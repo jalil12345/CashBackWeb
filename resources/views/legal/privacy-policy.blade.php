@@ -30,11 +30,12 @@ information.</p>
 
 <h3>4- Update or Delete your personal data</h3>
     <p class="h4">
-
+        you can update or delete your personal data by accessing your <a href="account-details"> Account Details page</a> of 
+        your macklara account.
     </p>
 <h3>5- Cookies</h3>
     <p class="h4 text-info"> 
-    Cookies are small text files that are stored on your browser, they help us process information. <br>
+    Cookies are small text files that are stored on your device, they help us process information. <br>
     Cookies are nesasery for tracking your cash back activity, they let us know if you made the purchase or not.<br>
         </p>
 <h3>6- Unsubscribe your Email Subscriptions</h3>

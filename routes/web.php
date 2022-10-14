@@ -43,12 +43,12 @@ Route::get('/profile', function () {
     return view('profile');
 })->middleware('auth');
 
-Route::get('/account-settings', function () {
+Route::get('/account-details', function () {
     return view('account/account-settings');
 })->middleware('auth');
 
-Route::get('/payment-methods', function () {
-    return view('account/payment-methods');
+Route::get('/payouts', function () {
+    return view('account/payouts');
 })->middleware('auth');
 
 Route::get('/stores', [CompanyController::class, 'index']);

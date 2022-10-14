@@ -75,66 +75,17 @@
     </div>
     <br>
     <div class="container">
-  <div class="row">
-    <div class="col-3"></div>
-    <div class="col-9">
-      <a class="  h5 btn btn-custom-pink rounded-5 ms-5 " href="update-account">Change your informations</a>
-    </div>
-  </div>
-    <div class="container">
-    <div class="row "><div class="col align-self-end">
-        
-        </div></div></div>
+  
+      <a class="  h5 btn btn-custom-pink rounded-5 ms-3 " href="update-account">Change your informations</a>
+    
+  <br><br>
+  <div class="alert alert-warning " role="alert">
+  <p> if you click this button your account will be deleted </p>
+  <button class="h5 btn btn-danger rounded-5 d-flex ">Delete your Account</button>
+</div></div>
+  
 <br><br><br><br>
-     
-    <div class="container">
-   
-    </div>
-<br> 
-
-    <div class="container  h2 wf-bolder">{{ __('Trips') }}</div>
-    <br>
-<div class="container ">
-<div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 ">
-
-  <div class="col ">
-    <div class="card rounded-3">
-      <img src="{{ asset('images/c.png') }}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="{{ asset('images/c.png') }}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="{{ asset('images/c.png') }}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="{{ asset('images/c.png') }}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
- </div>
-</div>
+    
 
 
 

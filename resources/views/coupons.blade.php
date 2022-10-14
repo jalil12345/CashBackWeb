@@ -19,7 +19,7 @@
     <strong class="h6 fw-bold  ">AAaaa</strong >
     </div>
     <div class="card-footer  bg-transparent border-light "> 
-      <strong class="h5 fw-bold text-success  text-end"> 5% cashback</strong >
+      <strong class="h6 fw-bold text-success  text-end"> 5% cashback</strong >
       </div>
     
   </div>
@@ -31,10 +31,10 @@
   <a href="#">
   <img  src="{{ asset('images/company/1.jpg') }}" class="card-img-top rounded-4"  alt="..." ></a>
   <div class="card-img-overlay">
-  <strong class="h5 fw-bold  ">AAaaa</strong >
+  <strong class="h6 fw-bold  ">AAaaa</strong >
   </div>
   <div class="card-footer  bg-transparent border-light "> 
-    <strong class="h5 fw-bold text-success  text-end"> 5% cashback</strong >
+    <strong class="h6 fw-bold text-success  text-end"> 5% cashback</strong >
     </div>
   
  </div> </div>
@@ -45,10 +45,10 @@
   <a href="#">
   <img  src="{{ asset('images/company/1.jpg') }}" class="card-img-top rounded-4"  alt="..." ></a>
   <div class="card-img-overlay">
-  <strong class="h5 fw-bold  ">AAaaa</strong >
+  <strong class="h6 fw-bold  ">AAaaa</strong >
   </div>
   <div class="card-footer  bg-transparent border-light "> 
-    <strong class="h5 fw-bold text-success  text-end"> 5% cashback</strong >
+    <strong class="h6 fw-bold text-success  text-end"> 5% cashback</strong >
     </div>
   
 </div> </div> 
@@ -59,10 +59,10 @@
   <a href="#">
   <img  src="{{ asset('images/company/1.jpg') }}" class="card-img-top rounded-4"  alt="..." ></a>
   <div class="card-img-overlay">
-  <strong class="h5 fw-bold  ">AAaaa</strong >
+  <strong class="h6 fw-bold  ">AAaaa</strong >
   </div>
   <div class="card-footer  bg-transparent border-light "> 
-    <strong class="h5 fw-bold text-success  text-end"> 5% cashback</strong >
+    <strong class="h6 fw-bold text-success  text-end"> 5% cashback</strong >
     </div>
   
 </div> </div>
@@ -73,10 +73,10 @@
   <a href="#">
   <img  src="{{ asset('images/company/1.jpg') }}" class="card-img-top rounded-4"  alt="..." ></a>
   <div class="card-img-overlay">
-  <strong class="h5 fw-bold  ">AAaaa</strong >
+  <strong class="h6 fw-bold  ">AAaaa</strong >
   </div>
   <div class="card-footer  bg-transparent border-light "> 
-    <strong class="h5 fw-bold text-success  text-end"> 5% cashback</strong >
+    <strong class="h6 fw-bold text-success  text-end"> 5% cashback</strong >
     </div>
   
 </div> </div>
@@ -89,10 +89,10 @@
   <a href="#">
   <img  src="{{ asset('images/company/1.jpg') }}" class="card-img-top rounded-4"  alt="..." ></a>
   <div class="card-img-overlay">
-  <strong class="h5 fw-bold  ">AAaaa</strong >
+  <strong class="h6 fw-bold  ">AAaaa</strong >
   </div>
   <div class="card-footer  bg-transparent border-light "> 
-    <strong class="h5 fw-bold text-success  text-end"> 5% cashback</strong >
+    <strong class="h6 fw-bold text-success  text-end"> 5% cashback</strong >
     </div>
   
 </div> </div>

@@ -28,7 +28,7 @@
                 <p class="container fw-bold h4 text-center mt-1 pb-0 mb-1" >ma<span class="h3 fw-bold  text-dark">ck</span>lara</p>
                 </a>
                 <!-- search -->
-                 <div class="dropdown   ">
+                  <!-- <div class="dropdown   ">
                     <form class="d-flex  "  method="GET" action="{{ URL::to('/search') }}" >
                     <input  
                     id="navbarDropdown0"
@@ -41,8 +41,8 @@
                     aria-label="Search"
                     style="max-width: 20rem ;min-width: 18rem ;"
                     autocomplete="off"
-                    value="{{ request()->get('search') }}">
-                    <!-- <button class="btn btn-custom-pink btn-outline-light rounded-0 rounded-end px-auto mx-auto" type="submit">Search</button>    -->
+                    value="{{ request()->get('search') }}"> 
+                     <button class="btn btn-custom-pink btn-outline-light rounded-0 rounded-end px-auto mx-auto" type="submit">Search</button> 
                     
                     
                     <div class="dropdown-menu dropdown-menu-end rounded-1 dropdown-menu dropdown-menu-end dropdown-menu-sm-start " 
@@ -56,7 +56,7 @@
                     <a class="dropdown-item" href="#">{{ __('How it works !') }}</a>
                     </div> 
                     </form>
-                </div>
+                </div> -->
                 
 
                 <button class="navbar-toggler " type="button" data-bs-toggle="collapse"
@@ -114,9 +114,9 @@
                                     
                                     <a class="dropdown-item" href="profile">{{ __('profile') }}
                                        </a>
-                                        <a class="dropdown-item" href="account-settings">{{ __('account details') }}
+                                        <a class="dropdown-item" href="account-details">{{ __('account details') }}
                                         </a>
-                                        <a class="dropdown-item" href="payment-methods">{{ __('choise payment method') }}
+                                        <a class="dropdown-item" href="payment-methods">{{ __('payouts') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -150,7 +150,35 @@
             
             
         </nav>
-                        
+           <div class="dropdown  container mt-4 ">
+                    <form class="d-flex  "  method="GET" action="{{ URL::to('/search') }}" >
+                    <input  
+                    id="navbarDropdown0"
+                    data-bs-toggle="dropdown" aria-haspopup="true"
+                    data-bs-display="static" aria-expanded="false" v-pre
+                    name="search" 
+                    class="form-control mx-auto  rounded-1 bg-info" 
+                    type="search" 
+                    placeholder="Search..." 
+                    aria-label="Search"
+                    autocomplete="off"
+                    value="{{ request()->get('search') }}">
+                    <!-- <button class="btn btn-custom-pink btn-outline-light rounded-0 rounded-end px-auto mx-auto" type="submit">Search</button>    -->
+                    
+                    
+                    <div class="dropdown-menu dropdown-menu-end rounded-1 dropdown-menu 
+                    dropdown-menu-end dropdown-menu-sm-start " 
+                    aria-labelledby="navbarDropdown0"
+                    style="min-width:17rem;"
+                    id="auto0"
+                    >
+                     <a class="dropdown-item" href="#">{{ __('About Us About Us About Us ') }}</a>        
+                     <a class="dropdown-item" href="#">{{ __('FAQs') }}</a>
+                     <li><hr class="dropdown-divider"></li>
+                    <a class="dropdown-item" href="#">{{ __('How it works !') }}</a>
+                    </div> 
+                    </form>
+                </div>          
                         
                         
                         

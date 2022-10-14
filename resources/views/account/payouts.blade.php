@@ -45,7 +45,7 @@
     </tbody>
 </table>
 </div></div>
-
+<br>
 <div class="container  h2">{{ __('Payouts History') }}</div>
 
 <div class="container "><div class="card">

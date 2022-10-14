@@ -54,7 +54,7 @@ class UserController extends Controller
                         'email' => $userEmail , 
                         'phone_number' => $userPhoneNumber , 
                         'zip_code' => $userZipCode]);
-               return redirect('account-settings');//->away('http://127.0.0.1:8000/account-settings');
+               return redirect('account-details');//->away('http://127.0.0.1:8000/account-settings');
         
     }
 }

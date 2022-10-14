@@ -2,35 +2,34 @@
 
 @section('content')
 
-
+<div class="container"id="body">
 
 <br><br>
-<div class="container">
+<div class="container" >
   <br>
 <strong class="h2  pe-2 pb-5 fw-bolder ">All Stores List </strong>  <br><br>
-
-<div class="dropdown">
-<label for="browser" class="form-label">Choise Category</label>
+<div class="row">
+<div class="dropdown col-5">
+<label for="browser" class="form-label">Categories</label>
   <input class="form-control "  id="browser" data-bs-toggle="dropdown"
-   aria-expanded="true"autocomplete="off" placeholder="All">
+   aria-expanded="true"autocomplete="off" value="All">
   
   <ul class="dropdown-menu" aria-labelledby="browser" id="ooo">
     <li><a class="dropdown-item" href="#">amazon</a></li>
   </ul></div> 
-
-<div class="dropdown">
-<label for="browser1" class="form-label">Choise Store</label>
+<div class="dropdown col-6">
+<label for="browser1" class="form-label"> Stores</label>
   <input class="form-control "  id="browser1" data-bs-toggle="dropdown"
-   aria-expanded="true"autocomplete="off" placeholder="All">
+   aria-expanded="true"autocomplete="off" value="All">
   
   <ul class="dropdown-menu" aria-labelledby="browser" id="ooo1">
   </ul></div> 
-
+  </div>
 <br>
-<div id="row"class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-5">
+<div id="row"class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-5">
  
   <!-- @foreach($companies as $company)
-  @if ($company->name == "amazon")
+  
 
 
   <div class="shadow card border-light mb-3 rounded-4" style="max-width: 20rem ;">
@@ -44,11 +43,13 @@
       </div>
   </div>
 </div>
+@if ($company->id==5)
+   @break
 @endif
 
 @endforeach -->
 
-</div></div>
+</div></div></div>
 
 <script>
   var app = {{ Js::from($companies) }};
@@ -64,12 +65,13 @@
   
     const getSearch0 =(e)=>{
       let txt = "";
-    let txtt = "";
+      let txtt = "";
       let emptyArray0=[];
-        let userData1=e.target.value;
+      let userData1=e.target.value;
+      
      axios.get('http://127.0.0.1:8000/api/companies?search='+userData1,{
         }).then(response=>{
-            console.log(response.data.length);
+            // console.log(response.data.length);
             for (let index = 0; index < response.data.length; index++) {
                  let element = response.data[index].name;
                  console.log(element);
@@ -85,7 +87,7 @@
               +'<a href="#">'
               +'<img  src="{{ asset("images/company") }}/'+value.image+'" class="card-img-top rounded-4"  alt="..." ></a>'
               +'<div class="card-footer  bg-transparent border-light ">' 
-              +'<strong class="h5 fw-bold text-success  text-end"> '+value.name+'</strong >'   
+              +'<strong class="h6 fw-bold text-success  "> '+value.name+'</strong >'   
               +'</div></div></div>' ;
                       }
                       emptyArray0=response.data;
@@ -108,11 +110,16 @@
               let listData;
                   listData=list.join('');
     }
-    
-    
+    let num = document.getElementById("ooo").childElementCount;
+    console.log(num);
+    if (num == 1) {
+      
+    }
     inputBox1.addEventListener('keyup',getSearch0);
     inputBox1.addEventListener('click',getSearch0);
     suggBox0.addEventListener('click',()=>{document.getElementById("browser").click()});
+    console.log(document.activeElement.id);
+  
   
     const getSearch1 =(e)=>{
       let emptyArray1=[];
@@ -134,7 +141,7 @@
                         +'<a href="#">'
                         +'<img  src="{{ asset("images/company") }}/'+value.image+'" class="card-img-top rounded-4"  alt="..." ></a>'
                         +'<div class="card-footer  bg-transparent border-light ">' 
-                        +'<strong class="h5 fw-bold text-success  text-end"> '+value.name+'</strong >'   
+                        +'<strong class="h6 fw-bold text-success  "> '+value.name+'</strong >'   
                         +'</div></div></div>' ;
                         }
         emptyArray1=response.data;

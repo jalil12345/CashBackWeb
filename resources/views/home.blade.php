@@ -73,14 +73,14 @@
 
 <div class="container">
   <br>
-<strong class="h2 ps-5 pe-2 fw-bolder "> Best Deals Today </strong> <a href="" class="h5">See All</a>
+<strong class="h2  pe-2 fw-bolder "> Best Deals Today </strong> <a href="" class="h6">See All</a>
 <br><br></div>
 <div class="container ">
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-5">
+<div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-5">
 <div class="col "> 
 
   <div class="card  mb-3 rounded-4" style="max-width: 18rem;">
-    <div class="card-header bg-transparent ">  <strong class="h5 fw-bold">Product name </strong>   </div>
+    <div class="card-header bg-transparent ">  <strong class="h6 fw-bold">Product name </strong>   </div>
     <div class="card-body">
     <a href="#">
   <img  src="{{ asset('images/company/1.jpg') }}" class="card-img-top  rounded-4"  alt="..." 
@@ -96,15 +96,20 @@
 
   <div class="col "> 
 
-<div class="card  mb-3" style="max-width: 16rem;">
-  <div class="card-header bg-transparent ">{{ __(' Walmart  :') }}     </div>
-  <div class="card-body text-success">
-    <h5 class="card-title">Success card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-  <div class="card-footer bg-transparent ">Product name <br>$5 $10 <br> free shiping <br> 5% cash back 
-  </div>
-</div></div>
+  <div class="card  mb-3 rounded-4" style="max-width: 18rem;">
+    <div class="card-header bg-transparent ">  <strong class="h6 fw-bold">Product name </strong>   </div>
+    <div class="card-body">
+    <a href="#">
+  <img  src="{{ asset('images/company/1.jpg') }}" class="card-img-top  rounded-4"  alt="..." 
+  style=" max-width: 12rem; max-height:10rem;"></a>
+  
+    </div>
+    <div class="card-footer bg-transparent "> 
+      <strong class="h5 fw-bolder"> 5$  </strong>
+      <small class="text-secondary text-decoration-line-through">$10</small> 
+      + <small class="text-secondary">free shiping</small> <br>  <strong class="h6 fw-bolder text-success">+ 5% cashback </strong> 
+    </div>
+  </div></div>
 
 <div class="col "> 
 
@@ -134,11 +139,11 @@
 
 <div class="container">
   <br>
-<strong class="h2 ps-5 pe-2 fw-bolder ">Find the best Stores </strong> <a href="" class="h5">See All</a>
+<strong class="h2  pe-2 fw-bolder ">Find the best Stores </strong> <a href="" class="h6">See All</a>
 <br></div>
 <br>
 <div class="container ">
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-5">
+<div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-5">
 <div class="col "> 
 
   <div class="card  mb-3" style="max-width: 16rem;">
@@ -195,10 +200,10 @@
 
 <div class="container">
   <br>
-<strong class="h2 ps-5 pe-2 fw-bolder ">Find the best Coupons </strong> <a href="" class="h5">See All</a>
+<strong class="h2  pe-2 fw-bolder ">Find the best Coupons </strong> <a href="" class="h6">See All</a>
 <br><br> </div>
 <div class="container ">
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-5">
+<div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-5">
 <div class="col "> 
 
   <div class="card  mb-3" style="max-width: 16rem;">

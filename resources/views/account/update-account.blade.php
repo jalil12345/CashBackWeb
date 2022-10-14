@@ -82,12 +82,10 @@
 
     <br>
     <div class="container">
-  <div class="row">
-    <div class="col-2"></div>
-    <div class="col-10">
-      <button class="h5 btn btn-custom-pink rounded-5 mx-auto " name="submit"type="submit">Save Change </button>
-      <a class="h5 btn btn-secondary rounded-5 mx-auto " href="account-settings">Cancel Change </a>
-    </div>
+  
+      <button class="h5 btn btn-custom-pink rounded-5 mx-2 " name="submit"type="submit">Save Change </button>
+      <a class="h5 btn btn-secondary rounded-5 mx-2 " href="account-details">Cancel Change </a>
+    
   </div>
   <input name="id0" type="text" style="display:none;" value="{{ Auth::user()->id}}">
 </form>
