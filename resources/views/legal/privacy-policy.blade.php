@@ -21,10 +21,6 @@ information.</p>
 <p class="h3"href=""> 9- Third Party Links</p>          
 <p class="h3"href=""> 10- California Consumer Privacy Act (CCPA)</p>          
 <p class="h3"href=""> 11- Contact information</p>          
-<p class="h3"href=""> 12-</p>
-<p class="h3"href=""> 13-</p>
-<p class="h3"href=""> 14-</p>
-<p class="h3"href=""> 15-</p>
 </div>
 <div class="container">
 

@@ -7,12 +7,15 @@
 <br><br>
 <div class="container" >
   <br>
-<strong class="h2  pe-2 pb-5 fw-bolder ">All Stores List </strong>  <br><br>
+<strong class="h2  pe-2 pb-3 fw-bolder ">All Stores List </strong>  <br><br>
+
+<store-search id="app0"></store-search>
+
 <div class="row">
 <div class="dropdown col-5">
 <label for="browser" class="form-label">Categories</label>
   <input class="form-control "  id="browser" data-bs-toggle="dropdown"
-   aria-expanded="true"autocomplete="off" value="All">
+   aria-expanded="true"autocomplete="off" placeholder="All">
   
   <ul class="dropdown-menu" aria-labelledby="browser" id="ooo">
     <li><a class="dropdown-item" href="#">amazon</a></li>
@@ -20,7 +23,7 @@
 <div class="dropdown col-6">
 <label for="browser1" class="form-label"> Stores</label>
   <input class="form-control "  id="browser1" data-bs-toggle="dropdown"
-   aria-expanded="true"autocomplete="off" value="All">
+   aria-expanded="true"autocomplete="off" placeholder="All">
   
   <ul class="dropdown-menu" aria-labelledby="browser" id="ooo1">
   </ul></div> 
@@ -32,7 +35,7 @@
   
 
 
-  <div class="shadow card border-light mb-3 rounded-4" style="max-width: 20rem ;">
+  <div class="shadow card border-light mb-3 rounded-2" style="max-width: 20rem ;">
     <a href="#">
     <img  src="{{ asset('images/company') }}/{{ $company->image }}" class="card-img-top rounded-4"  alt="..." ></a>
     <div class="card-img-overlay">
@@ -49,11 +52,13 @@
 
 @endforeach -->
 
-</div></div></div>
+</div></div>
+
+</div>
 
 <script>
   var app = {{ Js::from($companies) }};
-  console.log(app[0]);
+  console.log(app[0].name);
 
   const inputBox1 = document.getElementById("browser");
   const suggBox0 = document.getElementById("ooo");
@@ -83,9 +88,9 @@
             function myFunction(value) {
                         txt += '<li class="dropdown-item" >'+value.name+'</li>';
                         txtt += '<div class="col ">' 
-            +'<div class="shadow card border-light mb-3 rounded-4" style="max-width: 20rem ;">'
+            +'<div class="shadow card border-light mb-3 rounded-2" style="max-width: 20rem ;">'
               +'<a href="#">'
-              +'<img  src="{{ asset("images/company") }}/'+value.image+'" class="card-img-top rounded-4"  alt="..." ></a>'
+              +'<img  src="{{ asset("images/company") }}/'+value.image+'" class="card-img-top rounded-2"  alt="..." ></a>'
               +'<div class="card-footer  bg-transparent border-light ">' 
               +'<strong class="h6 fw-bold text-success  "> '+value.name+'</strong >'   
               +'</div></div></div>' ;
@@ -110,15 +115,10 @@
               let listData;
                   listData=list.join('');
     }
-    let num = document.getElementById("ooo").childElementCount;
-    console.log(num);
-    if (num == 1) {
-      
-    }
     inputBox1.addEventListener('keyup',getSearch0);
     inputBox1.addEventListener('click',getSearch0);
     suggBox0.addEventListener('click',()=>{document.getElementById("browser").click()});
-    console.log(document.activeElement.id);
+    
   
   
     const getSearch1 =(e)=>{
@@ -137,9 +137,9 @@
             function myFunction(value) {
                         txt += '<li class="dropdown-item" >'+value.category+'</li>'; 
                         txtt += '<div class="col ">' 
-                      +'<div class="shadow card border-light mb-3 rounded-4" style="max-width: 20rem ;">'
+                      +'<div class="shadow card border-light mb-3 rounded-2" style="max-width: 20rem ;">'
                         +'<a href="#">'
-                        +'<img  src="{{ asset("images/company") }}/'+value.image+'" class="card-img-top rounded-4"  alt="..." ></a>'
+                        +'<img  src="{{ asset("images/company") }}/'+value.image+'" class="card-img-top rounded-2"  alt="..." ></a>'
                         +'<div class="card-footer  bg-transparent border-light ">' 
                         +'<strong class="h6 fw-bold text-success  "> '+value.name+'</strong >'   
                         +'</div></div></div>' ;

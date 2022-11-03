@@ -93,7 +93,10 @@ Route::get('search', function (Request $request) {
      return view('/search',compact('results'));
 });
 
-
+Route::get('/stores/{name}', function (Request $request, $name) {
+    $store = Company::where('name',$name)->get();
+    return view('/store',compact('store'));
+});
 
 // compact('result')
 

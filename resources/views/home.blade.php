@@ -73,6 +73,7 @@
 
 <div class="container">
   <br>
+ 
 <strong class="h2  pe-2 fw-bolder "> Best Deals Today </strong> <a href="" class="h6">See All</a>
 <br><br></div>
 <div class="container ">

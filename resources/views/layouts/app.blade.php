@@ -150,23 +150,23 @@
             
             
         </nav>
-           <div class="dropdown  container mt-4 ">
+           <!-- <div class="dropdown  container mt-3">
                     <form class="d-flex  "  method="GET" action="{{ URL::to('/search') }}" >
                     <input  
                     id="navbarDropdown0"
                     data-bs-toggle="dropdown" aria-haspopup="true"
                     data-bs-display="static" aria-expanded="false" v-pre
                     name="search" 
-                    class="form-control mx-auto  rounded-1 bg-info" 
+                    class="form-control mx-auto rounded-3  bg-info" 
                     type="search" 
                     placeholder="Search..." 
                     aria-label="Search"
                     autocomplete="off"
-                    value="{{ request()->get('search') }}">
+                    value="{{ request()->get('search') }}"> -->
                     <!-- <button class="btn btn-custom-pink btn-outline-light rounded-0 rounded-end px-auto mx-auto" type="submit">Search</button>    -->
                     
                     
-                    <div class="dropdown-menu dropdown-menu-end rounded-1 dropdown-menu 
+                    <!-- <div class="dropdown-menu dropdown-menu-end rounded-3 dropdown-menu 
                     dropdown-menu-end dropdown-menu-sm-start " 
                     aria-labelledby="navbarDropdown0"
                     style="min-width:17rem;"
@@ -178,9 +178,9 @@
                     <a class="dropdown-item" href="#">{{ __('How it works !') }}</a>
                     </div> 
                     </form>
-                </div>          
-                        
-                        
+                </div>           -->
+                      <br><br>  
+                  <search id="app1"></search>      
                         
         
         <main class="py-4">
@@ -210,85 +210,39 @@
     </div>
     
     <script>
-        const inputBox = document.getElementById("navbarDropdown0");
-    const suggBox = document.getElementById("auto0");
+    //     const inputBox = document.getElementById("navbarDropdown0");
+    // const suggBox = document.getElementById("auto0");
     
-    const getSearch =(e)=>{
-        let userData=e.target.value;
-        console.log(userData);  
-     axios.get('http://127.0.0.1:8000/api/companies?search='+userData,{
+    // const getSearch =(e)=>{
+    //     let userData=e.target.value;
+    //     console.log(userData);  
+    //  axios.get('http://127.0.0.1:8000/api/companies?search='+userData,{
             
-        }).then(response=>{
-            console.log(response.data.length);
-            for (let index = 0; index < response.data.length; index++) {
-                 let element = response.data[index].name;
-                 let category = response.data[index].category;
-                 console.log(element);
-                 console.log(category);
+    //     }).then(response=>{
+    //         console.log(response.data.length);
+    //         for (let index = 0; index < response.data.length; index++) {
+    //              let element = response.data[index].name;
+    //              let category = response.data[index].category;
+    //              console.log(element);
+    //              console.log(category);
                  
-                //  suggBox0.innerHTML='<li><a class="dropdown-item" href="#">'+element+'</a></li>'+
-                //  '<li><a class="dropdown-item" href="#">'+email+'</a></li>';
-            }
-            let txt = "";
-            response.data.forEach(myFunction);
-            document.getElementById("auto0").innerHTML = txt;
-            function myFunction(value) {
-                        txt +='<li><a class="dropdown-item" href="#">'+value.name+'</a></li>'+
-                        '<li><a class="dropdown-item" href="#">'+value.category+'</a></li>'; 
-                        }
-            // suggBox.innerHTML=;
-        }).catch(err=>{
-            console.log(err);
-        });  
-    };
+    //             //  suggBox0.innerHTML='<li><a class="dropdown-item" href="#">'+element+'</a></li>'+
+    //             //  '<li><a class="dropdown-item" href="#">'+email+'</a></li>';
+    //         }
+    //         let txt = "";
+    //         response.data.forEach(myFunction);
+    //         document.getElementById("auto0").innerHTML = txt;
+    //         function myFunction(value) {
+    //                     txt +='<li><a class="dropdown-item" href="#">'+value.name+'</a></li>'+
+    //                     '<li><a class="dropdown-item" href="#">'+value.category+'</a></li>'; 
+    //                     }
+    //         // suggBox.innerHTML=;
+    //     }).catch(err=>{
+    //         console.log(err);
+    //     });  
+    // };
    
-    inputBox.addEventListener('keyup',getSearch);
-
-//     let suggestions=[
-//         "Abc","bac","cab","dfg","edu","zkl","sdc","sdc",
-//     ];
-//    const inputBox = document.getElementById("navbarDropdown0");
-//    const suggBox = document.getElementById("auto0");
-
-//    inputBox.onkeyup = (e)=>{
-//     let userData=e.target.value;
-//     let emptyArray=[];
-//     if(userData){
-//         emptyArray=suggestions.filter((data)=>{
-//             return data.toLocaleLowerCase()
-//             .startsWith(userData.toLocaleLowerCase());
-//         });
-//         emptyArray =emptyArray.map((data)=>{
-//             return data = '<li class="dropdown-item h5">'+data+'</li>';
-//         });
-//         showSuggestions(emptyArray);
-//         let allList=suggBox.querySelectorAll("li");
-//         console.log(allList);
-//         for (let i = 0; i < allList.length; i++) {
-//             allList[i].setAttribute("onclick","select(this)"); // put search action insted of select
-            
-//         }
-//     }else{
-
-//     }
-//     //  showSuggestions(emptyArray);
-//    }
-
-//    function select(element){
-//     let selectUserData=element.textContent;
-//     inputBox.value=selectUserData;
-//    }
-
-//    function  showSuggestions(list){
-//     let listData;
-//     if(!list.length){
-//             userValue=inputBox.value;
-//             listData='<li>'+userValue+'</li>';
-//     }else{
-//         listData=list.join('');
-//     }
-//        suggBox.innerHTML=listData+'<p class="h5 text-center text-custom-pink fw-bold">deals</p>'; 
-//    }
+    // inputBox.addEventListener('keyup',getSearch);
 
    
 

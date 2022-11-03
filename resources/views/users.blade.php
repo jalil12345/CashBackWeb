@@ -24,7 +24,7 @@
     </form>
     
 
-    <ul class="dropdown-menu dropdown-menu-end rounded-end rounded-start" 
+    <ul class="dropdown-menu dropdown-menu rounded-end rounded-start" 
     aria-labelledby="user_name"
     id="iid">
     @foreach($users as $user)
@@ -55,41 +55,45 @@
     </table>
     
 </div>
+<div class="container" id="app0">
+    <example-component></example-component>
+</div><br><br><br><br><br><br><br><br><br><br>
+<br><br><br>
     
 <script>
-    const inputBox0 = document.getElementById("user_name");
-    const suggBox0 = document.getElementById("iid");
+    // const inputBox0 = document.getElementById("user_name");
+    // const suggBox0 = document.getElementById("iid");
     
-    const getSearch =(e)=>{
-        let userData0=e.target.value;
-        console.log(userData0);  
-     axios.get('http://127.0.0.1:8000/api/users?search='+userData0,{
+    // const getSearch =(e)=>{
+    //     let userData0=e.target.value;
+    //     console.log(userData0);  
+    //  axios.get('http://127.0.0.1:8000/api/users?search='+userData0,{
             
-        }).then(response=>{
-            console.log(response.data.length);
-            for (let index = 0; index < response.data.length; index++) {
-                 let element = response.data[index].name;
-                 let email = response.data[index].email;
-                 console.log(element);
-                 console.log(email);
+    //     }).then(response=>{
+    //         console.log(response.data.length);
+    //         for (let index = 0; index < response.data.length; index++) {
+    //              let element = response.data[index].name;
+    //              let email = response.data[index].email;
+    //              console.log(element);
+    //              console.log(email);
                  
-                //  suggBox0.innerHTML='<li><a class="dropdown-item" href="#">'+element+'</a></li>'+
-                //  '<li><a class="dropdown-item" href="#">'+email+'</a></li>';
-            }
-            let txt = "";
-            response.data.forEach(myFunction);
-            document.getElementById("iid").innerHTML = txt;
-            function myFunction(value) {
-                        txt +='<li><a class="dropdown-item" href="#">'+value.name + '</a></li>'+
-                        '<li><a class="dropdown-item" href="#">'+value.email+'</a></li>'; 
-                        }
-            // suggBox.innerHTML=;
-        }).catch(err=>{
-            console.log(err);
-        });  
-    };
+    //             //  suggBox0.innerHTML='<li><a class="dropdown-item" href="#">'+element+'</a></li>'+
+    //             //  '<li><a class="dropdown-item" href="#">'+email+'</a></li>';
+    //         }
+    //         let txt = "";
+    //         response.data.forEach(myFunction);
+    //         document.getElementById("iid").innerHTML = txt;
+    //         function myFunction(value) {
+    //                     txt +='<li><a class="dropdown-item" href="#">'+value.name + '</a></li>'+
+    //                     '<li><a class="dropdown-item" href="#">'+value.email+'</a></li>'; 
+    //                     }
+    //         // suggBox.innerHTML=;
+    //     }).catch(err=>{
+    //         console.log(err);
+    //     });  
+    // };
    
-    inputBox0.addEventListener('keyup',getSearch);
+    // inputBox0.addEventListener('keyup',getSearch);
 </script>
 
 
