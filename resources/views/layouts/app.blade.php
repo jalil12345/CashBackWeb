@@ -100,7 +100,7 @@
 
                             @if (Route::has('register'))
                                 <li class="nav-item me-auto">
-                                    <a class="nav-link text-light" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link text-dark btn btn-warning px-3 rounded-1" href="{{ route('register') }}">{{ __(' Sign up ') }}</a>
                                 </li>
                             @endif
                         @else
@@ -116,7 +116,7 @@
                                        </a>
                                         <a class="dropdown-item" href="account-details">{{ __('account details') }}
                                         </a>
-                                        <a class="dropdown-item" href="payment-methods">{{ __('payouts') }}
+                                        <a class="dropdown-item" href="payouts">{{ __('payouts') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -136,11 +136,11 @@
                                 </a>
 
                             <div class="dropdown-menu dropdown-menu-end rounded-end rounded-start" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">{{ __('About Us') }}</a>        
+                            <a class="dropdown-item" href="#">{{ __('About Us') }}</a> 
+                            <a class="dropdown-item" href="#">{{ __('Contact Us') }}</a>        
                             <a class="dropdown-item" href="#">{{ __('FAQs') }}</a>
                             <a class="dropdown-item" href="#">{{ __('How it works !') }}</a>
                             <a class="dropdown-item" href="#">{{ __('I didnt get my Cash Back!') }}</a>
-                            <a class="dropdown-item" href="#">{{ __('How it work !') }}</a>
                             <a class="dropdown-item" href="privacy-policy">{{ __('Privacy Policy') }}</a>
                             <a class="dropdown-item" href="terms-conditions">{{ __('Terms & Conditions') }}</a></div>
                             </li>
@@ -179,8 +179,7 @@
                     </div> 
                     </form>
                 </div>           -->
-                      <br><br>  
-                  <search id="app1"></search>      
+                          
                         
         
         <main class="py-4">
@@ -196,16 +195,17 @@
     <a class="navbar-brand text-white" href="#">Macklara</a></nav>
     
     <div class="bg-secondary h6 text-center " ><p class="">
-            <a class=" text-white px-3" href="#" style="text-decoration: none;"> Macklara  </a>||
-            <a class=" text-white px-3" href="#" style="text-decoration: none;"> Macklara     </a>||
-            <a class=" text-white px-3" href="#" style="text-decoration: none;"> Macklara      </a> ||
-            <a class="text-white px-3" href="privacy-policy" style="text-decoration: none;">{{ __('Privacy Policy  ') }}</a>||
-            <a class="text-white px-3" href="terms-conditions" style="text-decoration: none;">{{ __('Terms & Conditions') }}</a>
-            </p>
+      <a class=" text-white px-3" href="#" style="text-decoration: none;"> Disclaimer   </a>||
+      <a class=" text-white px-3" href="#" style="text-decoration: none;"> FAQs </a>||
+      <a class=" text-white px-3" href="#" style="text-decoration: none;"> Contact Us  </a> ||
+      <a class=" text-white px-3" href="#" style="text-decoration: none;"> About Us  </a> ||
+      <a class="text-white px-3" href="privacy-policy" style="text-decoration: none;">{{ __('Privacy Policy  ') }}</a>||
+      <a class="text-white px-3" href="terms-conditions" style="text-decoration: none;">{{ __('Terms & Conditions') }}</a>
+           </p>
     </div><br>
     
     <div class="ml-4 text-center text-sm text-light sm:text-right sm:ml-0">
-                        All right reserve to Macklara 2022 &copy
+                        All right reserve to Macklara 2023 &copy 
                     </div><br>
     </div>
     

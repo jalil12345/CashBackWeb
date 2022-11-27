@@ -28373,7 +28373,7 @@ var render = function () {
       _c("div", { staticClass: "col-md-8" }, [
         _c("form", { attrs: { method: "GET" } }, [
           _c("input", {
-            staticClass: "form-control dropdown rounded-1",
+            staticClass: "form-control dropdown",
             attrs: {
               id: "user_name2",
               type: "text",
@@ -28452,6 +28452,10 @@ var render = function () {
     _c("form", { attrs: { method: "GET" } }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-5 dropdown" }, [
+          _c("label", { staticClass: "form-label ms-1", attrs: { for: "" } }, [
+            _vm._v(" Stores"),
+          ]),
+          _vm._v(" "),
           _c("input", {
             staticClass: "form-control mb-3",
             attrs: {
@@ -28493,6 +28497,10 @@ var render = function () {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-6 dropdown" }, [
+          _c("label", { staticClass: "form-label ms-1", attrs: { for: "" } }, [
+            _vm._v(" Categories"),
+          ]),
+          _vm._v(" "),
           _c("input", {
             staticClass: "form-control mb-3",
             attrs: {

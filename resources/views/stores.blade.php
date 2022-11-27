@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-
+<br>  
+                  <search id="app1"></search>  
 <div class="container"id="body">
 
 <br><br>

@@ -9,7 +9,7 @@
   
   <div class="col "><br><p class=" h6 ms-2 ">{{ __(' Pending Balance : ') }}{{ Auth::user()->name }}</p><hr>
                       <p class=" h6 ms-2 ">{{ __(' Verified Balance : ') }}{{ Auth::user()->name }}</p><hr>
-                      <p class=" h6 ms-2 ">{{ __(' Payabale Balance : ') }}{{ Auth::user()->name }}</p><hr>
+                      <p class=" h6 ms-2 fw-bold text-success">{{ __(' Payabale Balance : ') }}{{ Auth::user()->name }}</p><hr>
                       <p class=" h5 fw-bold ms-2 text-custom-pink">{{ __('Total Balance : ') }}{{ Auth::user()->name }}</p><br>
 </div>
 

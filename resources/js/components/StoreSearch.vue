@@ -60,6 +60,7 @@
                 <form method="GET">
                 <div class="row">
                  <div class="col-5 dropdown">   
+                <label for="" class="form-label ms-1"> Stores</label>
                 <input class="form-control  mb-3 "
                  id="user_name0" type="text" 
                  @keyup="getSearch3"
@@ -77,6 +78,7 @@
                     <li  class="dropdown-item">hhh </li>
                 </ul></div>
                 <div class="col-6 dropdown">
+                <label for="" class="form-label ms-1"> Categories</label>
                 <input class="form-control  mb-3"
                  id="user_name1" type="text" 
                  @keyup="getSearch3"

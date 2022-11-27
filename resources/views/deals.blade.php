@@ -22,8 +22,9 @@
         </div> 
     </div>
 </div> -->
-
-<br><br><br><br><br><br><br><br>
+<br>
+                  <search id="app1"></search>  
+<br><br><br><br><br><br>
 <div class="container g-4"><spam class="h2 fw-bold ">Find Best Deals</spam></div><br>
 
 <div class="container ">

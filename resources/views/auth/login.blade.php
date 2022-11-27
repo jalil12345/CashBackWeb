@@ -53,7 +53,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-custom-pink rounded-4 px-3">
+                                <button type="submit" class="btn btn-custom-pink rounded-1 px-3">
                                     {{ __('Login') }}
                                 </button>
                         
@@ -72,9 +72,7 @@
     </div>
 </div>
 <div class="container text-white">
-    <br>  <br> <br><br>  <br> <br><br>  <br> <br><br>
-      <br> <br><br>  <br> <br><br>  <br> <br>
-      <br>  <br> <br><br>  <br> <br><br>  <br> <br>
-      <br>  <br> <br><br>  <br> <br><br>  <br> <br>
+  
+      <br>  <br> <br><br>  <br> <br><br><br><br>  <br> <br>
 </div>
 @endsection

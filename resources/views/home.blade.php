@@ -65,9 +65,10 @@
     </div>
 </div> -->
 
+<br> 
+                  <search id="app1"></search>  
 
 
-<br>
 <br><br>
 
 
@@ -140,7 +141,7 @@
 
 <div class="container">
   <br>
-<strong class="h2  pe-2 fw-bolder ">Find the best Stores </strong> <a href="" class="h6">See All</a>
+<strong class="h2  pe-2 fw-bolder ">Find the best Stores </strong> <a href="stores" class="h6">See All</a>
 <br></div>
 <br>
 <div class="container ">
@@ -201,7 +202,7 @@
 
 <div class="container">
   <br>
-<strong class="h2  pe-2 fw-bolder ">Find the best Coupons </strong> <a href="" class="h6">See All</a>
+<strong class="h2  pe-2 fw-bolder ">Find the best Coupons </strong> <a href="coupons" class="h6">See All</a>
 <br><br> </div>
 <div class="container ">
 <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-5">

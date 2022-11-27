@@ -56,7 +56,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <form method="GET">
-                <input class="form-control dropdown rounded-1"
+                <input class="form-control dropdown "
                  id="user_name2" type="text" 
                  @keyup="getSearch4"
                  @click=""
