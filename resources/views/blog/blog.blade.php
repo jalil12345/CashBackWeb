@@ -20,34 +20,26 @@
     <div class="card-footer bg-transparent border-success">Footer</div>
   </div></div>
 
-  <div class="col">
-  <div class="card border-success mb-3">
-    <div class="card-header bg-transparent border-success">Header</div>
-    <div class="card-body text-success">
-      <h5 class="card-title">Success card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
-    <div class="card-footer bg-transparent border-success">Footer</div>
-  </div></div>
+  
 
   <div class="col">
-  <div class="card border-success mb-3">
-    <div class="card-header bg-transparent border-success">Header</div>
-    <div class="card-body text-success">
-      <h5 class="card-title">Success card title</h5>
+  <div class="card border-dark mb-3">
+    <!-- <div class="card-header bg-transparent border-success">Header</div> -->
+    <div class="card-body ">
+      <h4 class="card-title">Success card title</h4>
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     </div>
-    <div class="card-footer bg-transparent border-success">Footer</div>
+    <div class="card-footer bg-transparent border-dark">Sidehustle</div>
   </div></div>
 
   <div class="col ">
-  <div class="card border-success mb-3">
+  <div class="card border-dark mb-3">
     <div class="card-header bg-transparent border-success">Header</div>
     <div class="card-body text-success">
       <h5 class="card-title">Success card title</h5>
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     </div>
-    <div class="card-footer bg-transparent border-success">Footer</div>
+    <div class="card-footer bg-transparent border-success">Types of inovation</div>
   </div></div>
 
   <div class="col ">
@@ -57,7 +49,7 @@
       <h5 class="card-title">Success card title</h5>
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     </div>
-    <div class="card-footer bg-transparent border-success">Footer</div>
+    <div class="card-footer bg-transparent border-success">Productive</div>
   </div></div>
 
   <div class="col ">
@@ -67,7 +59,7 @@
       <h5 class="card-title">Success card title</h5>
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     </div>
-    <div class="card-footer bg-transparent border-success">Footer</div>
+    <div class="card-footer bg-transparent border-success">AI vs Humans</div>
   </div></div>
 
   <div class="col ">
@@ -77,7 +69,7 @@
       <h5 class="card-title">Success card title</h5>
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     </div>
-    <div class="card-footer bg-transparent border-success">Footer</div>
+    <div class="card-footer bg-transparent border-success">Cash Back</div>
   </div></div>
 
   <div class="col ">

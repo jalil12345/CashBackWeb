@@ -123,3 +123,13 @@ Route::get('/Affiliate', [AffiliateController::class, 'index']);
 
 Route::get('/blog/post0', function () { return view('/blog/post0');});
 Route::get('/blog/post1', function () { return view('/blog/post1');});
+Route::get('/blog/post2', function () { return view('/blog/post2');});
+Route::get('/blog/post3', function () { return view('/blog/post3');});
+Route::get('/blog/post4', function () { return view('/blog/post4');});
+Route::get('/blog/post5', function () { return view('/blog/post5');});
+Route::get('/blog/post6', function () { return view('/blog/post6');});
+Route::get('/blog/post7', function () { return view('/blog/post7');});
+Route::get('/blog/post8', function () { return view('/blog/post8');});
+Route::get('/blog/post9', function () { return view('/blog/post9');});
+Route::get('/blog/post10', function () { return view('/blog/post10');});
+Route::get('/blog/post11', function () { return view('/blog/post11');});
