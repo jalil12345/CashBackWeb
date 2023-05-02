@@ -11,8 +11,8 @@
   <div class="row">
   <div class="col-6"><br><br><p class="text-center h1  ">{{ __('  ') }}{{ Auth::user()->name }}</p>
                      <p class="text-center h5 ">{{ __(' Email : ') }}{{ Auth::user()->email }}</p><br>
-       <p class="text-center">   <button class="btn btn-custom-pink mb-1" type="button"> Details</button>
-                    <button class="btn btn-custom-pink mb-1" type="button">Payouts</button></p>
+       <p class="text-center">   <button class="btn btn-pink mb-1" type="button"> Details</button>
+                    <button class="btn btn-pink mb-1" type="button">Payouts</button></p>
                     </div>
   <div class="col-6"><br><p class=" h6 ms-2 ">{{ __(' Pending Balance : ') }}{{ Auth::user()->name }}</p><hr>
                       <p class=" h6 ms-2 ">{{ __(' Verified Balance : ') }}{{ Auth::user()->name }}</p><hr>

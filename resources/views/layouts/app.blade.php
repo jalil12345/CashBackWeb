@@ -22,7 +22,7 @@
 </head>
  <body> <!-- navbar -->
     <div id="app">
-        <nav class="navbar  sticky-top  navbar-expand-lg navbar-dark bg-custom-pink shadow-sm">
+        <nav class="navbar  sticky-top  navbar-expand-lg navbar-dark bg-pink shadow-sm">
             <div  class="container-fluid m-auto p-auto input-group">    
                 <a class="h4 wf-bolder me-1 pe-2 text-light " style="text-decoration: none;" href="{{ url('/') }}">
                 <p class="container fw-bold h4 text-center mt-1 pb-0 mb-1" >ma<span class="h3 fw-bold  text-dark">ck</span>lara</p>
@@ -65,7 +65,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                             
-                <div class="collapse navbar-collapse rounded-4 " id="navbarSupportedContent">
+                <div class="collapse navbar-collapse rounded-3 " id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <!-- <ul class="navbar-nav me-auto">
                     
@@ -110,7 +110,7 @@
                                     {{ Auth::user()->name }}{{ __(' 10 $') }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end rounded-4" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-end rounded-3" aria-labelledby="navbarDropdown">
                                     
                                     <a class="dropdown-item" href="profile">{{ __('profile') }}
                                        </a>

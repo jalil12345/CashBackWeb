@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\History;
+use App\Models\AffiliateNetwork;
 use Illuminate\Support\Facades\DB;
 
-class HistoryController extends Controller
+class AffiliateNetworksController extends Controller
 {
     //
 }

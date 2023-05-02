@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -13,14 +14,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->integer('companies_click-id')->nullable();
-            $table->string('name');
-            $table->string('category');
-            $table->string('image');
-            $table->string('rate');
-            $table->string('duration');
+            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('payment_methods_id')->nullable()->constrained();
+            $table->string('account_info')->nullable();
+            $table->string('payment_amount')->nullable();
+            $table->date('payment_date')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +32,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('payments');
     }
 };
+

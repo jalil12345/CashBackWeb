@@ -13,7 +13,7 @@
                         <div class="col-8 my-2">
                         <p class="h2">{{$st->name }}</p>
                         <p class="h5 text-success fw-bold">{{ $st->rate }}{{ __('%') }}</p>
-                        <a href="#" class="btn btn-custom-pink rounded-1">Shop Now</a>
+                        <a href="#" class="btn btn-pink rounded-1">Shop Now</a>
                         </div>
                         </div></div>
               @endforeach

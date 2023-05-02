@@ -76,7 +76,7 @@
     <br>
     <div class="container">
   
-      <a class="  h5 btn btn-custom-pink rounded-5 ms-3 " href="update-account">Change your informations</a>
+      <a class="  h5 btn btn-pink rounded-5 ms-3 " href="update-account">Change your informations</a>
     
   <br><br>
   <div class="alert alert-warning " role="alert">

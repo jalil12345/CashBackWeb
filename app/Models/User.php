@@ -52,6 +52,14 @@ class User extends \TCG\Voyager\Models\User
         return $this->hasMany(History::class);
     }
     
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+    public function user_memberships()
+    {
+        return $this->hasMany(UserMembership::class);
+    }
 
     /**
      * Get the indexable data array for the model.

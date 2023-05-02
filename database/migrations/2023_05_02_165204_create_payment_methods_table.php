@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
-            $table->integer('companies_click-id')->nullable();
-            $table->string('name');
-            $table->string('category');
-            $table->string('image');
-            $table->string('rate');
-            $table->string('duration');
+            $table->string('payment_type')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +27,11 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('payment_methods');
     }
 };
+
+
+
+
+

@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('user_memberships', function (Blueprint $table) {
             $table->id();
-            $table->integer('companies_click-id')->nullable();
-            $table->string('name');
-            $table->string('category');
-            $table->string('image');
-            $table->string('rate');
-            $table->string('duration');
+            $table->foreignId('user_id')->nullable()->constrained();
+            $table->string('membership_name')->nullable();
+            $table->string('membership_price')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('user_memberships');
     }
 };
