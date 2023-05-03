@@ -136,8 +136,8 @@
                                 </a>
 
                             <div class="dropdown-menu dropdown-menu-end rounded-end rounded-start" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">{{ __('About Us') }}</a> 
-                            <a class="dropdown-item" href="#">{{ __('Contact Us') }}</a>        
+                            <a class="dropdown-item" href="about-us">{{ __('About Us') }}</a> 
+                            <a class="dropdown-item" href="contact-us">{{ __('Contact Us') }}</a>        
                             <a class="dropdown-item" href="#">{{ __('FAQs') }}</a>
                             <a class="dropdown-item" href="#">{{ __('How it works !') }}</a>
                             <a class="dropdown-item" href="#">{{ __('I didnt get my Cash Back!') }}</a>
@@ -197,8 +197,8 @@
     <div class="bg-secondary h6 text-center " ><p class="">
       <a class=" text-white px-3" href="#" style="text-decoration: none;"> Disclaimer   </a>||
       <a class=" text-white px-3" href="#" style="text-decoration: none;"> FAQs </a>||
-      <a class=" text-white px-3" href="#" style="text-decoration: none;"> Contact Us  </a> ||
-      <a class=" text-white px-3" href="#" style="text-decoration: none;"> About Us  </a> ||
+      <a class=" text-white px-3" href="contact-us" style="text-decoration: none;"> Contact Us  </a> ||
+      <a class=" text-white px-3" href="about-us" style="text-decoration: none;"> About Us  </a> ||
       <a class="text-white px-3" href="privacy-policy" style="text-decoration: none;">{{ __('Privacy Policy  ') }}</a>||
       <a class="text-white px-3" href="terms-conditions" style="text-decoration: none;">{{ __('Terms & Conditions') }}</a>
            </p>

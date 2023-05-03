@@ -29,15 +29,14 @@ use App\Http\Controllers\GoogleAuth;
 //     return view('welcome');
 // });
 
+Route::get('/contact-us', [App\Http\Controllers\ContactController::class, 'show'])->middleware('auth')->name('contact.show');
+Route::post('/contact-us', [App\Http\Controllers\ContactController::class, 'store'])->middleware('auth')->name('contact.store');
 
 
-Route::get('/privacy-policy', function () {
-    return view('legal/privacy-policy');
-});
-
-Route::get('/terms-conditions', function () {
-    return view('legal/terms-conditions');
-});
+Route::get('/privacy-policy', function () { return view('legal/privacy-policy');});
+Route::get('/terms-conditions', function () { return view('legal/terms-conditions');});
+Route::get('/about-us', function () { return view('legal/About Us');});
+Route::get('/contact-us', function () { return view('legal/Contact Us');});
 
 Route::get('/profile', function () {
     return view('profile');
