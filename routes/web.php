@@ -107,6 +107,9 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('/sign-in/google', [GoogleAuth::class, 'googleSignin']);
 Route::get('/sign-in/google/redirect', [GoogleAuth::class, 'googleRedirect']);
 
+Route::get('/auth/facebook', [GoogleAuth::class, 'redirectToFacebook']);
+Route::get('/auth/facebook/callback', [GoogleAuth::class, 'handleFacebookCallback']);
+
 // AffiliateController view : Affiliate route :Affiliate
 Route::get('/Affiliate', [AffiliateController::class, 'index']);
 

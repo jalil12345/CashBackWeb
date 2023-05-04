@@ -31,4 +31,23 @@ class GoogleAuth extends Controller
         return redirect('/home');
     }
 
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function handleFacebookCallback(Request $request)
+    {
+        $user = Socialite::driver('facebook')->user();
+        // handle the authenticated user
+        $user = User::firstOrCreate([
+            'email' => $user->email
+        ], [
+            'name' => $user->name,
+            'password' => Hash::make(Str::random(24)),
+        ]);
+        Auth::login($user, true);
+        return redirect('/home');
+    }
+
 }
