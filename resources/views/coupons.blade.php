@@ -15,7 +15,7 @@
 
   <div class="shadow card border-light mb-3 rounded-4" style="max-width: 20rem ;">
     <a href="#">
-    <img  src="{{ asset('images/company/1.jpg') }}" class="card-img-top rounded-4"  alt="..." ></a>
+    <img loading="auto" src="{{ asset('images/company/1.jpg') }}" class="card-img-top rounded-4"  alt="..." ></a>
     <div class="card-img-overlay">
     <strong class="h6 fw-bold  ">AAaaa</strong >
     </div>
@@ -30,7 +30,7 @@
 
 <div class="shadow card border-light mb-3 rounded-4" style="max-width: 20rem ;">
   <a href="#">
-  <img  src="{{ asset('images/company/1.jpg') }}" class="card-img-top rounded-4"  alt="..." ></a>
+  <img loading="auto" src="{{ asset('images/company/1.jpg') }}" class="card-img-top rounded-4"  alt="..." ></a>
   <div class="card-img-overlay">
   <strong class="h6 fw-bold  ">AAaaa</strong >
   </div>
@@ -44,7 +44,7 @@
 
 <div class="shadow card border-light mb-3 rounded-4" style="max-width: 20rem ;">
   <a href="#">
-  <img  src="{{ asset('images/company/1.jpg') }}" class="card-img-top rounded-4"  alt="..." ></a>
+  <img loading="auto" src="{{ asset('images/company/1.jpg') }}" class="card-img-top rounded-4"  alt="..." ></a>
   <div class="card-img-overlay">
   <strong class="h6 fw-bold  ">AAaaa</strong >
   </div>
@@ -58,7 +58,7 @@
 
  <div class="shadow card border-light mb-3 rounded-4" style="max-width: 20rem ;">
   <a href="#">
-  <img  src="{{ asset('images/company/1.jpg') }}" class="card-img-top rounded-4"  alt="..." ></a>
+  <img loading="auto" src="{{ asset('images/company/1.jpg') }}" class="card-img-top rounded-4"  alt="..." ></a>
   <div class="card-img-overlay">
   <strong class="h6 fw-bold  ">AAaaa</strong >
   </div>
@@ -72,7 +72,7 @@
 
  <div class="shadow card border-light mb-3 rounded-4" style="max-width: 20rem ;">
   <a href="#">
-  <img  src="{{ asset('images/company/1.jpg') }}" class="card-img-top rounded-4"  alt="..." ></a>
+  <img loading="auto" src="{{ asset('images/company/1.jpg') }}" class="card-img-top rounded-4"  alt="..." ></a>
   <div class="card-img-overlay">
   <strong class="h6 fw-bold  ">AAaaa</strong >
   </div>
@@ -88,7 +88,7 @@
 
 <div class="shadow card border-light mb-3 rounded-4" style="max-width: 20rem ;">
   <a href="#">
-  <img  src="{{ asset('images/company/1.jpg') }}" class="card-img-top rounded-4"  alt="..." ></a>
+  <img loading="auto" src="{{ asset('images/company/1.jpg') }}" class="card-img-top rounded-4"  alt="..." ></a>
   <div class="card-img-overlay">
   <strong class="h6 fw-bold  ">AAaaa</strong >
   </div>

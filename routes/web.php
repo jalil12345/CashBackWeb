@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\Affiliate\AffiliateController;
 use Illuminate\Support\Facades\DB;
@@ -60,9 +61,7 @@ Route::get('/coupons', function () {
     return view('coupons');
 });
 
-Route::get('/blog', function () {
-    return view('blog/blog');
-});
+
 
 Route::get('/deals', function () {
     return view('deals');
@@ -114,24 +113,26 @@ Route::get('/auth/facebook/callback', [GoogleAuth::class, 'handleFacebookCallbac
 Route::get('/Affiliate', [AffiliateController::class, 'index']);
 
 
+Route::get('/billing', [PaymentController::class, 'index']);
 
 
 
 
 
+Route::get('/blog', function () {
+    return view('blog/blog');
+});
 
 
-
-
-Route::get('/blog/post0', function () { return view('/blog/post0');});
-Route::get('/blog/post1', function () { return view('/blog/post1');});
-Route::get('/blog/post2', function () { return view('/blog/post2');});
-Route::get('/blog/post3', function () { return view('/blog/post3');});
-Route::get('/blog/post4', function () { return view('/blog/post4');});
-Route::get('/blog/post5', function () { return view('/blog/post5');});
+Route::get('/blog/best-ways-to-save-money-at-walmart', function () { return view('/blog/best-ways-to-save-money-at-walmart');});
+Route::get('/blog/save-money-at-dollar-tree', function () { return view('/blog/save-money-at-dollar-tree');});
+Route::get('/blog/how-to-save-at-amazon', function () { return view('/blog/how-to-save-at-amazon');});
+Route::get('/blog/save-money-at-target', function () { return view('/blog/save-money-at-target');});
+Route::get('/blog/save-money-at-aldi', function () { return view('/blog/save-money-at-aldi');});
+Route::get('/blog/save-money-at-home-depot', function () { return view('/blog/save-money-at-home-depot');});
 Route::get('/blog/post6', function () { return view('/blog/post6');});
 Route::get('/blog/post7', function () { return view('/blog/post7');});
 Route::get('/blog/post8', function () { return view('/blog/post8');});
 Route::get('/blog/post9', function () { return view('/blog/post9');});
-Route::get('/blog/post10', function () { return view('/blog/post10');});
+Route::get('/blog/smart-ways-to-save-money-at-costco', function () { return view('/blog/smart-ways-to-save-money-at-costco');});
 Route::get('/blog/post11', function () { return view('/blog/post11');});

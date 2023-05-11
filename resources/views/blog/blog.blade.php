@@ -16,7 +16,7 @@
    
     <div class="card-header bg-transparent border-success">Header</div>
     <img src="{{ asset('images/company/1.png') }}" alt="" >
-    <a href="/blog/post0" class=" stretched-link"></a>
+    <a href="/blog/best-ways-to-save-money-at-walmart" class=" stretched-link"></a>
     <div class="card-footer bg-transparent border-success">Footer</div>
   </div></div>
 

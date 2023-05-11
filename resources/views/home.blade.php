@@ -85,7 +85,7 @@
     <div class="card-header bg-transparent ">  <strong class="h6 fw-bold">Product name </strong>   </div>
     <div class="card-body">
     <a href="#">
-  <img  src="{{ asset('images/company/1.jpg') }}" class="card-img-top  rounded-4"  alt="..." 
+  <img loading="auto" src="{{ asset('images/company/1.jpg') }}" class="card-img-top  rounded-4"  alt="..." 
   style=" max-width: 12rem; max-height:10rem;"></a>
   
     </div>
@@ -102,7 +102,7 @@
     <div class="card-header bg-transparent ">  <strong class="h6 fw-bold">Product name </strong>   </div>
     <div class="card-body">
     <a href="#">
-  <img  src="{{ asset('images/company/1.jpg') }}" class="card-img-top  rounded-4"  alt="..." 
+  <img loading="auto" src="{{ asset('images/company/1.jpg') }}" class="card-img-top  rounded-4"  alt="..." 
   style=" max-width: 12rem; max-height:10rem;"></a>
   
     </div>

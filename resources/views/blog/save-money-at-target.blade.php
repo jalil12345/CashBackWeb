@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1 class="h1">target</h1>
+    <h1 class="h1">save money at Target</h1>
     <h2 class="ms-5">1-join the Target Circle program</h2>
                 <p>the Target Circle program is free to join, when you become a member you’ll 
                     get 1% cash back, on your purchases in-store or online</p>
