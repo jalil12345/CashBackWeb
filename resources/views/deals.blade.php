@@ -24,7 +24,7 @@
 </div> -->
 <br>
                   <search id="app1"></search>  
-<br><br><br><br><br><br>
+<br><br><br><br>
 <div class="container g-4"><spam class="h2 fw-bold ">Find Best Deals</spam></div><br>
 
 <div class="container ">
@@ -32,10 +32,12 @@
 <div class="col "> 
 
   <div class="card  mb-3 rounded-4" style="max-width: 20rem;">
-    <div class="card-header bg-transparent ">{{ __('from Walmarte  :  6 hours ago') }}     </div>
-    <div class="card-body text-success">
-      <h5 class="card-title">Success card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <div class="card-header bg-transparent ">{{ __('Walmart:6 hours ago') }}     </div>
+    <div class="card-body ">
+    <a href="#">
+  <img loading="auto" src="{{ asset('images/company/1.jpg') }}" class="card-img-top rounded-4"  alt="..." ></a>
+      <!-- <h5 class="card-title ">Success card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
     </div>
     <div class="card-footer bg-transparent "><strong class="h5 fw-bold">Product name </strong> 
       <br><strong class="h4 fw-bolder"> 5$  </strong>
@@ -43,51 +45,6 @@
       <br><small class="text-secondary">free shiping</small>  <br> <strong class="h5 fw-bolder text-success">5% cash back </strong> 
     </div>
   </div></div>
-<div class="col "> 
-
-  <div class="card  mb-3" style="max-width: 16rem;">
-    <div class="card-header bg-transparent ">{{ __('from Walmarte  :  6 hours ago') }}     </div>
-    <div class="card-body text-success">
-      <h5 class="card-title">Success card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
-    <div class="card-footer bg-transparent ">Product name <br>$5 $10 <br> free shiping <br> 5% cash back 
-    </div>
-  </div></div>
-
-  <div class="col "> 
-
-<div class="card  mb-3" style="max-width: 16rem;">
-  <div class="card-header bg-transparent ">{{ __('from Walmarte  :  6 hours ago') }}     </div>
-  <div class="card-body text-success">
-    <h5 class="card-title">Success card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-  <div class="card-footer bg-transparent ">Product name <br>$5 $10 <br> free shiping <br> 5% cash back 
-  </div>
-</div></div>
-
-
-
-  <div class="col "> 
-
-<div class="card  mb-3" style="max-width: 16rem;">
-  <div class="card-header bg-transparent ">{{ __('from Walmarte  :  6 hours ago') }}     </div>
-  <div class="card-body text-success">
-    <h5 class="card-title">Success card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-  <div class="card-footer bg-transparent ">Product name <br>$5 $10 <br> free shiping <br> 5% cash back 
-  </div>
-</div></div>
-
-
-
-
-
-
-
-  
 
 
 </div>

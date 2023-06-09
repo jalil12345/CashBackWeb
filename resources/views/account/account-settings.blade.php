@@ -59,19 +59,7 @@
     </div>  
     </div>
     <hr>
-    <div class="row py-2">
-    <div class="col-4">
-        <span class="h5">User Name</span>  
-    </div>
-    <div class="col-4">
-        <span   class="h5">{{ Auth::user()->name }}</span>
-      </div>
-    <div class="col-4">
-       <span class="h5"></span>
-    </div>  
-    </div>
-
-    <hr>
+    
     </div>
     <br>
     <div class="container">

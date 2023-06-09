@@ -25,7 +25,7 @@
                         ways to save money and get the most out of your purchases,
                      the Value Seekers Club may be a useful resource for you.
                </p>
-<h2 class="ms-5">Discount</h2>
+<h2 class="ms-5">Discounts</h2>
                 <p>
                 In addition to its already discounted prices, Dollar Tree occasionally offers 
                 additional discounts and promotions, 

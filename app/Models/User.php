@@ -59,7 +59,11 @@ class User extends \TCG\Voyager\Models\User
     }
     public function user_memberships()
     {
-        return $this->hasMany(UserMembership::class);
+        return $this->hasOne(UserMembership::class);
+    }
+    public function paymentMethod()
+    {
+        return $this->hasMany(PaymentMethod::class);
     }
 
     /**

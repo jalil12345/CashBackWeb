@@ -2,17 +2,30 @@
 
 @section('content')
 <div class="container">
-    <h1 class="h1">Start a Business</h1>
-    <h2 class="ms-5">first</h2>
-                <h3>a</h3><h3>b</h3><h3>c</h3>
-<h2 class="ms-5">second</h2>
-                <h3>a</h3><h3>b</h3><h3>c</h3>
-<h2 class="ms-5">third</h2>
-                <h3>a</h3><h3>b</h3><h3>c</h3>
-<h2 class="ms-5">forth</h2>
-                <h3>a</h3><h3>b</h3><h3>c</h3>
-<h2 class="ms-5">fifth</h2>
-                <h3>a</h3><h3>b</h3><h3>c</h3>
+<table class="table table-bordered border-primary">
+  <!-- <thead>
+    
+  </thead> -->
+  <tbody>
+    <tr>
+      <th scope="row"><h2>1</h2></th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
 </div>
 
 

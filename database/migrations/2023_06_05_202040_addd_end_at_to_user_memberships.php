@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('payment_methods', function (Blueprint $table) {
-            $table->id();
-            $table->string('payment_type')->nullable();
-            $table->string('email_associated');
-            $table->boolean('email_verification')->default(false);
-            $table->timestamps();
+        Schema::table('user_memberships', function (Blueprint $table) {
+            $table->timestamp('end_at')->nullable();
         });
     }
 
@@ -29,11 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payment_methods');
+        Schema::table('user_memberships', function (Blueprint $table) {
+            $table->dropColumn('end_at');
+        });
     }
 };
-
-
-
-
-

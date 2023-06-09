@@ -59,20 +59,23 @@
                 <input class="form-control dropdown "
                  id="user_name2" type="text" 
                  @keyup="getSearch4"
-                 @click=""
+                 @click="getSearch4"
                  name="search" placeholder="Search..." 
                  aria-label="Search" autocomplete="off"
                  data-bs-toggle="dropdown" aria-expanded="false">
                 
                 <ul class="dropdown-menu dropdown-menu rounded-start" 
                     aria-labelledby="user_name2">
-                    <a v-for="(item, index) in emptyArray3" 
-                    style="text-decoration: none;" class="text-dark" :href="`stores/${item.name}`" >
+                    <li class="h5 text-pink">Stores</li>
+                    <a v-for="(item, index) in emptyArray3" v-if="index < 4"
+                    style="text-decoration: none;" class="text-dark" :href="`stores/name/${item.name}`" >
                     <li  class="dropdown-item" >
                         {{item.name}}</li></a>
-                    <li v-for="(item, index) in emptyArray3" class="dropdown-item">
-                        {{item.category}}</li>
-                    <li class="dropdown-item">hhhhhhh</li>
+                    <li class="h5 text-pink">Categories</li>
+                    <a v-for="(item, index) in emptyArray3" v-if="index < 4"
+                    style="text-decoration: none;" class="text-dark" :href="`stores/category/${item.category}`" >
+                     <li class="dropdown-item">
+                        {{item.category}}</li></a>
                 </ul></form></div>
             </div>
         </div>

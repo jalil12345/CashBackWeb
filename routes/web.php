@@ -7,8 +7,11 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PaymentEmailVerificationController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\Affiliate\AffiliateController;
+use App\Http\Controllers\UserMembershipController;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\GoogleAuth;
  
@@ -33,6 +36,12 @@ use App\Http\Controllers\GoogleAuth;
 Route::get('/contact-us', [App\Http\Controllers\ContactController::class, 'show'])->middleware('auth')->name('contact.show');
 Route::post('/contact-us', [App\Http\Controllers\ContactController::class, 'store'])->middleware('auth')->name('contact.store');
 
+Route::post('/payouts', [PaymentEmailVerificationController::class, 'index'])->name('email.save')->middleware('auth');
+Route::post('/payouts/send', [PaymentEmailVerificationController::class, 'send'])->name('email.send');
+Route::get('/payouts/verify', [PaymentEmailVerificationController::class, 'verifyEmail'])->name('payouts.verify')->middleware('auth');
+Route::get('/payouts', [PaymentMethodController::class, 'index'])->name('payouts')->middleware('auth');
+
+
 
 Route::get('/privacy-policy', function () { return view('legal/privacy-policy');});
 Route::get('/terms-conditions', function () { return view('legal/terms-conditions');});
@@ -47,9 +56,8 @@ Route::get('/account-details', function () {
     return view('account/account-settings');
 })->middleware('auth');
 
-Route::get('/payouts', function () {
-    return view('account/payouts');
-})->middleware('auth');
+
+
 
 Route::get('/stores', [CompanyController::class, 'index']);
 
@@ -73,6 +81,8 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 // after log in
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/home', [UserMembershipController::class, 'index'])->name('home');
+
 // Route::post('/search', function () {
 //     $q = Input::get('q');
 //     dd($q);
@@ -91,10 +101,19 @@ Route::get('search', function (Request $request) {
      return view('/search',compact('results'));
 });
 
-Route::get('/stores/{name}', function (Request $request, $name) {
+Route::get('/stores/name/{name}', function (Request $request, $name) {
     $store = Company::where('name',$name)->get();
     return view('/store',compact('store'));
 });
+
+Route::get('/stores/category/{category}', function (Request $request, $category) {
+    $store = Company::where('category',$category)->get();
+    return view('/category',compact('store'));
+});
+
+
+
+
 
 // compact('result')
 
@@ -119,20 +138,20 @@ Route::get('/billing', [PaymentController::class, 'index']);
 
 
 
-Route::get('/blog', function () {
-    return view('blog/blog');
-});
+// Route::get('/blog', function () {
+//     return view('blog/blog');
+// });
 
 
-Route::get('/blog/best-ways-to-save-money-at-walmart', function () { return view('/blog/best-ways-to-save-money-at-walmart');});
-Route::get('/blog/save-money-at-dollar-tree', function () { return view('/blog/save-money-at-dollar-tree');});
-Route::get('/blog/how-to-save-at-amazon', function () { return view('/blog/how-to-save-at-amazon');});
-Route::get('/blog/save-money-at-target', function () { return view('/blog/save-money-at-target');});
-Route::get('/blog/save-money-at-aldi', function () { return view('/blog/save-money-at-aldi');});
-Route::get('/blog/save-money-at-home-depot', function () { return view('/blog/save-money-at-home-depot');});
-Route::get('/blog/post6', function () { return view('/blog/post6');});
-Route::get('/blog/post7', function () { return view('/blog/post7');});
-Route::get('/blog/post8', function () { return view('/blog/post8');});
-Route::get('/blog/post9', function () { return view('/blog/post9');});
-Route::get('/blog/smart-ways-to-save-money-at-costco', function () { return view('/blog/smart-ways-to-save-money-at-costco');});
-Route::get('/blog/post11', function () { return view('/blog/post11');});
+// Route::get('/blog/best-ways-to-save-money-at-walmart', function () { return view('/blog/best-ways-to-save-money-at-walmart');});
+// Route::get('/blog/save-money-at-dollar-tree', function () { return view('/blog/save-money-at-dollar-tree');});
+// Route::get('/blog/how-to-save-at-amazon', function () { return view('/blog/how-to-save-at-amazon');});
+// Route::get('/blog/save-money-at-target', function () { return view('/blog/save-money-at-target');});
+// Route::get('/blog/save-money-at-aldi', function () { return view('/blog/save-money-at-aldi');});
+// Route::get('/blog/save-money-at-home-depot', function () { return view('/blog/save-money-at-home-depot');});
+// Route::get('/blog/post6', function () { return view('/blog/post6');});
+// Route::get('/blog/save-money-at-nike', function () { return view('/blog/save-money-at-nike');});
+// Route::get('/blog/post8', function () { return view('/blog/post8');});
+// Route::get('/blog/post9', function () { return view('/blog/post9');});
+// Route::get('/blog/smart-ways-to-save-money-at-costco', function () { return view('/blog/smart-ways-to-save-money-at-costco');});
+// Route::get('/blog/post11', function () { return view('/blog/post11');});

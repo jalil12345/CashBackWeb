@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
+
     /**
      * Run the migrations.
      *
@@ -15,8 +17,10 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->integer('companies_click-id')->nullable();
+            $table->foreignId('affiliate_networks_id')->nullable();
+            $table->integer('companies_click_id')->nullable();
             $table->string('name');
+            $table->string('url');
             $table->string('category');
             $table->string('image');
             $table->string('rate');

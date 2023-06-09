@@ -8,12 +8,12 @@
                 <div class="card my-2">
                     <div class="row">
                     <div class="col-4">
-                        <img src="..." class="img-fluid rounded-start" alt="...">
+                        <img src="{{ asset('images/36.jpg') }}" class="img-fluid rounded-start" alt="..." loading="lazy">
                         </div>
                         <div class="col-8 my-2">
                         <p class="h2">{{$st->name }}</p>
                         <p class="h5 text-success fw-bold">{{ $st->rate }}{{ __('%') }}</p>
-                        <a href="#" class="btn btn-pink rounded-1">Shop Now</a>
+                        <a href="{{ $st->url }}{{ $st->companies_click_id }}" class="btn btn-pink rounded-1">Shop Now</a>
                         </div>
                         </div></div>
               @endforeach

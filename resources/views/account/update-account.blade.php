@@ -83,7 +83,7 @@
     <br>
     <div class="container">
   
-      <button class="h5 btn btn-custom-pink rounded-5 mx-2 " name="submit"type="submit">Save Change </button>
+      <button class="h5 btn btn-pink rounded-5 mx-2 " name="submit"type="submit">Save Change </button>
       <a class="h5 btn btn-secondary rounded-5 mx-2 " href="account-details">Cancel Change </a>
     
   </div>

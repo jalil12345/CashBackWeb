@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <title>Get Exclusive Cashback, Deals, Coupons & Discounts at Macklara</title>
+    <meta name="description" content="Discover the best cashback offers, unbeatable deals, exclusive coupons, and amazing discounts at Macklara. Shop smart and save big on your favorite brands with our money-saving opportunities. Start saving today!">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- <title>{{ config('app.name', 'Laravel') }}</title> -->
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -19,6 +20,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 </head>
  <body> <!-- navbar -->
     <div id="app">
@@ -75,20 +77,20 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav mx-auto">
                     <li class="nav-item me-auto">
-                                <a class="nav-link text-light wf-bold  h4" aria-current="page" href="stores">Stores</a>
+                                <a class="nav-link text-light wf-bold  h4" aria-current="page" href="{{ url('stores') }}">Stores</a>
                             </li>
                             <li class="nav-item me-auto">
-                            <a class="nav-link text-light  wf-bold h4"  href="coupons">Coupons</a>
+                            <a class="nav-link text-light  wf-bold h4"  href="{{ url('coupons') }}">Coupons</a>
                             </li>
                             <li class="nav-item me-auto">
-                            <a class="nav-link text-light wf-bold h4" href="deals">Deals</a>
+                            <a class="nav-link text-light wf-bold h4" href="{{ url('deals') }}">Deals</a>
                             </li>
                             <!-- <li class="nav-item">
                             <a class="nav-link text-light" href="deals">ServisesBlog</a>
                             </li> -->
-                            <li class="nav-item me-2 ">
+                            <!-- <li class="nav-item me-2 ">
                             <a class="nav-link text-light wf-bold h4" href="blog" tabindex="" aria-disabled="true">Blog</a>
-                            </li>
+                            </li> -->
                             
                         <!-- Authentication Links -->
                         @guest
@@ -112,11 +114,11 @@
 
                                 <div class="dropdown-menu dropdown-menu-end rounded-3" aria-labelledby="navbarDropdown">
                                     
-                                    <a class="dropdown-item" href="profile">{{ __('profile') }}
+                                    <a class="dropdown-item" href="{{ url('profile') }}">{{ __('profile') }}
                                        </a>
-                                        <a class="dropdown-item" href="account-details">{{ __('account details') }}
+                                        <a class="dropdown-item" href="{{ url('account-details') }}">{{ __('account details') }}
                                         </a>
-                                        <a class="dropdown-item" href="payouts">{{ __('payouts') }}
+                                        <a class="dropdown-item" href="{{ url('payouts') }}">{{ __('payouts') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -136,13 +138,13 @@
                                 </a>
 
                             <div class="dropdown-menu dropdown-menu-end rounded-end rounded-start" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="about-us">{{ __('About Us') }}</a> 
-                            <a class="dropdown-item" href="contact-us">{{ __('Contact Us') }}</a>        
-                            <a class="dropdown-item" href="#">{{ __('FAQs') }}</a>
-                            <a class="dropdown-item" href="#">{{ __('How it works !') }}</a>
-                            <a class="dropdown-item" href="#">{{ __('I didnt get my Cash Back!') }}</a>
-                            <a class="dropdown-item" href="privacy-policy">{{ __('Privacy Policy') }}</a>
-                            <a class="dropdown-item" href="terms-conditions">{{ __('Terms & Conditions') }}</a></div>
+                            <a class="dropdown-item" href="{{ url('about-us') }}">{{ __('About Us') }}</a> 
+                            <a class="dropdown-item" href="{{ url('contact-us') }}">{{ __('Contact Us') }}</a>        
+                            <a class="dropdown-item" href="{{ url('#') }}">{{ __('FAQs') }}</a>
+                            <a class="dropdown-item" href="{{ url('#') }}">{{ __('How it works !') }}</a>
+                            <a class="dropdown-item" href="{{ url('#') }}">{{ __('I didnt get my Cash Back!') }}</a>
+                            <a class="dropdown-item" href="{{ url('privacy-policy') }}">{{ __('Privacy Policy') }}</a>
+                            <a class="dropdown-item" href="{{ url('terms-conditions') }}">{{ __('Terms & Conditions') }}</a></div>
                             </li>
                     </ul>
                 </div>
@@ -195,12 +197,12 @@
     <a class="navbar-brand text-white" href="#">Macklara</a></nav>
     
     <div class="bg-secondary h6 text-center " ><p class="">
-      <a class=" text-white px-3" href="#" style="text-decoration: none;"> Disclaimer   </a>||
-      <a class=" text-white px-3" href="#" style="text-decoration: none;"> FAQs </a>||
-      <a class=" text-white px-3" href="contact-us" style="text-decoration: none;"> Contact Us  </a> ||
-      <a class=" text-white px-3" href="about-us" style="text-decoration: none;"> About Us  </a> ||
-      <a class="text-white px-3" href="privacy-policy" style="text-decoration: none;">{{ __('Privacy Policy  ') }}</a>||
-      <a class="text-white px-3" href="terms-conditions" style="text-decoration: none;">{{ __('Terms & Conditions') }}</a>
+      <a class=" text-white px-3" href="{{ url('#') }}" style="text-decoration: none;"> Disclaimer   </a>||
+      <a class=" text-white px-3" href="{{ url('#') }}" style="text-decoration: none;"> FAQs </a>||
+      <a class=" text-white px-3" href="{{ url('contact-us') }}" style="text-decoration: none;"> Contact Us  </a> ||
+      <a class=" text-white px-3" href="{{ url('about-us') }}" style="text-decoration: none;"> About Us  </a> ||
+      <a class="text-white px-3" href="{{ url('privacy-policy') }}" style="text-decoration: none;">{{ __('Privacy Policy  ') }}</a>||
+      <a class="text-white px-3" href="{{ url('terms-conditions') }}" style="text-decoration: none;">{{ __('Terms & Conditions') }}</a>
            </p>
     </div><br>
     

@@ -5501,7 +5501,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       emptyArray3: [],
-      element: ''
+      element: '',
+      selectedItem: '',
+      selectedItem0: ''
     };
   },
   props: [],
@@ -5519,17 +5521,21 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    select3: function select3(element) {
-      var selectUserData = element.path[0].attributes.text.value;
-      console.log(selectUserData);
-      document.getElementById("user_name0").value = selectUserData;
-      document.getElementById("user_name0").click();
+    select3: function select3(item) {
+      // let selectUserData=element.path[0].attributes.text.value;
+      //  console.log(selectUserData);
+      //  document.getElementById("user_name0").value=selectUserData;
+      // document.getElementById("user_name0").click();
+      this.selectedItem = item.name;
+      this.$refs.inputField.click();
     },
-    select4: function select4(element) {
-      var selectUserData = element.path[0].attributes.text.value;
-      console.log(selectUserData);
-      document.getElementById("user_name1").value = selectUserData;
-      document.getElementById("user_name1").click();
+    select4: function select4(item) {
+      // let selectUserData=element.path[0].attributes.text.value;
+      // console.log(selectUserData);
+      // document.getElementById("user_name1").value=selectUserData;
+      // document.getElementById("user_name1").click();
+      this.selectedItem0 = item.name;
+      this.$refs.inputField0.click();
     },
     getSearch3: function getSearch3(e) {
       var _this2 = this;
@@ -28384,7 +28390,7 @@ var render = function () {
               "data-bs-toggle": "dropdown",
               "aria-expanded": "false",
             },
-            on: { keyup: _vm.getSearch4, click: function ($event) {} },
+            on: { keyup: _vm.getSearch4, click: _vm.getSearch4 },
           }),
           _vm._v(" "),
           _c(
@@ -28394,29 +28400,47 @@ var render = function () {
               attrs: { "aria-labelledby": "user_name2" },
             },
             [
-              _vm._l(_vm.emptyArray3, function (item, index) {
-                return _c(
-                  "a",
-                  {
-                    staticClass: "text-dark",
-                    staticStyle: { "text-decoration": "none" },
-                    attrs: { href: "stores/" + item.name },
-                  },
-                  [
-                    _c("li", { staticClass: "dropdown-item" }, [
-                      _vm._v("\n                    " + _vm._s(item.name)),
-                    ]),
-                  ]
-                )
-              }),
+              _c("li", { staticClass: "h5 text-pink" }, [_vm._v("Stores")]),
               _vm._v(" "),
               _vm._l(_vm.emptyArray3, function (item, index) {
-                return _c("li", { staticClass: "dropdown-item" }, [
-                  _vm._v("\n                    " + _vm._s(item.category)),
-                ])
+                return index < 4
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "text-dark",
+                        staticStyle: { "text-decoration": "none" },
+                        attrs: { href: "stores/name/" + item.name },
+                      },
+                      [
+                        _c("li", { staticClass: "dropdown-item" }, [
+                          _vm._v("\n                    " + _vm._s(item.name)),
+                        ]),
+                      ]
+                    )
+                  : _vm._e()
               }),
               _vm._v(" "),
-              _c("li", { staticClass: "dropdown-item" }, [_vm._v("hhhhhhh")]),
+              _c("li", { staticClass: "h5 text-pink" }, [_vm._v("Categories")]),
+              _vm._v(" "),
+              _vm._l(_vm.emptyArray3, function (item, index) {
+                return index < 4
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "text-dark",
+                        staticStyle: { "text-decoration": "none" },
+                        attrs: { href: "stores/category/" + item.category },
+                      },
+                      [
+                        _c("li", { staticClass: "dropdown-item" }, [
+                          _vm._v(
+                            "\n                    " + _vm._s(item.category)
+                          ),
+                        ]),
+                      ]
+                    )
+                  : _vm._e()
+              }),
             ],
             2
           ),
@@ -28449,100 +28473,6 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("form", { attrs: { method: "GET" } }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-5 dropdown" }, [
-          _c("label", { staticClass: "form-label ms-1", attrs: { for: "" } }, [
-            _vm._v(" Stores"),
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control mb-3",
-            attrs: {
-              id: "user_name0",
-              type: "text",
-              name: "search",
-              placeholder: "Search...",
-              "aria-label": "Search",
-              autocomplete: "off",
-              "data-bs-toggle": "dropdown",
-              "aria-expanded": "false",
-            },
-            on: { keyup: _vm.getSearch3, click: _vm.getSearch3 },
-          }),
-          _vm._v(" "),
-          _c(
-            "ul",
-            {
-              staticClass: "dropdown-menu dropdown-menu rounded-start",
-              attrs: { "aria-labelledby": "user_name0", id: "iid0" },
-            },
-            [
-              _vm._l(_vm.emptyArray3, function (item, index) {
-                return _c(
-                  "li",
-                  {
-                    staticClass: "dropdown-item",
-                    attrs: { text: item.name },
-                    on: { click: _vm.select3 },
-                  },
-                  [_vm._v("\n                    " + _vm._s(item.name))]
-                )
-              }),
-              _vm._v(" "),
-              _c("li", { staticClass: "dropdown-item" }, [_vm._v("hhh ")]),
-            ],
-            2
-          ),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-6 dropdown" }, [
-          _c("label", { staticClass: "form-label ms-1", attrs: { for: "" } }, [
-            _vm._v(" Categories"),
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control mb-3",
-            attrs: {
-              id: "user_name1",
-              type: "text",
-              name: "search",
-              placeholder: "Search...",
-              "aria-label": "Search",
-              autocomplete: "off",
-              "data-bs-toggle": "dropdown",
-              "aria-expanded": "false",
-            },
-            on: { keyup: _vm.getSearch3, click: _vm.getSearch3 },
-          }),
-          _vm._v(" "),
-          _c(
-            "ul",
-            {
-              staticClass: "dropdown-menu dropdown-menu rounded-start",
-              attrs: { "aria-labelledby": "user_name1", id: "iid0" },
-            },
-            [
-              _vm._l(_vm.emptyArray3, function (item, index) {
-                return _c(
-                  "li",
-                  {
-                    staticClass: "dropdown-item",
-                    attrs: { text: item.category },
-                    on: { click: _vm.select4 },
-                  },
-                  [_vm._v("\n                    " + _vm._s(item.category))]
-                )
-              }),
-              _vm._v(" "),
-              _c("li", { staticClass: "dropdown-item" }, [_vm._v("hhh ")]),
-            ],
-            2
-          ),
-        ]),
-      ]),
-    ]),
-    _vm._v(" "),
     _c(
       "div",
       {
@@ -28558,10 +28488,14 @@ var render = function () {
               staticStyle: { "max-width": "20rem" },
             },
             [
-              _c("a", { attrs: { href: "stores/" + item.name } }, [
+              _c("a", { attrs: { href: "stores/name/" + item.name } }, [
                 _c("img", {
                   staticClass: "card-img-top rounded-2",
-                  attrs: { src: item.image, alt: "..." },
+                  attrs: {
+                    src: "images/company/" + item.image,
+                    loading: "lazy",
+                    alt: "...",
+                  },
                 }),
               ]),
               _vm._v(" "),

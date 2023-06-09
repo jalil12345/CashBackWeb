@@ -2,22 +2,14 @@
 
 @section('content')
 
-    <br>
-    
-  
-  
-<br>
 <div class="container "> <div class="card ">
   <div class="row">
   <div class="col-6"><br><br><p class="text-center h1  ">{{ __('  ') }}{{ Auth::user()->name }}</p>
-                     <p class="text-center h5 ">{{ __(' Email : ') }}{{ Auth::user()->email }}</p><br>
+                     <p class="text-center h6 ">{{ __('  ') }}{{ Auth::user()->email }}</p><br>
        <p class="text-center">   <button class="btn btn-pink mb-1" type="button"> Details</button>
                     <button class="btn btn-pink mb-1" type="button">Payouts</button></p>
                     </div>
-  <div class="col-6"><br><p class=" h6 ms-2 ">{{ __(' Pending Balance : ') }}{{ Auth::user()->name }}</p><hr>
-                      <p class=" h6 ms-2 ">{{ __(' Verified Balance : ') }}{{ Auth::user()->name }}</p><hr>
-                      <p class=" h6 ms-2 ">{{ __(' Payabale Balance : ') }}{{ Auth::user()->name }}</p><hr>
-                      <p class=" h5 fw-bold ms-2 text-custom-pink">{{ __('Total Balance : ') }}{{ Auth::user()->name }}</p><br>
+  <div class="col-6"><br>Membership<br>
 </div>
 </div>
 </div></div>
@@ -30,7 +22,7 @@
   </div> -->
 
   
-<div class="container text-center h1 text-custom-pink">{{ __('Payment Methods') }}</div>
+<div class="container  h1 text-custom-pink">{{ __('Payment Methods') }}</div>
     <br>
 <div class="container ">
 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 ">
@@ -76,7 +68,7 @@
 
 <br>
 
-<div class="container text-center h1">{{ __('Trips') }}</div>
+<div class="container  h1">{{ __('Trips') }}</div>
     <br>
     <div class="container "><div class="card">
 <table class="table">
