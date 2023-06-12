@@ -47,6 +47,8 @@ Route::get('/privacy-policy', function () { return view('legal/privacy-policy');
 Route::get('/terms-conditions', function () { return view('legal/terms-conditions');});
 Route::get('/about-us', function () { return view('legal/About Us');});
 Route::get('/contact-us', function () { return view('legal/Contact Us');});
+Route::get('/how-it-works', function () { return view('legal/how-it-works');});
+
 
 Route::get('/profile', function () {
     return view('profile');

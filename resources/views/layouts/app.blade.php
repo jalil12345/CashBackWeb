@@ -140,9 +140,9 @@
                             <div class="dropdown-menu dropdown-menu-end rounded-end rounded-start" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ url('about-us') }}">{{ __('About Us') }}</a> 
                             <a class="dropdown-item" href="{{ url('contact-us') }}">{{ __('Contact Us') }}</a>        
-                            <a class="dropdown-item" href="{{ url('#') }}">{{ __('FAQs') }}</a>
-                            <a class="dropdown-item" href="{{ url('#') }}">{{ __('How it works !') }}</a>
-                            <a class="dropdown-item" href="{{ url('#') }}">{{ __('I didnt get my Cash Back!') }}</a>
+                            <a class="dropdown-item" href="{{ url('how-it-works') }}">{{ __('FAQs') }}</a>
+                            <a class="dropdown-item" href="{{ url('how-it-works') }}">{{ __('How it works !') }}</a>
+                            <a class="dropdown-item" href="{{ url('how-it-works') }}">{{ __('I didnt get my Cash Back!') }}</a>
                             <a class="dropdown-item" href="{{ url('privacy-policy') }}">{{ __('Privacy Policy') }}</a>
                             <a class="dropdown-item" href="{{ url('terms-conditions') }}">{{ __('Terms & Conditions') }}</a></div>
                             </li>
