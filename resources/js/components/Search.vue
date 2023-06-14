@@ -28,7 +28,7 @@
     //   let emptyArray3=[];
       let userData3=e.target.value;
       
-     axios.get('http://127.0.0.1:8000/api/companies?search='+userData3,{
+     axios.get('https://www.macklara.com/api/companies?search='+userData3,{
         }).then(response=>{
             // console.log(response.data.length);
             // for (let index = 0; index < response.data.length; index++) {

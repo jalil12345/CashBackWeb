@@ -5382,7 +5382,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     console.log('Component created.');
-    axios.get('http://127.0.0.1:8000/api/users', {}).then(function (response) {
+    axios.get('https://www.macklara.com/api/users', {}).then(function (response) {
       _this.emptyArray3 = response.data;
     })["catch"](function (err) {
       console.log(err);
@@ -5395,7 +5395,7 @@ __webpack_require__.r(__webpack_exports__);
       var txt = ""; //   let emptyArray3=[];
 
       var userData3 = e.target.value;
-      axios.get('http://127.0.0.1:8000/api/users?search=' + userData3, {}).then(function (response) {
+      axios.get('https://www.macklara.com/api/users?search=' + userData3, {}).then(function (response) {
         // console.log(response.data.length);
         // for (let index = 0; index < response.data.length; index++) {
         //      let element = response.data[index].name;
@@ -5466,7 +5466,7 @@ __webpack_require__.r(__webpack_exports__);
       var txt = ""; //   let emptyArray3=[];
 
       var userData3 = e.target.value;
-      axios.get('http://127.0.0.1:8000/api/companies?search=' + userData3, {}).then(function (response) {
+      axios.get('https://www.macklara.com/api/companies?search=' + userData3, {}).then(function (response) {
         // console.log(response.data.length);
         // for (let index = 0; index < response.data.length; index++) {
         //      let element = response.data[index].name;
@@ -5514,7 +5514,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     console.log('Component created.');
-    axios.get('http://127.0.0.1:8000/api/companies', {}).then(function (response) {
+    axios.get('https://www.macklara.com/api/companies', {}).then(function (response) {
       _this.emptyArray3 = response.data;
     })["catch"](function (err) {
       console.log(err);
@@ -5543,7 +5543,7 @@ __webpack_require__.r(__webpack_exports__);
       var txt = ""; //   let emptyArray3=[];
 
       var userData3 = e.target.value;
-      axios.get('http://127.0.0.1:8000/api/companies?search=' + userData3, {}).then(function (response) {
+      axios.get('https://www.macklara.com/api/companies?search=' + userData3, {}).then(function (response) {
         _this2.emptyArray3 = response.data;
       })["catch"](function (err) {
         console.log(err);

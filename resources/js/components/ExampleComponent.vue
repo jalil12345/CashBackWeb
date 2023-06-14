@@ -11,7 +11,7 @@
         },
         created(){
             console.log('Component created.')
-            axios.get('http://127.0.0.1:8000/api/users',{
+            axios.get('https://www.macklara.com/api/users',{
         }).then(response=>{
             this.emptyArray3=response.data
             
@@ -28,7 +28,7 @@
     //   let emptyArray3=[];
       let userData3=e.target.value;
       
-     axios.get('http://127.0.0.1:8000/api/users?search='+userData3,{
+     axios.get('https://www.macklara.com/api/users?search='+userData3,{
         }).then(response=>{
             // console.log(response.data.length);
             // for (let index = 0; index < response.data.length; index++) {

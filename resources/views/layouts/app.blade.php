@@ -211,43 +211,6 @@
                     </div><br>
     </div>
     
-    <script>
-    //     const inputBox = document.getElementById("navbarDropdown0");
-    // const suggBox = document.getElementById("auto0");
-    
-    // const getSearch =(e)=>{
-    //     let userData=e.target.value;
-    //     console.log(userData);  
-    //  axios.get('http://127.0.0.1:8000/api/companies?search='+userData,{
-            
-    //     }).then(response=>{
-    //         console.log(response.data.length);
-    //         for (let index = 0; index < response.data.length; index++) {
-    //              let element = response.data[index].name;
-    //              let category = response.data[index].category;
-    //              console.log(element);
-    //              console.log(category);
-                 
-    //             //  suggBox0.innerHTML='<li><a class="dropdown-item" href="#">'+element+'</a></li>'+
-    //             //  '<li><a class="dropdown-item" href="#">'+email+'</a></li>';
-    //         }
-    //         let txt = "";
-    //         response.data.forEach(myFunction);
-    //         document.getElementById("auto0").innerHTML = txt;
-    //         function myFunction(value) {
-    //                     txt +='<li><a class="dropdown-item" href="#">'+value.name+'</a></li>'+
-    //                     '<li><a class="dropdown-item" href="#">'+value.category+'</a></li>'; 
-    //                     }
-    //         // suggBox.innerHTML=;
-    //     }).catch(err=>{
-    //         console.log(err);
-    //     });  
-    // };
    
-    // inputBox.addEventListener('keyup',getSearch);
-
-   
-
-</script>
 </body>
 </html>
