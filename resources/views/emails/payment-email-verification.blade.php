@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Payment Email Verification</title>
+    <title>Email Verification</title>
     <style>
         body {
             font-family: Arial, sans-serif;

@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Mail\PaymentEmailVerificationMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+
 
 class PaymentEmailVerificationController extends Controller
 {
@@ -17,31 +21,18 @@ class PaymentEmailVerificationController extends Controller
      try {   
         // Validate the input
     $request->validate([
-        'paymentEmailVerification' => 'required|email',
+        'paymentEmailVerification0' => 'required|email',
     ]);
     
     // Retrieve the email value from the request
-    $email = $request->input('paymentEmailVerification');
-    // Retrieve the authenticated user's ID
-    $userId = Auth::id();
-    // Check if a payment method already exists for the user
-    $paymentMethod = PaymentMethod::where('user_id', $userId)->first();
+    $email = $request->input('paymentEmailVerification0');
+    // Retrieve the authenticated user
+    $user = Auth::user();
+    // Update the name field of the user
+    $user->email = $email;
+    $user->email_verified_at = null;
+    $user->save();
 
-    // Save the email value to the email_verification column
-
-    if (!$paymentMethod) {
-        // Create a new payment method record
-        $paymentMethod = new PaymentMethod();
-        $paymentMethod->user_id = $userId;
-    } 
-    // Update the email_associated column
-    $paymentMethod->email_associated = $email;
-    $paymentMethod->save();
-    
-
-    // Perform any other necessary logic or operations
-
-    // Return a response or redirect to another page
     } catch (\Illuminate\Validation\ValidationException $e) {
         // Validation failed
         dd($e->errors());
@@ -50,52 +41,81 @@ class PaymentEmailVerificationController extends Controller
 
     public function send(Request $request)
     {
-        // Retrieve the payment method associated with the user
-        $paymentMethods = Auth::user()->paymentMethod;
-
+        $user = Auth::user();
+        
         // Generate a verification token
         $token = Str::random(32);
         
-        // Save the token in the payment method record
-        foreach ($paymentMethods as $paymentMethod) {
-            // Update the token for each payment method
-            $paymentMethod->token = $token;
-            $paymentMethod->save();
+         $user->token =$token;
+         $user->save();
         
-        }
-
         $verificationLink = route('payouts.verify', ['token' => $token]);
         // Send the verification email to the user's associated email
-        Mail::to($paymentMethod->email_associated)
+        Mail::to($user->email)
         ->send(new PaymentEmailVerificationMail($verificationLink));
+        return redirect('account-details');
         }
 
         public function verifyEmail(Request $request)
         {
             $token = $request->query('token');
             // Find the payment method record with the given token
-            $paymentMethod = PaymentMethod::where('token', $token)->first();
+            $user = Auth::user();
             
-            if (!$paymentMethod || !$token) {
-                // Handle invalid token case (e.g., show an error message)
-                dd($paymentMethod);
-                // return view('emails.email-verification-failed');
+            if ($token === $user->token) {
+                $user->email_verified_at = Carbon::now();
+                $user->save();
+                return redirect('account-details');
             } else {
-                // Update the email_verified flag
-                $paymentMethod->email_verification = true;
-                $paymentMethod->save();
-                
-                // Retrieve the authenticated user
-                $user = $request->user();
-                // Fetch the payment method associated with the user
-                $paymentMethods = $user->paymentMethod;
-                // Display the email verification success message
-                return view('account/payouts', ['paymentMethods' => $paymentMethods]);
+                return redirect('home');
             }
         }
 
+        public function changeUserName(Request $request)
+        {
+        try {   
+                // Validate the input
+            $request->validate([
+                    'changeUserNameInput' => 'required|max:255|alpha_num',
+                ]);
+            // Retrieve the username value from the request
+            $username =$request->input('changeUserNameInput');
+            // Retrieve the authenticated user
+            $user = Auth::user();
+            // Update the name field of the user
+            $user->name = $username;
+            $user->save();
+            // Redirect to the account settings route with the user data
+            return redirect('account-details')->with('user', $user);
+        }
+        catch(\Illuminate\Validation\ValidationException $e){
+             // Handle validation errors
+             // You can return an error response or redirect back with errors
+             return redirect('account-details')->with('warning', $e->getMessage());
+        }
+        }
+        public function updatePassword(Request $request)
+        {
+            $request->validate([
+                'current_password' => 'required',
+                'new_password' => 'required|min:8|confirmed',
+            ]);
+            $user = Auth::user();
+            // Verify the current password
+            if (!Hash::check($request->current_password, $user->password)) {
+                throw ValidationException::withMessages([
+                    'current_password' => 'The current password is incorrect.',
+                ]);
+                
+            }
+            // Update the password
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+            return redirect('account-details')->with('success', 'Password updated successfully.');
+        }
+        
     }
-
+    
 
 
 

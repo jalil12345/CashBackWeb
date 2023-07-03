@@ -9,7 +9,6 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Scout\Searchable;
 use Laravel\Cashier\Billable;
-// use Illuminate\Support\Facades\Input;
 
 
 class User extends \TCG\Voyager\Models\User
@@ -51,6 +50,10 @@ class User extends \TCG\Voyager\Models\User
     public function histories()
     {
         return $this->hasMany(History::class);
+    }
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class, 'user_id');
     }
     
     public function payments()

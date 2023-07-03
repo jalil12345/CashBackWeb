@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Company extends Model
 {
     use HasFactory,Searchable;
@@ -24,8 +25,9 @@ class Company extends Model
         return [
             
             'name' => $this->name,  // you can search by name
-            'category' => $this->category   // you can search by email
+            'category' => $this->category   // you can search by category
         ];
 
     }
+
 }

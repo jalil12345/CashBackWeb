@@ -78,13 +78,6 @@
           placeholder="Enter your PayPal email address">
         </div>
         <div class="modal-footer">
-            <!-- @if ($errors->any())
-             <div class="alert alert-danger"> <ul>
-            @foreach ($errors->all() as $error)
-             <li>{{ $error }}</li>
-            @endforeach
-            </ul></div>
-             @endif -->
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           
           <button type="submit" class="btn btn-pink">Save changes</button>

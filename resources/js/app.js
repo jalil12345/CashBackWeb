@@ -18,10 +18,16 @@ window.Vue = require('vue').default;
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+window.EventBus = new Vue();
+
+
+
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('store-search', require('./components/StoreSearch.vue').default);
 Vue.component('search', require('./components/Search.vue').default);
+Vue.component('rec-favorite', require('./components/rec-favorite.vue').default);
+Vue.component('favorite', require('./components/favorite.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -33,5 +39,11 @@ const app = new Vue({
 });
 const app1 = new Vue({
     el: '#app1',
+});
+const app2 = new Vue({
+    el: '#app2',
+});
+const app3 = new Vue({
+    el: '#app3',
 });
 

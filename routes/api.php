@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Company;
+use App\Models\Favorite;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -38,3 +39,12 @@ Route::get('/companies', function (Request $request) {
     }
     return response()->json($companies);
 });
+Route::get('/api-favorites', function (Request $request) {
+    if($request->filled('search')){
+        $favorites = Favorite::search($request->search)->get();
+    }else{
+        $favorites = Favorite::get();
+    }
+    return response()->json($favorites);
+});
+

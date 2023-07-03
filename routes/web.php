@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use Illuminate\Support\Facades\Input;
 use App\Models\User;
 use App\Models\Company;
 use Illuminate\Http\Request;
@@ -9,11 +8,13 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentEmailVerificationController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\Affiliate\AffiliateController;
 use App\Http\Controllers\UserMembershipController;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\GoogleAuth;
+use App\Http\Controllers\favoriteController;
  
 
 /*
@@ -27,20 +28,26 @@ use App\Http\Controllers\GoogleAuth;
 |
 */
 
+Route::post('/api/favorites/toggleFavorite/{companyId}', [favoriteController::class, 'toggleFavorite'])
+->name('favorites.toggleFavorite');
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::get('/contact-us', [App\Http\Controllers\ContactController::class, 'show'])->middleware('auth')->name('contact.show');
 Route::post('/contact-us', [App\Http\Controllers\ContactController::class, 'store'])->middleware('auth')->name('contact.store');
 
-Route::post('/payouts', [PaymentEmailVerificationController::class, 'index'])->name('email.save')->middleware('auth');
-Route::post('/payouts/send', [PaymentEmailVerificationController::class, 'send'])->name('email.send');
-Route::get('/payouts/verify', [PaymentEmailVerificationController::class, 'verifyEmail'])->name('payouts.verify')->middleware('auth');
 Route::get('/payouts', [PaymentMethodController::class, 'index'])->name('payouts')->middleware('auth');
+Route::post('/account-details', [PaymentEmailVerificationController::class, 'index'])->name('email.save')->middleware('auth');
+Route::post('/account-details/send', [PaymentEmailVerificationController::class, 'send'])->name('email.send');
+Route::get('/payouts/verify', [PaymentEmailVerificationController::class, 'verifyEmail'])->name('payouts.verify')->middleware('auth');
+Route::post('/account-settings/change-user-name', [PaymentEmailVerificationController::class, 'changeUserName'])->name('account-details.change-user-name');
 
+Route::post('/account-settings/add-password', [PaymentEmailVerificationController::class, 'addPassword'])
+->name('account.password');
+Route::post('/account-details/update-password', [PaymentEmailVerificationController::class, 'updatePassword'])
+->name('password.update0');
+Route::get('/favorites', [CompanyController::class, 'favorite'])
+->middleware('auth');
 
 
 Route::get('/privacy-policy', function () { return view('legal/privacy-policy');});
@@ -48,14 +55,16 @@ Route::get('/terms-conditions', function () { return view('legal/terms-condition
 Route::get('/about-us', function () { return view('legal/About Us');});
 Route::get('/contact-us', function () { return view('legal/Contact Us');});
 Route::get('/how-it-works', function () { return view('legal/how-it-works');});
+Route::get('/membership-plans', function () { return view('memberships');});
 
 
-Route::get('/profile', function () {
-    return view('profile');
+Route::get('/user-profile', function () {
+    return view('user-profile');
 })->middleware('auth');
 
 Route::get('/account-details', function () {
-    return view('account/account-settings');
+    $user = Auth::user();
+    return view('account/account-settings', compact('user'));
 })->middleware('auth');
 
 
@@ -79,9 +88,9 @@ Route::get('/deals', function () {
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 // after log in
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/home', [UserMembershipController::class, 'index'])->name('home');
 
