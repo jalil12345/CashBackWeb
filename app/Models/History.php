@@ -10,9 +10,8 @@ class History extends Model
     use HasFactory;
 
     protected $fillable = [
-        'payment_amount',
-        'payment_date',
-        'created_at',
+        'p_cashback',
+        'p_store',
         'updated_at',
     ];
 }

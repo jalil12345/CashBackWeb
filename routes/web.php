@@ -28,6 +28,8 @@ use App\Http\Controllers\favoriteController;
 |
 */
 
+
+
 Route::post('/api/favorites/toggleFavorite/{companyId}', [favoriteController::class, 'toggleFavorite'])
 ->name('favorites.toggleFavorite');
 
@@ -55,7 +57,7 @@ Route::get('/terms-conditions', function () { return view('legal/terms-condition
 Route::get('/about-us', function () { return view('legal/About Us');});
 Route::get('/contact-us', function () { return view('legal/Contact Us');});
 Route::get('/how-it-works', function () { return view('legal/how-it-works');});
-Route::get('/membership-plans', function () { return view('memberships');});
+// Route::get('/membership-plans', function () { return view('memberships');});
 
 
 Route::get('/user-profile', function () {
@@ -92,7 +94,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // after log in
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [UserMembershipController::class, 'index'])->name('home');
+// Route::get('/home', [UserMembershipController::class, 'index'])->name('home');
 
 // Route::post('/search', function () {
 //     $q = Input::get('q');
@@ -128,13 +130,11 @@ Route::get('/stores/category/{category}', function (Request $request, $category)
 
 // compact('result')
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
 
-// GoogleAuth view :    route :/sign-in/google  /sign-in/google/redirect  
-Route::get('/sign-in/google', [GoogleAuth::class, 'googleSignin']);
-Route::get('/sign-in/google/redirect', [GoogleAuth::class, 'googleRedirect']);
+    Route::get('/sign-in/google', [GoogleAuth::class, 'googleSignin']);
+    Route::get('/sign-in/google/redirect', [GoogleAuth::class, 'googleRedirect']);
+
+
 
 Route::get('/auth/facebook', [GoogleAuth::class, 'redirectToFacebook']);
 Route::get('/auth/facebook/callback', [GoogleAuth::class, 'handleFacebookCallback']);
@@ -146,9 +146,15 @@ Route::get('/Affiliate', [AffiliateController::class, 'index']);
 Route::get('/billing', [PaymentController::class, 'index']);
 
 
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
 
-
-
+Route::group(['middleware' => ['auth', 'admin.user']], function () {
+    Route::get('/1/cou', function () {
+        return view('cou');
+    });
+});
 // Route::get('/blog', function () {
 //     return view('blog/blog');
 // });

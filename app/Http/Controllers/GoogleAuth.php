@@ -28,7 +28,7 @@ class GoogleAuth extends Controller
             'password' => Hash::make(Str::random(24)),
         ]);
         Auth::login($user, true);
-        return redirect('/home');
+        return redirect('/');
     }
 
     public function redirectToFacebook()
@@ -36,9 +36,11 @@ class GoogleAuth extends Controller
         return Socialite::driver('facebook')->redirect();
     }
 
-    public function handleFacebookCallback(Request $request)
+    public function handleFacebookCallback()
     {
+        
         $user = Socialite::driver('facebook')->user();
+        
         // handle the authenticated user
         $user = User::firstOrCreate([
             'email' => $user->email
@@ -47,7 +49,7 @@ class GoogleAuth extends Controller
             'password' => Hash::make(Str::random(24)),
         ]);
         Auth::login($user, true);
-        return redirect('/home');
+        return redirect('/');
     }
 
 }

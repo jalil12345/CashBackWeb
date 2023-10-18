@@ -12,6 +12,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/recordClick.js') }}"></script>
+
     <!-- <script src="{{ asset('js/jquery.js') }}"></script> -->
 
     <!-- Fonts -->
@@ -59,8 +61,8 @@
                             <div class="dropdown-menu dropdown-menu-end rounded-end rounded-start" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item text-success" href="{{ url('favorites') }}">{{ __('Favorites') }}
                             </a>
-                            <a class="dropdown-item text-success" href="{{ url('membership-plans') }}">{{ __('Membership Plans') }}
-                            </a>
+                            <!-- <a class="dropdown-item text-success" href="{{ url('membership-plans') }}">{{ __('Membership Plans') }}
+                            </a> -->
                             <a class="dropdown-item" href="{{ url('about-us') }}">{{ __('About Us') }}</a> 
                             <a class="dropdown-item" href="{{ url('contact-us') }}">{{ __('Contact Us') }}</a>        
                             <a class="dropdown-item" href="{{ url('how-it-works') }}">{{ __('FAQs') }}</a>
@@ -127,11 +129,11 @@
     <div class="container-fluid bg-secondary">
      <nav class="navbar  navbar-light bg-secondary ">
     
-    <a class="navbar-brand text-white" href="#">Macklara</a></nav>
+    <a class="navbar-brand text-white" href="{{ url('/') }}">Macklara</a></nav>
     
     <div class="bg-secondary h6 text-center " ><p class="">
       <a class=" text-white px-3" href="{{ url('#') }}" style="text-decoration: none;"> Disclaimer   </a>||
-      <a class=" text-white px-3" href="{{ url('#') }}" style="text-decoration: none;"> FAQs </a>||
+      <a class=" text-white px-3" href="{{ url('how-it-works') }}" style="text-decoration: none;"> FAQs </a>||
       <a class=" text-white px-3" href="{{ url('contact-us') }}" style="text-decoration: none;"> Contact Us  </a> ||
       <a class=" text-white px-3" href="{{ url('about-us') }}" style="text-decoration: none;"> About Us  </a> ||
       <a class="text-white px-3" href="{{ url('privacy-policy') }}" style="text-decoration: none;">{{ __('Privacy Policy  ') }}</a>||

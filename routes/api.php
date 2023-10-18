@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Company;
 use App\Models\Favorite;
+use App\Http\Controllers\HistoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -39,6 +40,16 @@ Route::get('/companies', function (Request $request) {
     }
     return response()->json($companies);
 });
+// middleware('last.modified')->
+Route::middleware('last.modified')->get('/extension-list', function (Request $request) {
+    if($request->filled('search')){
+        $companies = Company::search($request->search)->get();
+    }else{
+        $companies = Company::get();
+        
+    }
+    return response()->json($companies);
+});
 Route::get('/api-favorites', function (Request $request) {
     if($request->filled('search')){
         $favorites = Favorite::search($request->search)->get();
@@ -47,4 +58,6 @@ Route::get('/api-favorites', function (Request $request) {
     }
     return response()->json($favorites);
 });
+
+Route::post('/record-click', [HistoryController::class, 'recordClick']);
 

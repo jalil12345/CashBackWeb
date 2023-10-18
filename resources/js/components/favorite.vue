@@ -5,7 +5,7 @@
       favoriteCompanies: [],
       companies: [],
       page: 1,
-      perPage: 6,
+      perPage: 20,
       maxRounds: 5,
       rounds: 0
     };
@@ -15,6 +15,7 @@
       this.favoriteCompanies = updatedCompanies;
     });
     this.fetchFavoriteCompanies();
+    this.loadMoreCompanies();
   },
   methods: {
     fetchFavoriteCompanies() {
@@ -45,7 +46,12 @@
           const newCompanies = response.data;
 
           if (newCompanies.length > 0) {
-            this.companies = this.companies.concat(newCompanies);
+            const filteredCompanies = newCompanies.filter(company => {
+              return !this.favoriteCompanies.some(
+                favorite => favorite.company_id === company.id
+              );
+            });
+            this.companies = this.companies.concat(filteredCompanies);
             this.page++;
             this.rounds++;
           } else {
@@ -58,30 +64,41 @@
         });
     },
     toggleFavorite(companyId) {
+  axios
+    .post('/api/favorites/toggleFavorite/' + companyId)
+    .then(response => {
+      const updatedCompany = response.data;
+      
+      const index = this.companies.findIndex(
+        company => company.id === updatedCompany.id
+      );
+      if (index !== -1) {
+        this.companies.splice(index, 1, updatedCompany);
+      }
+      
       axios
-        .post('/api/favorites/toggleFavorite/' + companyId)
+        .get('http://127.0.0.1:8000/api/api-favorites')
         .then(response => {
-          axios
-            .get('http://127.0.0.1:8000/api/api-favorites')
-            .then(response => {
-              const updatedCompany = response.data;
-              const index = this.companies.findIndex(
-                company => company.id === updatedCompany.id
-              );
-              if (index !== -1) {
-                this.companies.splice(index, 1, updatedCompany);
-              }
-              EventBus.$emit('favoriteCompaniesUpdated', response.data);
-            })
-            .catch(error => {
-              console.error(error);
-            });
+          // const favoriteIndex = this.companies.findIndex(
+          //   company => company.id === updatedCompany.company_id
+          // );
+          // if (favoriteIndex !== -1) {
+          //   this.companies.splice(favoriteIndex, 1);
+          // }
+          EventBus.$emit('favoriteCompaniesUpdated', response.data);
         })
         .catch(error => {
-          // Handle the error if needed
           console.error(error);
         });
-    }
+    })
+    .catch(error => {
+      // Handle the error if needed
+      console.error(error);
+    });
+},
+isFavoriteCompany(companyId) {
+    return this.favoriteCompanies.some(favorite => favorite.company_id === companyId);
+  }
   }
    }; 
 </script>
@@ -93,10 +110,23 @@
     <div>
     <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-5">
       <div class="col" v-for="(favorite, index) in favoriteCompanies" :key="index">
-        <div class="card">
-          <div class="card-body">
-            <h3 class="card-title">{{ favorite.name }}</h3>
-            <!-- Add other company details here if needed -->
+        <div class="card mb-3">
+          <div class="card-body ">
+            <div class=" d-flex align-items-center justify-content-between">
+            
+                       <a  href="#" class="text-pink" @click.prevent="toggleFavorite(favorite.company_id)">
+                        <i class="text-pink">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                            </svg>
+                        </i>
+                      </a>
+                      <a class="h4 text-dark" 
+                      :href="`stores/name/${favorite.name}`"
+                      style="text-decoration: none;"
+                      >{{ favorite.name }}</a>
+                      <span class="h5 fw-bold text-success">{{ favorite.rate }}</span>
+                    </div>
           </div>
         </div>
       </div>
@@ -111,9 +141,9 @@
        <div>
         <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-5">
             <div class="col" v-for="(company, index) in companies.slice(0, page * perPage)">
-                <div class="card mb-3">
+                <div class="card mb-3" v-if="!isFavoriteCompany(company.id)">
                     <div class="card-body">
-                        <h3 class="card-title">{{ company.name }}</h3>
+                      <div class=" d-flex align-items-center justify-content-between">
                         <a href="#" class="text-pink" @click.prevent="toggleFavorite(company.id)">
                         <i>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" 
@@ -122,11 +152,13 @@
                             </svg>
                         </i>
                         </a>
-                        <i class="text-pink">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                            </svg>
-                        </i>
+                        <a class="h4 text-dark" 
+                        :href="`stores/name/${company.name}`"
+                        style="text-decoration: none;"
+                        >{{ company.name }}</a>
+                        <span class="h5 fw-bold text-success">{{ company.rate }}</span>
+                      
+                    </div>
                     </div>
                 </div>
             </div>

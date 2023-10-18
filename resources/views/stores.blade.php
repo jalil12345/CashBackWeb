@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<br>  
-                  <search id="app1"></search>  
+
+<search id="app1" class="py-0"></search> 
+
 <div class="container"id="body">
 
-<br><br>
 <div class="container" >
   <br>
 <strong class="h2  pe-2 pb-3 fw-bolder ">All Stores List </strong>  <br><br>
 
-<store-search id="app0"></store-search>
+<store-search id="app0" ></store-search>
 
 <!-- <div class="row">
 <div class="dropdown col-5">

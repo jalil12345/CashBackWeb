@@ -109,11 +109,12 @@
     </div>
   </div>
 </div>
-@include('account.modal.account-password-modal')     
-@include('account.modal.user-name-modal')
-@include('account.modal.email-address-modal')   
-@include('account.modal.phone-number-modal') 
+ 
+@include('account.modal.user-name-modal')   
 @include('account.modal.email-send-modal') 
+@include('account.modal.email-address-modal') 
+@include('account.modal.phone-number-modal') 
+@include('account.modal.account-password-modal') 
     </div>
     <br>
     <div class="container">
@@ -126,9 +127,6 @@
   <button class="h5 btn btn-danger rounded-5 d-flex ">Delete your Account</button>
 </div>
 
-
-</div>
-</div>
 
 </div>
 <br>

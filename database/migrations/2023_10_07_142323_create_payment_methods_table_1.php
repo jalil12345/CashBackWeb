@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable();
             $table->string('payment_type')->nullable();
             $table->string('email_associated');
             $table->boolean('email_verification')->default(false);
+            $table->string('token')->nullable();
             $table->timestamps();
         });
     }

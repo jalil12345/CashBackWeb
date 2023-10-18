@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<br>
-                  <search id="app1"></search>  
-<br><br>
+
+<search id="app1" class="py-0"></search> 
 
 <div class="container "><br></div>
 
