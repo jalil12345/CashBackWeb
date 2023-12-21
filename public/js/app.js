@@ -5438,7 +5438,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var txt = "";
       var userData3 = e.target.value;
-      axios.get('http://127.0.0.1:8000/api/companies?search=' + userData3, {}).then(function (response) {
+      axios.get('http://127.0.0.1:8000/api/stores?search=' + userData3, {}).then(function (response) {
         _this.emptyArray3 = response.data;
       })["catch"](function (err) {
         console.log(err);
@@ -5464,119 +5464,85 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      companies: [],
+      visibleCompanies: [],
+      // Store currently visible companies
+      perPage: 30,
       page: 1,
-      perPage: 10 // Set initial load to 50 stores
+      // Track the current page
+      isFetching: false,
+      hasMoreData: true // Track if there are more companies to fetch
 
     };
   },
-  created: function created() {
-    this.fetchCompanies();
+  mounted: function mounted() {
+    this.setupIntersectionObserver();
   },
   methods: {
     fetchCompanies: function fetchCompanies() {
       var _this = this;
 
-      axios.get('http://127.0.0.1:8000/api/companies', {
-        params: {
-          page: this.page,
-          perPage: this.perPage
-        }
-      }).then(function (response) {
-        _this.companies = _this.companies.concat(response.data);
-      })["catch"](function (err) {
-        console.error("Error fetching companies:", err);
-      });
-    },
-    loadMoreCompanies: function loadMoreCompanies() {
-      if (this.page === 1) {
-        // If it's the first page, we set subsequent loads to 20
-        this.perPage = 20;
-      }
+      if (!this.isFetching && this.hasMoreData) {
+        this.isFetching = true;
+        axios.get('http://127.0.0.1:8000/api/companies', {
+          params: {
+            perPage: this.perPage,
+            page: this.page
+          }
+        }).then(function (response) {
+          var newCompanies = response.data.data;
 
-      this.page++;
-      this.fetchCompanies();
+          if (newCompanies.length > 0) {
+            _this.visibleCompanies = [].concat(_toConsumableArray(_this.visibleCompanies), _toConsumableArray(newCompanies));
+            _this.page++; // Increment the page for the next request
+          } else {
+            // No more data to fetch
+            _this.hasMoreData = false;
+          }
+
+          _this.isFetching = false;
+        })["catch"](function (err) {
+          console.error('Error fetching companies:', err);
+          _this.isFetching = false;
+        });
+      }
     },
-    getSearch: function getSearch(searchTerm) {
+    setupIntersectionObserver: function setupIntersectionObserver() {
       var _this2 = this;
 
-      axios.get('http://127.0.0.1:8000/api/companies', {
-        params: {
-          search: searchTerm
+      var options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.25
+      };
+      var observer = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting && _this2.hasMoreData) {
+          _this2.fetchCompanies();
         }
-      }).then(function (response) {
-        _this2.companies = response.data;
-      })["catch"](function (err) {
-        console.error("Error searching companies:", err);
-      });
+      }, options); // Target the element just below the last visible company card to observe
+
+      var sentinelElement = document.getElementById('sentinel');
+
+      if (sentinelElement) {
+        observer.observe(sentinelElement);
+      } // Fetch initial set of companies
+
+
+      this.fetchCompanies();
     }
   }
 });
@@ -5618,7 +5584,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchFavoriteCompanies: function fetchFavoriteCompanies() {
       var _this2 = this;
 
-      axios.get('http://127.0.0.1:8000/api/api-favorites').then(function (response) {
+      axios.get('/api-favorites').then(function (response) {
         _this2.favoriteCompanies = response.data;
       })["catch"](function (error) {
         console.error(error);
@@ -5633,7 +5599,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.get('http://127.0.0.1:8000/api/companies', {
+      axios.get('/api/stores', {
         params: {
           page: this.page,
           perPage: this.perPage
@@ -5661,7 +5627,7 @@ __webpack_require__.r(__webpack_exports__);
     toggleFavorite: function toggleFavorite(companyId) {
       var _this4 = this;
 
-      axios.post('/api/favorites/toggleFavorite/' + companyId).then(function (response) {
+      axios.post('/favorites/toggleFavorite/' + companyId).then(function (response) {
         var updatedCompany = response.data;
 
         var index = _this4.companies.findIndex(function (company) {
@@ -5672,7 +5638,7 @@ __webpack_require__.r(__webpack_exports__);
           _this4.companies.splice(index, 1, updatedCompany);
         }
 
-        axios.get('http://127.0.0.1:8000/api/api-favorites').then(function (response) {
+        axios.get('/api-favorites').then(function (response) {
           // const favoriteIndex = this.companies.findIndex(
           //   company => company.id === updatedCompany.company_id
           // );
@@ -29128,7 +29094,7 @@ var render = function () {
         staticClass:
           "row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-5",
       },
-      _vm._l(_vm.companies, function (company, index) {
+      _vm._l(_vm.visibleCompanies, function (company, index) {
         return _c("div", { key: index, staticClass: "col" }, [
           _c(
             "div",
@@ -29163,6 +29129,8 @@ var render = function () {
       }),
       0
     ),
+    _vm._v(" "),
+    _c("div", { staticStyle: { height: "10px" }, attrs: { id: "sentinel" } }),
   ])
 }
 var staticRenderFns = []
@@ -29202,71 +29170,77 @@ var render = function () {
             },
             _vm._l(_vm.favoriteCompanies, function (favorite, index) {
               return _c("div", { key: index, staticClass: "col" }, [
-                _c("div", { staticClass: "card mb-3" }, [
-                  _c("div", { staticClass: "card-body" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "d-flex align-items-center justify-content-between",
-                      },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-pink",
-                            attrs: { href: "#" },
-                            on: {
-                              click: function ($event) {
-                                $event.preventDefault()
-                                return _vm.toggleFavorite(favorite.company_id)
+                _c(
+                  "div",
+                  { staticClass: "card mb-3 shadow border-light rounded-3" },
+                  [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "d-flex align-items-center justify-content-between",
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "text-pink",
+                              attrs: { href: "#" },
+                              on: {
+                                click: function ($event) {
+                                  $event.preventDefault()
+                                  return _vm.toggleFavorite(favorite.company_id)
+                                },
                               },
                             },
-                          },
-                          [
-                            _c("i", { staticClass: "text-pink" }, [
-                              _c(
-                                "svg",
-                                {
-                                  staticClass: "bi bi-heart-fill",
-                                  attrs: {
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    width: "16",
-                                    height: "16",
-                                    fill: "currentColor",
-                                    viewBox: "0 0 16 16",
-                                  },
-                                },
-                                [
-                                  _c("path", {
+                            [
+                              _c("i", { staticClass: "text-pink" }, [
+                                _c(
+                                  "svg",
+                                  {
+                                    staticClass: "bi bi-heart-fill",
                                     attrs: {
-                                      "fill-rule": "evenodd",
-                                      d: "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z",
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      width: "16",
+                                      height: "16",
+                                      fill: "currentColor",
+                                      viewBox: "0 0 16 16",
                                     },
-                                  }),
-                                ]
-                              ),
-                            ]),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "h4 text-dark",
-                            staticStyle: { "text-decoration": "none" },
-                            attrs: { href: "stores/name/" + favorite.name },
-                          },
-                          [_vm._v(_vm._s(favorite.name))]
-                        ),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "h5 fw-bold text-success" }, [
-                          _vm._v(_vm._s(favorite.rate)),
-                        ]),
-                      ]
-                    ),
-                  ]),
-                ]),
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        "fill-rule": "evenodd",
+                                        d: "M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z",
+                                      },
+                                    }),
+                                  ]
+                                ),
+                              ]),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "h4 text-dark",
+                              staticStyle: { "text-decoration": "none" },
+                              attrs: { href: "stores/name/" + favorite.name },
+                            },
+                            [_vm._v(_vm._s(favorite.name))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            { staticClass: "h5 fw-bold text-success" },
+                            [_vm._v(_vm._s(favorite.rate))]
+                          ),
+                        ]
+                      ),
+                    ]),
+                  ]
+                ),
               ])
             }),
             0
@@ -29293,74 +29267,81 @@ var render = function () {
               function (company, index) {
                 return _c("div", { staticClass: "col" }, [
                   !_vm.isFavoriteCompany(company.id)
-                    ? _c("div", { staticClass: "card mb-3" }, [
-                        _c("div", { staticClass: "card-body" }, [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "d-flex align-items-center justify-content-between",
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "text-pink",
-                                  attrs: { href: "#" },
-                                  on: {
-                                    click: function ($event) {
-                                      $event.preventDefault()
-                                      return _vm.toggleFavorite(company.id)
+                    ? _c(
+                        "div",
+                        {
+                          staticClass:
+                            "card mb-3 shadow border-light rounded-3",
+                        },
+                        [
+                          _c("div", { staticClass: "card-body" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "d-flex align-items-center justify-content-between",
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "text-pink",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function ($event) {
+                                        $event.preventDefault()
+                                        return _vm.toggleFavorite(company.id)
+                                      },
                                     },
                                   },
-                                },
-                                [
-                                  _c("i", [
-                                    _c(
-                                      "svg",
-                                      {
-                                        staticClass: "bi bi-heart",
-                                        attrs: {
-                                          xmlns: "http://www.w3.org/2000/svg",
-                                          width: "16",
-                                          height: "16",
-                                          fill: "currentColor",
-                                          viewBox: "0 0 16 16",
-                                        },
-                                      },
-                                      [
-                                        _c("path", {
+                                  [
+                                    _c("i", [
+                                      _c(
+                                        "svg",
+                                        {
+                                          staticClass: "bi bi-heart",
                                           attrs: {
-                                            d: "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z",
+                                            xmlns: "http://www.w3.org/2000/svg",
+                                            width: "16",
+                                            height: "16",
+                                            fill: "currentColor",
+                                            viewBox: "0 0 16 16",
                                           },
-                                        }),
-                                      ]
-                                    ),
-                                  ]),
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "h4 text-dark",
-                                  staticStyle: { "text-decoration": "none" },
-                                  attrs: {
-                                    href: "stores/name/" + company.name,
+                                        },
+                                        [
+                                          _c("path", {
+                                            attrs: {
+                                              d: "m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z",
+                                            },
+                                          }),
+                                        ]
+                                      ),
+                                    ]),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "h4 text-dark",
+                                    staticStyle: { "text-decoration": "none" },
+                                    attrs: {
+                                      href: "stores/name/" + company.name,
+                                    },
                                   },
-                                },
-                                [_vm._v(_vm._s(company.name))]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                { staticClass: "h5 fw-bold text-success" },
-                                [_vm._v(_vm._s(company.rate))]
-                              ),
-                            ]
-                          ),
-                        ]),
-                      ])
+                                  [_vm._v(_vm._s(company.name))]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  { staticClass: "h5 fw-bold text-success" },
+                                  [_vm._v(_vm._s(company.rate))]
+                                ),
+                              ]
+                            ),
+                          ]),
+                        ]
+                      )
                     : _vm._e(),
                 ])
               }

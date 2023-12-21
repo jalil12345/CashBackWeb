@@ -86,7 +86,7 @@ class PaymentEmailVerificationController extends Controller
             $user->name = $username;
             $user->save();
             // Redirect to the account settings route with the user data
-            return redirect('account-details')->with('user', $user);
+            return redirect('account-details')->with('successUserName', 'User Name updated successfully.');
         }
         catch(\Illuminate\Validation\ValidationException $e){
              // Handle validation errors
@@ -112,6 +112,26 @@ class PaymentEmailVerificationController extends Controller
             $user->password = Hash::make($request->new_password);
             $user->save();
             return redirect('account-details')->with('success', 'Password updated successfully.');
+        }
+        public function addNumber(Request $request)
+        {
+        try {   
+                
+            // Retrieve the username value from the request
+            $userNumber =$request->input('phoneNumberInput');
+            // Retrieve the authenticated user
+            $user = Auth::user();
+            // Update the name field of the user
+            $user->phone_number = $userNumber;
+            $user->save();
+            // Redirect to the account settings route with the user data
+            return redirect('account-details')->with('successPhoneNumber', 'Phone Number updated successfully.');
+        }
+        catch(\Illuminate\Validation\ValidationException $e){
+             // Handle validation errors
+             // You can return an error response or redirect back with errors
+             return redirect('account-details')->with('warning', $e->getMessage());
+        }
         }
         
     }

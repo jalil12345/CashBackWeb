@@ -15,7 +15,6 @@ class HistoryController extends Controller
             'p_store' => $request->input('p_store'),
             'updated_at' => now(),
         ]);
-
-        return response()->json(['message' => 'Click recorded successfully']);
+       return;
     }
 }

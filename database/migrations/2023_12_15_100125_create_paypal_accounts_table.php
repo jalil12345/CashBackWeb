@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('histories', function (Blueprint $table) {
+        Schema::create('paypal_accounts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained();
-            $table->string('p_name')->nullable();
-            $table->string('p_store')->nullable();
-            $table->string('p_price')->nullable();
-            $table->string('p_cashback')->nullable();
-            $table->string('p_refund')->nullable();
+            $table->string('paypal_id')->unique();
+            $table->string('paypal_email')->nullable();
+            $table->string('paypal_name')->nullable();
+            $table->text('paypal_access_token')->nullable();
+            $table->timestamp('paypal_expires_at')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('histories');
+        Schema::dropIfExists('paypal_accounts');
     }
 };

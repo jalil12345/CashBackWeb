@@ -1,0 +1,5 @@
+/* Example: Override Bootstrap button color */
+.btn-primary {
+    background-color: rgb(140, 92, 228); /* Your custom color */
+    border-color: rgba(210, 233, 230, 0.918); /* Your custom border color */
+}

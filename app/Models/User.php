@@ -11,7 +11,7 @@ use Laravel\Scout\Searchable;
 use Laravel\Cashier\Billable;
 
 
-class User extends \TCG\Voyager\Models\User
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, Searchable, Billable;
 
@@ -68,6 +68,10 @@ class User extends \TCG\Voyager\Models\User
     {
         return $this->hasMany(PaymentMethod::class);
     }
+    public function paypalAccount()
+    {
+        return $this->hasOne(Paypal::class);
+    }
 
     /**
      * Get the indexable data array for the model.
@@ -88,4 +92,18 @@ class User extends \TCG\Voyager\Models\User
         ];
 
     }
+    // app/Models/User.php
+
+    public function isAdmin()
+    {
+        return $this->userRoles->where('role', 'admin')->isNotEmpty();
+    }
+
+    public function userRoles()
+    {
+        return $this->hasMany(UserRoles::class);
+    }
+
+    
+
 }

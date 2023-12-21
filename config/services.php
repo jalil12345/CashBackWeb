@@ -43,6 +43,14 @@ return [
         'redirect' => env('FACEBOOK_REDIRECT_URI'),
         'debug' => true,
     ],
+    // config/services.php
+
+    'paypal' => [
+        'client_id' => env('PAYPAL_CLIENT_ID'),
+        'client_secret' => env('PAYPAL_SECRET'),
+        'redirect_url' => env('APP_URL') . '/paypal/callback',
+    ],
+
 
     'stripe' => [
         'key' => env('STRIPE_KEY'),

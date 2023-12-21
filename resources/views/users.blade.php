@@ -4,7 +4,7 @@
 @section('content')
       
 <div class="container">
-    <h1 class="text-center text-dark">Laravel 9 Scout Full Text Search Tutorial - ItSolutionStuff.com</h1>
+    <h1 class="text-center text-dark">H1</h1>
   
     <form method="GET">
         <div class=" dropdown dropdown input-group"
@@ -12,42 +12,39 @@
           <input 
             id="user_name"
             type="text" 
-             name="search"
+            name="search"
             value="{{ request()->get('search') }}" 
             class="  dropdown form-control" 
             placeholder="Search..." 
             aria-label="Search" 
             autocomplete="off"
-            data-bs-toggle="dropdown" aria-expanded="false">
+            data-bs-toggle="dropdown" 
+            aria-expanded="false">
           <button class="btn btn-success" type="submit" id="button-addon2">Search</button>
         
     </form>
     
-
-    <ul class="dropdown-menu dropdown-menu rounded-end rounded-start" 
-    aria-labelledby="user_name"
-    id="iid">
-    @foreach($users as $user)
-    <li><a class="dropdown-item" href="#">{{ $user->name }}</a></li>
-    <li><a class="dropdown-item" href="#">{{ $user->email }}</a></li>
-    @endforeach
-  </ul></div>
+    </div>
 
  <div  id="auto"></div>
 </div>
     <table class="table table-bordered data-table">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
             </tr>
         </thead>
         <tbody>
             @foreach($users as $user)
             <tr>
-                <td >{{ $user->id }}</td>
                 <td >{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->id }}</td>
+                <td>{{ $user->email }}</td>
                 <td>{{ $user->email }}</td>
             </tr>
             @endforeach
@@ -55,9 +52,8 @@
     </table>
     
 </div>
-<div class="container" id="app0">
-    <example-component></example-component>
-</div><br><br><br><br><br><br><br><br><br><br>
+
+<br><br><br><br><br><br><br><br><br><br>
 <br><br><br>
     
 <script>

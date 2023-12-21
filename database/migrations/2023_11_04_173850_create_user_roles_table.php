@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('histories', function (Blueprint $table) {
+        Schema::create('user_roles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained();
-            $table->string('p_name')->nullable();
-            $table->string('p_store')->nullable();
-            $table->string('p_price')->nullable();
-            $table->string('p_cashback')->nullable();
-            $table->string('p_refund')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->string('role');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('histories');
+        Schema::dropIfExists('user_roles');
     }
 };

@@ -2,7 +2,7 @@
 
 @section('content')
 
-   <search id="app1" class="py-0"></search>
+   
 <div class="container">
     @foreach($store as $st)
                
@@ -21,6 +21,7 @@
                            class="btn btn-pink rounded-1 store-link" 
                            data-store="{{ $st->name }}" 
                            data-cashback="{{ $st->rate }}"
+                           data-redirect="{{ $st->url }}{{ $st->companies_click_id }}"
                            target="_blank" 
                            rel="noopener noreferrer">Shop Now</a>
                         </div>

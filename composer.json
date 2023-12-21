@@ -13,8 +13,7 @@
         "laravel/scout": "^9.4",
         "laravel/socialite": "^5.9",
         "laravel/tinker": "^2.7",
-        "laravel/ui": "^3.4",
-        "tcg/voyager": "^1.6"
+        "laravel/ui": "^3.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

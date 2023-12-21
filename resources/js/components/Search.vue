@@ -16,7 +16,7 @@
        
       let txt = "";
       let userData3=e.target.value;
-     axios.get('http://127.0.0.1:8000/api/companies?search='+userData3,{
+     axios.get('http://127.0.0.1:8000/api/stores?search='+userData3,{
         }).then(response=>{
             this.emptyArray3=response.data
         }).catch(err=>{

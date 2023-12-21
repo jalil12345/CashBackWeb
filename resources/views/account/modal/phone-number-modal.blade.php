@@ -1,5 +1,9 @@
 
-<div class="modal fade" id="phoneNumber" tabindex="-1" role="dialog" aria-labelledby="phoneNumberLabel" aria-hidden="true">
+<div class="modal fade" 
+     id="phoneNumber" 
+     tabindex="-1" role="dialog" 
+     aria-labelledby="phoneNumberLabel" 
+     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -8,9 +12,9 @@
           </button>
         </div>
         <div class="modal-body">
-        <form action="{{ route('email.save') }}" method="post">
+        <form action="{{ route('number.add') }}" method="post">
             @csrf
-          <input name="paymentEmailVerification" type="email" class="form-control" 
+          <input name="phoneNumberInput" type="tel" class="form-control" 
           placeholder="Enter Phone Number">
         </div>
         <div class="modal-footer">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
- <h1>fff</h1>
+ <h1>H1</h1>
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br>

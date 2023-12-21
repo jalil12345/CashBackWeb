@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Company;
 use App\Models\Favorite;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\CompanyController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,15 +32,9 @@ Route::get('/users', function (Request $request) {
     return response()->json($users);
 });
 
-Route::get('/companies', function (Request $request) {
-    if($request->filled('search')){
-        $companies = Company::search($request->search)->get();
-    }else{
-        $companies = Company::get();
-        
-    }
-    return response()->json($companies);
-});
+Route::get('/companies',  [CompanyController::class, 'searchStores']);
+Route::get('/stores',  [CompanyController::class, 'search']);
+
 // middleware('last.modified')->
 Route::middleware('last.modified')->get('/extension-list', function (Request $request) {
     if($request->filled('search')){
@@ -50,14 +45,9 @@ Route::middleware('last.modified')->get('/extension-list', function (Request $re
     }
     return response()->json($companies);
 });
-Route::get('/api-favorites', function (Request $request) {
-    if($request->filled('search')){
-        $favorites = Favorite::search($request->search)->get();
-    }else{
-        $favorites = Favorite::get();
-    }
-    return response()->json($favorites);
-});
+
+
+
 
 Route::post('/record-click', [HistoryController::class, 'recordClick']);
 

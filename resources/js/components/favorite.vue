@@ -20,7 +20,7 @@
   methods: {
     fetchFavoriteCompanies() {
       axios
-        .get('http://127.0.0.1:8000/api/api-favorites')
+        .get('/api-favorites')
         .then(response => {
           this.favoriteCompanies = response.data;
         })
@@ -36,7 +36,7 @@
       }
 
       axios
-        .get('http://127.0.0.1:8000/api/companies', {
+        .get('/api/stores', {
           params: {
             page: this.page,
             perPage: this.perPage
@@ -65,7 +65,7 @@
     },
     toggleFavorite(companyId) {
   axios
-    .post('/api/favorites/toggleFavorite/' + companyId)
+    .post('/favorites/toggleFavorite/' + companyId)
     .then(response => {
       const updatedCompany = response.data;
       
@@ -77,7 +77,7 @@
       }
       
       axios
-        .get('http://127.0.0.1:8000/api/api-favorites')
+        .get('/api-favorites')
         .then(response => {
           // const favoriteIndex = this.companies.findIndex(
           //   company => company.id === updatedCompany.company_id
@@ -110,7 +110,7 @@ isFavoriteCompany(companyId) {
     <div>
     <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-5">
       <div class="col" v-for="(favorite, index) in favoriteCompanies" :key="index">
-        <div class="card mb-3">
+        <div class="card mb-3 shadow border-light rounded-3">
           <div class="card-body ">
             <div class=" d-flex align-items-center justify-content-between">
             
@@ -140,8 +140,10 @@ isFavoriteCompany(companyId) {
        <h3 class="card-title">Recommended Stores</h3>
        <div>
         <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-5">
-            <div class="col" v-for="(company, index) in companies.slice(0, page * perPage)">
-                <div class="card mb-3" v-if="!isFavoriteCompany(company.id)">
+            <div class="col" 
+                  v-for="(company, index) in companies.slice(0, page * perPage)">
+                <div class="card mb-3 shadow border-light rounded-3" 
+                    v-if="!isFavoriteCompany(company.id)">
                     <div class="card-body">
                       <div class=" d-flex align-items-center justify-content-between">
                         <a href="#" class="text-pink" @click.prevent="toggleFavorite(company.id)">

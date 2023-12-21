@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Company;
 use Illuminate\Http\Request;
@@ -15,6 +16,9 @@ use App\Http\Controllers\UserMembershipController;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\GoogleAuth;
 use App\Http\Controllers\favoriteController;
+use App\Http\Controllers\PaypalController;
+use App\Http\Controllers\DetailsController;
+
  
 
 /*
@@ -27,10 +31,12 @@ use App\Http\Controllers\favoriteController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::middleware(['auth'])->group(function () {
+    Route::get('/api-favorites', [favoriteController::class, 'index']);
+});
 
 
-
-Route::post('/api/favorites/toggleFavorite/{companyId}', [favoriteController::class, 'toggleFavorite'])
+Route::post('/favorites/toggleFavorite/{companyId}', [favoriteController::class, 'toggleFavorite'])
 ->name('favorites.toggleFavorite');
 
 
@@ -42,12 +48,24 @@ Route::get('/payouts', [PaymentMethodController::class, 'index'])->name('payouts
 Route::post('/account-details', [PaymentEmailVerificationController::class, 'index'])->name('email.save')->middleware('auth');
 Route::post('/account-details/send', [PaymentEmailVerificationController::class, 'send'])->name('email.send');
 Route::get('/payouts/verify', [PaymentEmailVerificationController::class, 'verifyEmail'])->name('payouts.verify')->middleware('auth');
-Route::post('/account-settings/change-user-name', [PaymentEmailVerificationController::class, 'changeUserName'])->name('account-details.change-user-name');
+Route::post('/account-settings/change-user-name', [PaymentEmailVerificationController::class, 'changeUserName'])
+->name('account-details.change-user-name');
+
+
+         // Paypal   
+         
+Route::get('/paypal/authenticate', [PaypalController::class, 'initiatePaypalAuthentication']);
+Route::get('/paypal/callback', [PaypalController::class, 'handlePaypalCallback']);
+
+
+
 
 Route::post('/account-settings/add-password', [PaymentEmailVerificationController::class, 'addPassword'])
 ->name('account.password');
 Route::post('/account-details/update-password', [PaymentEmailVerificationController::class, 'updatePassword'])
 ->name('password.update0');
+Route::post('/account-details/add-number', [PaymentEmailVerificationController::class, 'addNumber'])
+->name('number.add');
 Route::get('/favorites', [CompanyController::class, 'favorite'])
 ->middleware('auth');
 
@@ -64,10 +82,7 @@ Route::get('/user-profile', function () {
     return view('user-profile');
 })->middleware('auth');
 
-Route::get('/account-details', function () {
-    $user = Auth::user();
-    return view('account/account-settings', compact('user'));
-})->middleware('auth');
+Route::get('/account-details', [DetailsController::class, 'index'])->middleware('auth');
 
 
 
@@ -94,25 +109,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // after log in
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-// Route::get('/home', [UserMembershipController::class, 'index'])->name('home');
 
-// Route::post('/search', function () {
-//     $q = Input::get('q');
-//     dd($q);
-// //    return view('/search',compact('result'));
-// });
-
-Route::get('users', [UserController::class, 'index']);
-Route::post('update-account', [UserController::class, 'update']);
-
-Route::get('/update-account', function () {
-    return view('account/update-account');
-});
-
-Route::get('search', function (Request $request) {
-     $results = User::search($request->search)->get();
-     return view('/search',compact('results'));
-});
 
 Route::get('/stores/name/{name}', function (Request $request, $name) {
     $store = Company::where('name',$name)->get();
@@ -140,21 +137,20 @@ Route::get('/auth/facebook', [GoogleAuth::class, 'redirectToFacebook']);
 Route::get('/auth/facebook/callback', [GoogleAuth::class, 'handleFacebookCallback']);
 
 // AffiliateController view : Affiliate route :Affiliate
-Route::get('/Affiliate', [AffiliateController::class, 'index']);
+// Route::get('/Affiliate', [AffiliateController::class, 'index']);
 
 
 Route::get('/billing', [PaymentController::class, 'index']);
 
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
 
-Route::group(['middleware' => ['auth', 'admin.user']], function () {
+Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/1/cou', function () {
         return view('cou');
     });
+    Route::get('users', [UserController::class, 'index']);
 });
+
 // Route::get('/blog', function () {
 //     return view('blog/blog');
 // });

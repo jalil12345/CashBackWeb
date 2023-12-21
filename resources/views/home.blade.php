@@ -95,60 +95,69 @@ style=" max-width: 12rem; max-height:10rem;"></a>
   
 <div class="col "> 
   <div class="card  mb-3 rounded-4" style="max-width: 18rem;">
-    <div class="card-header bg-transparent ">  <strong class="h6 fw-bold">Product name </strong>   </div>
     <div class="card-body">
     <a href="#">
-  <img loading="auto" src="{{ asset('images/company/1.jpg') }}" class="card-img-top  rounded-4"  alt="..." 
-  style=" max-width: 12rem; max-height:10rem;"></a>
+    <img  loading="auto" src="{{ asset('images/company/1.jpg') }}" 
+          class="card-img-top  rounded-4"  alt="..." 
+          style=" max-width: 12rem; max-height:10rem;">
+        </a>
   
     </div>
-    <div class="card-footer bg-transparent "> 
-      <strong class="h5 fw-bolder"> 5$  </strong>
-      <small class="text-secondary text-decoration-line-through">$10</small> 
-      + <small class="text-secondary">free shiping</small> <br>  <strong class="h6 fw-bolder text-success">+ 5% cashback </strong> 
+    <div class="card-footer bg-transparent text-center"> 
+      <strong class="h5 fw-bolder text-success"> 5% cashback </strong> 
     </div>
-  </div></div>
-
-  <div class="col "> 
-
-  <div class="card  mb-3 rounded-4" style="max-width: 18rem;">
-    <div class="card-header bg-transparent ">  <strong class="h6 fw-bold">Product name </strong>   </div>
-    <div class="card-body">
-    <a href="#">
-  <img loading="auto" src="{{ asset('images/company/1.jpg') }}" class="card-img-top  rounded-4"  alt="..." 
-  style=" max-width: 12rem; max-height:10rem;"></a>
-  
-    </div>
-    <div class="card-footer bg-transparent "> 
-      <strong class="h5 fw-bolder"> 5$  </strong>
-      <small class="text-secondary text-decoration-line-through">$10</small> 
-      + <small class="text-secondary">free shiping</small> <br>  <strong class="h6 fw-bolder text-success">+ 5% cashback </strong> 
-    </div>
-  </div></div>
+  </div>
+</div>
 
 <div class="col "> 
-
-  <div class="card  mb-3" style="max-width: 16rem;">
-    <div class="card-header bg-transparent ">{{ __(' Walmart  :') }}     </div>
-    <div class="card-body text-success">
-      <h5 class="card-title">Success card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  <div class="card  mb-3 rounded-4" style="max-width: 18rem;">
+    <div class="card-body">
+    <a href="#">
+    <img  loading="auto" src="{{ asset('images/company/1.jpg') }}" 
+          class="card-img-top  rounded-4"  alt="..." 
+          style=" max-width: 12rem; max-height:10rem;">
+        </a>
+  
     </div>
-    <div class="card-footer bg-transparent ">Product name <br>$5 $10 <br> free shiping <br> 5% cash back 
+    <div class="card-footer bg-transparent text-center"> 
+      <strong class="h5 fw-bolder text-success"> 5% cashback </strong> 
     </div>
-  </div></div>
-
-  <div class="col "> 
-
-<div class="card  mb-3" style="max-width: 16rem;">
-  <div class="card-header bg-transparent ">{{ __(' Walmart  :') }}     </div>
-  <div class="card-body text-success">
-    <h5 class="card-title">Success card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
   </div>
-  <div class="card-footer bg-transparent ">Product name <br>$5 $10 <br> free shiping <br> 5% cash back 
+</div>
+
+<div class="col "> 
+  <div class="card  mb-3 rounded-4" style="max-width: 18rem;">
+    <div class="card-body">
+    <a href="#">
+    <img  loading="auto" src="{{ asset('images/company/1.jpg') }}" 
+          class="card-img-top  rounded-4"  alt="..." 
+          style=" max-width: 12rem; max-height:10rem;">
+        </a>
+  
+    </div>
+    <div class="card-footer bg-transparent text-center"> 
+      <strong class="h5 fw-bolder text-success"> 5% cashback </strong> 
+    </div>
   </div>
-</div></div></div>
+</div>
+
+<div class="col "> 
+  <div class="card  mb-3 rounded-4" style="max-width: 18rem;">
+    <div class="card-body">
+    <a href="#">
+    <img  loading="auto" src="{{ asset('images/company/1.jpg') }}" 
+          class="card-img-top  rounded-4"  alt="..." 
+          style=" max-width: 12rem; max-height:10rem;">
+        </a>
+  
+    </div>
+    <div class="card-footer bg-transparent text-center"> 
+      <strong class="h5 fw-bolder text-success"> 5% cashback </strong> 
+    </div>
+    </div>
+  </div>
+</div>
+
 
 
   <div class="d-flex align-items-center">

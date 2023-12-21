@@ -35,5 +35,15 @@ class favoriteController extends Controller
 
         return response()->json(['message' => $message]);
     }
+    public function index(Request $request)
+    {
+        $user = $request->user(); // Get the authenticated user
+        $favorites = $user->favorites;
 
+        if ($request->filled('search')) {
+            $favorites = $favorites->search($request->search)->get();
+        }
+
+        return response()->json($favorites);
+    }
 }
