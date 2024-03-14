@@ -35,6 +35,6 @@
     <a href="{{ $verificationLink }}">Verify Email</a>
     <p>If you did not request this email verification, you can safely ignore this message.</p>
     <p>Thank you,</p>
-    <p>Your Company Name</p>
+    <p>Macklara</p>
 </body>
 </html>

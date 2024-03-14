@@ -22,6 +22,7 @@ return new class extends Migration
             $table->set('flavors', ['strawberry', 'vanilla'])->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('token')->nullable();
             $table->rememberToken();
             $table->timestamps();
             

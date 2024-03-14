@@ -1,5 +1,8 @@
 @extends('layouts.app')
-
+@section('meta')
+<title>Get Exclusive Cashback, Deals, Coupons & Discounts at Macklara</title>
+<meta name="description" content="Discover the best cashback offers, unbeatable deals, exclusive coupons, and amazing discounts at Macklara. Shop smart and save big on your favorite brands with our money-saving opportunities. Start saving today!">
+@endsection 
 @section('content')
 <br>
 
@@ -15,8 +18,7 @@
     <div class="container">
     <div class="card mb-2  shadow border-light rounded-3">
     <div class="card-body">
-    <h3 class="card-title fw-bold">Account Details</h3>
-    <br>
+    <h3 class="card-title fw-bold mb-3">Account Settings</h3>
     <div class="container">
     @if(session('successUserName'))
     <div class="alert alert-success alert-dismissible fade show mb-2  shadow">
@@ -42,31 +44,47 @@
   </div>
 </div>
    
-  
+
+
+<div class="container">
+    @if(session('successEmailVerification'))
+    <div class="alert alert-success alert-dismissible fade show mb-2  shadow">
+        {{ session('successEmailVerification') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+</div>  
 
 <div class="card mb-3 border-light shadow">
   <div class="card-body">
     <h5 class="card-title">Email</h5>
-    <div class="card-text">
-      <span id="">{{ Auth::user()->email }}</span>
+    <div class="card-text ">
+      <span class="float-start pe-1" id="">{{ Auth::user()->email }}</span>
       @if($user->email_verified_at !== NULL)
       <a 
       href="#"
-      class="float-end text-success" 
+      class="float-start text-custom-color" 
       style="text-decoration: none;"
       data-bs-toggle="modal"
       data-bs-target="#emailAddress"
-      >Change Email
+      >change
     </a>
+    <div class="text-custom-color float-end">
+        <span class=" me-0 h5">Verified</span>   
+        <svg class="mb-1"xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </svg>
+     </div>
     @elseif($user->email_verified_at == NULL)
-    <a 
-    href="#"
-    class="float-end text-success" 
+    <form action="{{ route('email.send') }}" method="post">
+            @csrf
+    <button 
+    class="float-end btn btn-custom-color" 
     style="text-decoration: none;"
-    data-bs-toggle="modal"
-    data-bs-target="#sendEmailAddress">
+    type="submit" >
     Send Email Verification
-    </a>
+   </button>
+    </form>
     @endif
     </div>
   </div>
@@ -97,7 +115,7 @@
     @elseif($user->password !== NULL)
     <a 
       href="#"
-      class="float-end text-success" 
+      class="float-end text-custom-color" 
       style="text-decoration: none;"
       data-bs-toggle="modal"
       data-bs-target="#accountPassword"
@@ -127,7 +145,7 @@
       @if($user->phone_number == NULL)
       <a 
       href="#"
-      class="float-end text-success" 
+      class="float-end text-custom-color" 
       style="text-decoration: none;"
       data-bs-toggle="modal"
       data-bs-target="#phoneNumber"
@@ -226,5 +244,10 @@
 
 </div>
 <br>
-
+@include('layouts.footer')
 @endsection 
+
+
+<!-- <a href=""
+data-bs-toggle="modal"
+    data-bs-target="#sendEmailAddress"></a> -->

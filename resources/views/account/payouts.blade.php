@@ -1,16 +1,29 @@
 @extends('layouts.app')
-
+@section('meta')
+<title>Get Exclusive Cashback, Deals, Coupons & Discounts at Macklara</title>
+<meta name="description" content="Discover the best cashback offers, unbeatable deals, exclusive coupons, and amazing discounts at Macklara. Shop smart and save big on your favorite brands with our money-saving opportunities. Start saving today!">
+@endsection 
 @section('content')
 <br>
 <div class="container  h3">{{ __('Balance') }}</div>
 
-<div class="container "> <div class="card shadow border-light rounded-3">
-  <div class="row ">
+<div class="container "> <div class="bg-white shadow border-light rounded-3">
+  <div class="row m-3 p-3 d-flex flex-column flex-md-row">
   
-  <div class="col "><br><p class=" h6 ms-2 ">{{ __(' Pending Balance : ') }}0$</p><hr>
+  <div class="col card m-2 flex-grow-1">
+    
+                  <br><p class=" h6 ms-2 ">{{ __(' Pending Balance : ') }}0$</p><hr>
                       <p class=" h6 ms-2 ">{{ __(' Verified Balance : ') }}0$</p><hr>
                       <p class=" h6 ms-2 fw-bold text-success">{{ __(' Payable Balance : ') }}0$</p><hr>
                       <p class=" h5 fw-bold ms-2 text-custom-pink">{{ __('Total Balance : ') }}0$</p><br>
+  </div>
+  <div class="col card m-2  flex-grow-1 ">
+    <br><br><br><p class=" h4 ms-2 text-center text-success fw-bold">{{ __(' Payable Balance  ') }}</p>
+    <p class=" h5 fw-bold  text-success text-center">0$</p>
+    <div class="text-center">
+        <button class="btn btn-custom-color">Request Payment</button>
+    </div>
+    <br><br>
   </div>
   </div>
 </div>
@@ -27,7 +40,7 @@
 </div>
 
 <div class="container  ">
-  <div class="h3 ">{{ __('Payout Request') }}</div>
+  <div class="h3 ">{{ __('Payment Method') }}</div>
   <div class="card mb-3 shadow border-light rounded-3">
     <div class="card-body">
         <div class="float-start">
@@ -51,72 +64,6 @@
   </div>
 </div>
 
-<br>
-<div class="container  ">
-  <div class="h3 ">{{ __('Payout Request') }}</div>
-
-<div class="card shadow border-light rounded-3">
-  <div class="card-body">
-    <div class="row">
-      <div class="col">
-        <img src="paypal_logo.png" alt="PayPal Logo" width="100" height="100">
-      </div>
-      <div class="col">
-       
-      @if ($paymentMethods->isEmpty())
-        <a href="#" class="card-link  h5 btn btn-pink" style="text-decoration: none;"
-        data-bs-toggle="modal" data-bs-target="#paypalEmailAssousiated">Enter Your PayPal Associated Email </a>
-      
-       @else
-       @if ($paymentMethod->email_verification == false)
-            
-           <form action="{{ route('email.send') }}" method="POST">
-             @csrf
-             <button type="submit" class="card-link  h5 btn btn-pink" style="text-decoration: none;">
-             Verify Your Email </button>
-               @if (Route::currentRouteName() === 'email.send')
-               @include('account.send')
-                @endif
-             </form>
-        @elseif($paymentMethod->email_verification == true)
-        <p class="h5  text-success">Your Email is Verified  
-          <button type="submit" class="h5 btn btn-pink" style="text-decoration: none;"
-          data-bs-toggle="modal" data-bs-target="#paypalEmailAssousiated">
-             Change </button></p>
-        @endif
-        
-       @endif
-       
-      
-      </div>
-    </div>
-  </div>
-</div></div>
-  <!-- Modal -->
-  <div class="modal fade" id="paypalEmailAssousiated" tabindex="-1" role="dialog" aria-labelledby="paypalEmailAssousiatedLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="paypalEmailAssousiatedLabel">Enter Your PayPal Email</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-
-          </button>
-        </div>
-        <div class="modal-body">
-        <form action="{{ route('email.save') }}" method="post">
-            @csrf
-          <input name="paymentEmailVerification" type="email" class="form-control" 
-          placeholder="Enter your PayPal email address">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          
-          <button type="submit" class="btn btn-pink">Save changes</button>
-          
-        </div></form>
-      </div>
-    </div>
-</div>
 
 <br>
 <div class="container  h3">
@@ -128,7 +75,7 @@
 <table class="table">
 <thead>
     <tr>
-      <th class="h6 fw-bold">Requested Date</th>
+      <th class="h6 fw-bold">Date & Time</th>
       <th class="h6 fw-bold">Amount</th>
       <th class="h6 fw-bold">Method</th>
       <th class="h6 fw-bold">Status</th>
@@ -146,8 +93,5 @@
 </table>
 </div></div>
 
-
-
-<br><br><br><br><br>
-
+@include('layouts.footer')
 @endsection 

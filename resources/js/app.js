@@ -27,6 +27,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('store-search', require('./components/StoreSearch.vue').default);
 Vue.component('search', require('./components/Search.vue').default);
 Vue.component('favorite', require('./components/favorite.vue').default);
+// Vue.component('trip-component', require('./components/TripComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -42,4 +43,7 @@ const app1 = new Vue({
 const app3 = new Vue({
     el: '#app3',
 });
+// const app4 = new Vue({
+//     el: '#app4',
+// });
 

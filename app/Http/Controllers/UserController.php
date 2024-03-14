@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
   
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Trip;
 use Illuminate\Support\Facades\DB;
 
   
@@ -23,12 +24,16 @@ class UserController extends Controller
         if($request->filled('search')){
             $users = User::search($request->search)->get();
         }else{
-             $users = User::get();
-            
+            $users = User::search('user0')->get();
         }
-            return view('users',compact('users'));
+            return view('users',['users' => $users]);
             // return response()->json($users);
     }
+    public function cou(Request $request) 
+    { 
+        $trips = Trip::get();
 
+        return view('cou', ['trips' => $trips]);
+    }
 }
 

@@ -19,6 +19,4 @@ class CookieCotroller extends Controller
         $value = request()->cookie('last_clicked_link');
         dd($value);
     }
-    
-    
 }

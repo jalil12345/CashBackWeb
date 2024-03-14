@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('coupons', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_id')->nullable()->constrained();
+            $table->string('c_title')->nullable();
+            $table->string('c_url')->nullable();
             $table->string('store')->nullable();
             $table->string('type')->nullable();
             $table->string('code')->nullable();

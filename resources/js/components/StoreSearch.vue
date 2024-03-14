@@ -13,6 +13,9 @@ export default {
     this.setupIntersectionObserver();
   },
   methods: {
+      handleImageError(event) {
+      event.target.src = 'images/company/g.png'; // Provide a placeholder image
+       },
     fetchCompanies() {
       if (!this.isFetching && this.hasMoreData) {
         this.isFetching = true;
@@ -73,14 +76,15 @@ export default {
 <template>
   <div>
     
-    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-5">
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 row-cols-xlg-5">
       
       <div class="col "
       v-for="(company, index) in visibleCompanies" :key="index">
-        <div  class=" shadow card border-light mb-3 rounded-2" style="max-width: 20rem;">
+        <div  class=" shadow card border-light mb-3 rounded-3" style="max-width: 20rem;">
           <a :href="`stores/name/${company.name}`">
                 <img :src="`images/company/${company.image}`" 
-                 loading="lazy" class="card-img-top rounded-2" alt="..."> 
+                 loading="lazy" class="card-img-top rounded-3" alt="..."
+                 @error="handleImageError"> 
           </a>
           <div class="card-footer bg-transparent border-light">
             <strong class="h6 fw-bold text-success">{{ company.name }}</strong>

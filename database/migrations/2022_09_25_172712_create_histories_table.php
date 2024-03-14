@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('p_price')->nullable();
             $table->string('p_cashback')->nullable();
             $table->string('p_refund')->nullable();
+            $table->unsignedBigInteger('trip_id')->nullable();
             $table->timestamps();
         });
     }

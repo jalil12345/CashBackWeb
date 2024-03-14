@@ -22,7 +22,7 @@
               <li>Customer support</li>
               <li>Members limit: 2,000 </li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn-pink">Take it</button>
+            <button type="button" class="w-100 btn btn-lg btn-primary">Take it</button>
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@
               <li>Customer support</li>
               <li>Members limit: 10,000</li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn-pink">Take it</button>
+            <button type="button" class="w-100 btn btn-lg btn-primary">Take it</button>
           </div>
         </div>
       </div>
@@ -56,7 +56,7 @@
               <li>Customer support</li>
               <li>Members limit: Unlimited</li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn-pink">Take it</button>
+            <button type="button" class="w-100 btn btn-lg btn-primary">Take it</button>
           </div>
         </div>
       </div>

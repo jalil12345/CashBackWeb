@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Validator;
 
 
 class PaymentEmailVerificationController extends Controller
@@ -53,7 +54,7 @@ class PaymentEmailVerificationController extends Controller
         // Send the verification email to the user's associated email
         Mail::to($user->email)
         ->send(new PaymentEmailVerificationMail($verificationLink));
-        return redirect('account-details');
+        return redirect('account-details')->with('successEmailVerification', 'your email verification has been sent successfully.');
         }
 
         public function verifyEmail(Request $request)
@@ -115,23 +116,27 @@ class PaymentEmailVerificationController extends Controller
         }
         public function addNumber(Request $request)
         {
-        try {   
+            try {
                 
-            // Retrieve the username value from the request
-            $userNumber =$request->input('phoneNumberInput');
-            // Retrieve the authenticated user
-            $user = Auth::user();
-            // Update the name field of the user
-            $user->phone_number = $userNumber;
-            $user->save();
-            // Redirect to the account settings route with the user data
-            return redirect('account-details')->with('successPhoneNumber', 'Phone Number updated successfully.');
-        }
-        catch(\Illuminate\Validation\ValidationException $e){
-             // Handle validation errors
-             // You can return an error response or redirect back with errors
-             return redirect('account-details')->with('warning', $e->getMessage());
-        }
+                // Retrieve the phone number value from the request
+                $userNumber = $request->input('phoneNumberInput');
+                // Retrieve the authenticated user
+                $user = Auth::user();
+                // Update the phone_number field of the user
+                $user->phone_number = $userNumber;
+                $user->save();
+
+                // Redirect to the account details route with success message
+                return redirect('account-details')->with('successPhoneNumber', 'Phone Number updated successfully.');
+            } catch (\Illuminate\Validation\ValidationException $e) {
+                // Handle validation errors
+                // Redirect back with validation errors
+                return redirect('account-details')->with('warning', 'Enter a valied phone number.');
+            } catch (\Exception $e) {
+                // Handle other exceptions
+                // Redirect back with error message
+                return redirect('account-details')->with('warning', 'Enter a valied phone number.');
+            }
         }
         
     }

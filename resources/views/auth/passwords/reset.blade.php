@@ -51,7 +51,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-pink rounded-4">
+                                <button type="submit" class="btn btn-custom-color rounded-4">
                                     {{ __('Reset Password') }}
                                 </button>
                             </div>
@@ -68,4 +68,5 @@
 <br><br><br><br><br><br>
 <br><br><br><br><br><br>
 <br><br><br><br><br><br>
+@include('layouts.footer')
 @endsection

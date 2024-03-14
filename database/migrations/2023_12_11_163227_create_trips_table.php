@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('company_id')->nullable()->constrained();
+            $table->string('trip_id')->nullable();
             $table->string('p_name')->nullable();
             $table->string('p_store')->nullable();
             $table->string('p_price')->nullable();
-            $table->string('p_cashback')->nullable();
+            $table->decimal('trip_cashback',12, 2)->nullable();
             $table->boolean('pending')->default(false);
             $table->boolean('verified')->default(false);
             $table->boolean('payable')->default(false);

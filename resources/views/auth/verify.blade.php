@@ -31,5 +31,5 @@
 <br><br><br><br><br><br>
 <br><br><br><br><br><br>
 <br><br><br><br><br><br>
-
+@include('layouts.footer')
 @endsection

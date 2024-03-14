@@ -5421,11 +5421,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      emptyArray3: []
+      emptyArray3: [],
+      searchText: ''
     };
   },
   props: [],
@@ -5436,13 +5436,17 @@ __webpack_require__.r(__webpack_exports__);
     getSearch4: function getSearch4(e) {
       var _this = this;
 
-      var txt = "";
-      var userData3 = e.target.value;
-      axios.get('http://127.0.0.1:8000/api/stores?search=' + userData3, {}).then(function (response) {
+      this.searchText = e.target.value;
+      var userData3 = this.searchText;
+      axios.get('http://127.0.0.1:8000/api/stores?search=' + userData3).then(function (response) {
         _this.emptyArray3 = response.data;
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    highlightMatchingText: function highlightMatchingText(text) {
+      var regex = new RegExp(this.searchText, 'gi');
+      return text.replace(regex, '<span class="highlight">$&</span>');
     },
     select3: function select3(element) {
       var selectUserData = element.textContent;
@@ -5493,6 +5497,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     this.setupIntersectionObserver();
   },
   methods: {
+    handleImageError: function handleImageError(event) {
+      event.target.src = 'images/company/g.png'; // Provide a placeholder image
+    },
     fetchCompanies: function fetchCompanies() {
       var _this = this;
 
@@ -5627,7 +5634,7 @@ __webpack_require__.r(__webpack_exports__);
     toggleFavorite: function toggleFavorite(companyId) {
       var _this4 = this;
 
-      axios.post('/favorites/toggleFavorite/' + companyId).then(function (response) {
+      axios.post("/favorites/toggleFavorite/".concat(companyId)).then(function (response) {
         var updatedCompany = response.data;
 
         var index = _this4.companies.findIndex(function (company) {
@@ -5639,12 +5646,6 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         axios.get('/api-favorites').then(function (response) {
-          // const favoriteIndex = this.companies.findIndex(
-          //   company => company.id === updatedCompany.company_id
-          // );
-          // if (favoriteIndex !== -1) {
-          //   this.companies.splice(favoriteIndex, 1);
-          // }
           EventBus.$emit('favoriteCompaniesUpdated', response.data);
         })["catch"](function (error) {
           console.error(error);
@@ -5692,7 +5693,8 @@ window.EventBus = new Vue();
 Vue.component('example-component', (__webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]));
 Vue.component('store-search', (__webpack_require__(/*! ./components/StoreSearch.vue */ "./resources/js/components/StoreSearch.vue")["default"]));
 Vue.component('search', (__webpack_require__(/*! ./components/Search.vue */ "./resources/js/components/Search.vue")["default"]));
-Vue.component('favorite', (__webpack_require__(/*! ./components/favorite.vue */ "./resources/js/components/favorite.vue")["default"]));
+Vue.component('favorite', (__webpack_require__(/*! ./components/favorite.vue */ "./resources/js/components/favorite.vue")["default"])); // Vue.component('trip-component', require('./components/TripComponent.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -5707,7 +5709,9 @@ var app1 = new Vue({
 });
 var app3 = new Vue({
   el: '#app3'
-});
+}); // const app4 = new Vue({
+//     el: '#app4',
+// });
 
 /***/ }),
 
@@ -10791,7 +10795,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.dropdown-menu-width {\r\n  width: 100%; /* Set the width to 100% or adjust as needed */\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.dropdown-menu-width {\n    width: 100%; /* Set the width to 100% or adjust as needed */\n}\n.highlight {\n    background-color: yellow; /* Set your desired highlight color */\n    font-weight: bold; /* Optionally, make the text bold */\n}\n.search-input {\n  border: 1px solid rgb(210, 163, 255); /* Default border color */\n}\n.search-input:hover {\n  border: 1px solid rgb(163, 68, 252); /* Default border color */\n}\n.search-input:focus {\n  border-color: rgb(154, 48, 253); /* Border color when focused */\n  box-shadow: 0 0 0 2px rgb(171, 89, 248);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -28991,7 +28995,7 @@ var render = function () {
         _c("form", { attrs: { method: "GET" } }, [
           _c("div", { staticClass: "dropdown" }, [
             _c("input", {
-              staticClass: "form-control",
+              staticClass: "form-control search-input",
               attrs: {
                 id: "user_name2",
                 type: "text",
@@ -29026,9 +29030,16 @@ var render = function () {
                           attrs: { href: "stores/name/" + item.name },
                         },
                         [
-                          _c("li", { staticClass: "dropdown-item" }, [
-                            _vm._v(_vm._s(item.name) + "-" + _vm._s(item.rate)),
-                          ]),
+                          _c("li", {
+                            staticClass: "dropdown-item",
+                            domProps: {
+                              innerHTML: _vm._s(
+                                _vm.highlightMatchingText(
+                                  item.name + "-" + item.rate
+                                )
+                              ),
+                            },
+                          }),
                         ]
                       )
                     : _vm._e()
@@ -29048,9 +29059,14 @@ var render = function () {
                           attrs: { href: "stores/category/" + item.category },
                         },
                         [
-                          _c("li", { staticClass: "dropdown-item" }, [
-                            _vm._v(_vm._s(item.category)),
-                          ]),
+                          _c("li", {
+                            staticClass: "dropdown-item",
+                            domProps: {
+                              innerHTML: _vm._s(
+                                _vm.highlightMatchingText(item.category)
+                              ),
+                            },
+                          }),
                         ]
                       )
                     : _vm._e()
@@ -29092,25 +29108,26 @@ var render = function () {
       "div",
       {
         staticClass:
-          "row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-5",
+          "row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 row-cols-xlg-5",
       },
       _vm._l(_vm.visibleCompanies, function (company, index) {
         return _c("div", { key: index, staticClass: "col" }, [
           _c(
             "div",
             {
-              staticClass: "shadow card border-light mb-3 rounded-2",
+              staticClass: "shadow card border-light mb-3 rounded-3",
               staticStyle: { "max-width": "20rem" },
             },
             [
               _c("a", { attrs: { href: "stores/name/" + company.name } }, [
                 _c("img", {
-                  staticClass: "card-img-top rounded-2",
+                  staticClass: "card-img-top rounded-3",
                   attrs: {
                     src: "images/company/" + company.image,
                     loading: "lazy",
                     alt: "...",
                   },
+                  on: { error: _vm.handleImageError },
                 }),
               ]),
               _vm._v(" "),
@@ -29185,7 +29202,6 @@ var render = function () {
                           _c(
                             "a",
                             {
-                              staticClass: "text-pink",
                               attrs: { href: "#" },
                               on: {
                                 click: function ($event) {
@@ -29195,7 +29211,7 @@ var render = function () {
                               },
                             },
                             [
-                              _c("i", { staticClass: "text-pink" }, [
+                              _c("i", {}, [
                                 _c(
                                   "svg",
                                   {
@@ -29354,7 +29370,7 @@ var render = function () {
               "a",
               {
                 ref: "seeMoreButton",
-                staticClass: "btn btn-pink text-center",
+                staticClass: "btn btn-custom-color text-center",
                 on: { click: _vm.loadMoreCompanies },
               },
               [_vm._v("See more")]

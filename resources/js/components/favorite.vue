@@ -65,7 +65,7 @@
     },
     toggleFavorite(companyId) {
   axios
-    .post('/favorites/toggleFavorite/' + companyId)
+    .post(`/favorites/toggleFavorite/${companyId}`)
     .then(response => {
       const updatedCompany = response.data;
       
@@ -79,12 +79,6 @@
       axios
         .get('/api-favorites')
         .then(response => {
-          // const favoriteIndex = this.companies.findIndex(
-          //   company => company.id === updatedCompany.company_id
-          // );
-          // if (favoriteIndex !== -1) {
-          //   this.companies.splice(favoriteIndex, 1);
-          // }
           EventBus.$emit('favoriteCompaniesUpdated', response.data);
         })
         .catch(error => {
@@ -114,8 +108,8 @@ isFavoriteCompany(companyId) {
           <div class="card-body ">
             <div class=" d-flex align-items-center justify-content-between">
             
-                       <a  href="#" class="text-pink" @click.prevent="toggleFavorite(favorite.company_id)">
-                        <i class="text-pink">
+                       <a  href="#" class="" @click.prevent="toggleFavorite(favorite.company_id)">
+                        <i class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                             </svg>
@@ -167,7 +161,7 @@ isFavoriteCompany(companyId) {
         </div>
 
         <div class="text-center">
-            <a ref="seeMoreButton" class="btn btn-pink text-center" @click="loadMoreCompanies">See more</a>
+            <a ref="seeMoreButton" class="btn btn-custom-color text-center" @click="loadMoreCompanies">See more</a>
         </div>
     </div>   
     </div>

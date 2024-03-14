@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Company;
-use Illuminate\Http\Request;
+use App\Models\Deal;
+use App\Models\Coupon;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentEmailVerificationController;
@@ -12,13 +14,15 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\Affiliate\AffiliateController;
+use App\Http\Controllers\Affiliate\TripController;
 use App\Http\Controllers\UserMembershipController;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\GoogleAuth;
 use App\Http\Controllers\favoriteController;
 use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\DetailsController;
-
+use App\Http\Controllers\CouponController;
+use App\Http\Controllers\DealController;
  
 
 /*
@@ -35,11 +39,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/api-favorites', [favoriteController::class, 'index']);
 });
 
-
 Route::post('/favorites/toggleFavorite/{companyId}', [favoriteController::class, 'toggleFavorite'])
 ->name('favorites.toggleFavorite');
-
-
 
 Route::get('/contact-us', [App\Http\Controllers\ContactController::class, 'show'])->middleware('auth')->name('contact.show');
 Route::post('/contact-us', [App\Http\Controllers\ContactController::class, 'store'])->middleware('auth')->name('contact.store');
@@ -51,13 +52,9 @@ Route::get('/payouts/verify', [PaymentEmailVerificationController::class, 'verif
 Route::post('/account-settings/change-user-name', [PaymentEmailVerificationController::class, 'changeUserName'])
 ->name('account-details.change-user-name');
 
-
-         // Paypal   
-         
+         // Paypal  
 Route::get('/paypal/authenticate', [PaypalController::class, 'initiatePaypalAuthentication']);
 Route::get('/paypal/callback', [PaypalController::class, 'handlePaypalCallback']);
-
-
 
 
 Route::post('/account-settings/add-password', [PaymentEmailVerificationController::class, 'addPassword'])
@@ -69,7 +66,6 @@ Route::post('/account-details/add-number', [PaymentEmailVerificationController::
 Route::get('/favorites', [CompanyController::class, 'favorite'])
 ->middleware('auth');
 
-
 Route::get('/privacy-policy', function () { return view('legal/privacy-policy');});
 Route::get('/terms-conditions', function () { return view('legal/terms-conditions');});
 Route::get('/about-us', function () { return view('legal/About Us');});
@@ -77,44 +73,44 @@ Route::get('/contact-us', function () { return view('legal/Contact Us');});
 Route::get('/how-it-works', function () { return view('legal/how-it-works');});
 // Route::get('/membership-plans', function () { return view('memberships');});
 
-
-Route::get('/user-profile', function () {
-    return view('user-profile');
+Route::get('/profile', function () {
+    return view('profile');
 })->middleware('auth');
 
 Route::get('/account-details', [DetailsController::class, 'index'])->middleware('auth');
 
 
-
-
 Route::get('/stores', [CompanyController::class, 'index']);
+Route::get('stores/{id}', [TripController::class, 'store'])->middleware('auth');
+Route::get('trips', [TripController::class, 'index'])->middleware('auth');
+Route::get('trips/data', [TripController::class, 'tripsData'])->middleware('auth');
 
-// Route::get('/brands', function () {
-//     return view('brands');
+
+Route::get('/coupons', [CouponController::class, 'index']);
+Route::get('coupons/{id}', [TripController::class, 'storeCoupons'])->middleware('auth');
+
+// Route::get('/deals', [DealController::class, 'index']);
+// Route::get('deals/{id}', [TripController::class, 'storeDeals'])->middleware('auth');
+// Route::get('/deals/name/{id}', function (Request $request, $id) {
+//     $deal = Deal::where('id',$id)->get();
+//     return view('/deal',compact('deal'));
 // });
-
-Route::get('/coupons', function () {
-    return view('coupons');
-});
+// Route::get('/dealss?a={a?}&b={b?}&c={c?}', [DealController::class, 'show'])->name('deal.show');
 
 
-
-Route::get('/deals', function () {
-    return view('deals');
-});
 
 Auth::routes();
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 // after log in
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
 
 
 Route::get('/stores/name/{name}', function (Request $request, $name) {
     $store = Company::where('name',$name)->get();
     return view('/store',compact('store'));
 });
+
+
 
 Route::get('/stores/category/{category}', function (Request $request, $category) {
     $store = Company::where('category',$category)->get();
@@ -145,9 +141,7 @@ Route::get('/billing', [PaymentController::class, 'index']);
 
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
-    Route::get('/1/cou', function () {
-        return view('cou');
-    });
+    Route::get('/1/cou', [UserController::class, 'cou'] );
     Route::get('users', [UserController::class, 'index']);
 });
 

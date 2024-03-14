@@ -1,6 +1,10 @@
 @extends('layouts.app')
-
+@section('meta')
+<title>Get Exclusive Cashback, Deals, Coupons & Discounts at Macklara</title>
+<meta name="description" content="Discover the best cashback offers, unbeatable deals, exclusive coupons, and amazing discounts at Macklara. Shop smart and save big on your favorite brands with our money-saving opportunities. Start saving today!">
+@endsection 
 @section('content')
+<br><br><br>
 <div class="container">
             @if(session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -63,7 +67,7 @@
 
               <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4">
-                  <button type="submit" class="btn btn-primary">
+                  <button type="submit" class="btn btn-custom-color">
                     {{ __('Submit') }}
                   </button>
                 </div>
@@ -75,6 +79,7 @@
     </div>
   </div>
 
+  <br><br><br><br><br>
   
-
+  @include('layouts.footer')
 @endsection

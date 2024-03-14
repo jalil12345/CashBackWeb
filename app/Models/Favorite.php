@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Laravel\Scout\Searchable;
 
 class Favorite extends Model
 {
-    use HasFactory;
+    use HasFactory,Searchable;
     protected $fillable = ['company_id','user_id','affiliate_networks_id','companies_click_id',
                             'name','url','category','image','rate','duration'];
     protected $table = 'favorites'; // Specify the table name
@@ -18,6 +19,23 @@ class Favorite extends Model
 {
     return $this->belongsToMany(User::class, 'user_id');
 }
+ /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        // $array = $this->toArray();
+ 
+        // Customize the data array...
+ 
+        // return $array;
+        return [
+            
+            'company_id' => $this->company_id
+        ];
 
+    }
     
 }

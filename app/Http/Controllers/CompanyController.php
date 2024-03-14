@@ -45,9 +45,11 @@ class CompanyController extends Controller
      */
     public function search(Request $request)
     {
-       
+        if ($request->filled('search')) {
+        $companies = Company::search($request->search)->get();
+        }else {
         $companies = Company::get();
-          
+        }
         return response()->json($companies);
     }
     /**

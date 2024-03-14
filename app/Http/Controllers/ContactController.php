@@ -27,8 +27,8 @@ class ContactController extends Controller
             'message' => $request->message,
         ];
 
-        Mail::to('abjalilbzn13@gmail.com')->send(new ContactForm($contact));
-
+        Mail::to('contact@macklara.com')->send(new ContactForm($contact));
+        // abjalilbzn13@gmail.com
         return redirect()->back()->with('success', 'Thank you for contacting us!');
     }
 }

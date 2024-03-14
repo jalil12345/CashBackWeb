@@ -41,7 +41,16 @@ class favoriteController extends Controller
         $favorites = $user->favorites;
 
         if ($request->filled('search')) {
-            $favorites = $favorites->search($request->search)->get();
+            // Check if the company_id exists in favorites
+            $searchedCompany = $favorites->where('company_id', $request->search)->first();
+    
+            if ($searchedCompany) {
+                // If found, return the searched company
+                return response()->json([$searchedCompany]);
+            } else {
+                // If not found, return an empty array
+                return response()->json([]);
+            }
         }
 
         return response()->json($favorites);

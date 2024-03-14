@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_memberships', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->nullable()->constrained();
-            $table->string('membership_name')->nullable();
-            $table->string('membership_price')->nullable();
-            $table->timestamps();
+        Schema::table('companies', function (Blueprint $table) {
+            $table->decimal('rate', 10, 2)->nullable();
         });
     }
 
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_memberships');
+        Schema::dropIfExists('companies');
     }
 };

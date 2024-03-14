@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('histories', function (Blueprint $table) {
-            $table->unsignedBigInteger('trip_id')->nullable();
+        Schema::create('sub_categories', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('company_id')->nullable()->constrained();
+            $table->string('sub_name');
+            $table->decimal('sub_rate', 10, 2)->default(0);
         });
     }
 
@@ -25,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('histories', function (Blueprint $table) {
-            $table->dropColumn('trip_id');
-        });
+        Schema::dropIfExists('sub_categories');
     }
 };
