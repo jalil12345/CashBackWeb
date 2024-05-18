@@ -11,17 +11,36 @@
       console.log('Component mounted.')
     },
     methods: {
-      getSearch4(e) {
+      async getSearch4(e) {
         this.searchText = e.target.value;
         let userData3 = this.searchText;
-        axios.get('http://127.0.0.1:8000/api/stores?search=' + userData3)
-          .then(response => {
-            this.emptyArray3 = response.data;
-          }).catch(err => {
-            console.log(err);
-          });
+        try {
+          const response = await axios.get('http://127.0.0.1:8000/api/stores?search=' + userData3);
+          this.emptyArray3 = response.data;
+        } catch (err) {
+          console.log(err);
+        }
       },
       highlightMatchingText(text) {
+        const regex = new RegExp(this.searchText, 'gi');
+        const highlightedText = text.replace(regex, '<span class="highlight">$&</span>');
+        return `<span class="">${highlightedText}</span>`;
+      },
+      getHighlightedText(item) {
+        let text = this.highlightMatchingText(item.name); // Apply highlighting to text
+        if (item.sub_category === 1) {
+          text += `<strong class="h6 fw-bold text-custom-color text-center float-end">Up to: ${item.rate}%</strong>`;
+        } else if (item.fix_amount !== null && item.fix_amount !== 0) {
+          text += `<strong class="h6 fw-bold text-custom-color text-center float-end">$${item.fix_amount}</strong>`;
+        }else if (item.rate == null ) {
+          text += `<strong class="h6 fw-bold text-custom-color text-center float-end">0%</strong>`;
+        } else {
+          text += `<strong class="h6 fw-bold text-custom-color text-center float-end">${item.rate}%</strong>`;
+        }
+        return text;
+      },
+      // Method for highlighting category text
+      highlightCategoryText(text) {
         const regex = new RegExp(this.searchText, 'gi');
         return text.replace(regex, '<span class="highlight">$&</span>');
       },
@@ -54,12 +73,17 @@
             >
             <div class="dropdown-menu dropdown-menu-width rounded-start" aria-labelledby="user_name2">
               <li class="h6 ms-1 fw-bold">Stores</li>
-              <a v-for="(item, index) in emptyArray3" v-if="index < 5" style="text-decoration: none;" class="text-dark" :href="`stores/name/${item.name}`">
-                <li class="dropdown-item" v-html="highlightMatchingText(item.name + '-' + item.rate)"></li>
+              <a v-for="(item, index) in emptyArray3" v-if="index < 5" style="text-decoration: none;" 
+                  class="text-dark" :href="`/stores/name/${item.name}`">
+                  <li class="dropdown-item">
+                    <span v-html="getHighlightedText(item)"> </span>
+                  </li>
               </a>
+
               <li class="h6 ms-1 fw-bold">Categories</li>
-              <a v-for="(item, index) in emptyArray3" v-if="index < 4" style="text-decoration: none;" class="text-dark" :href="`stores/category/${item.category}`">
-                <li class="dropdown-item" v-html="highlightMatchingText(item.category)"></li>
+              <a v-for="(item, index) in emptyArray3" v-if="index < 4" style="text-decoration: none;" 
+                  class="text-dark" :href="`/stores/category/${item.category}`">
+                <li class="dropdown-item" v-html="highlightCategoryText(item.category)"></li>
               </a>
             </div>
           </div>

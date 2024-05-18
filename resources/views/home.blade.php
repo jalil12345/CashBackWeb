@@ -4,6 +4,14 @@
 <meta name="description" content="Discover the best cashback offers, unbeatable deals, exclusive coupons, and amazing discounts at Macklara. Shop smart and save big on your favorite brands with our money-saving opportunities. Start saving today!">
 @endsection 
 @section('content')
+<div class="container">
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+</div>
 
  <search id="app1" class="py-3"></search>  
     <!-- Button to add extension -->
@@ -75,23 +83,30 @@
   <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 row-cols-xlg-5">
   @foreach($stores as  $store)
         
-  <div class="col mb-3"> 
+  <div class="col mb-1"> 
     <div class="card mx-0 mb-2 rounded-4 shadow border-light" style="max-width: 18rem;">
       <div class="card-body">
-      <a href="{{ url('stores/name/' . $store->name) }}">
+      <a href="{{ url('stores/name/' . $store->name) }}" class="my-0 py-0 mx-0 px-0">
       <img  loading="auto" src="{{ asset('images/company/g.png') }}" 
-            class="card-img-top  rounded-3"  alt="..." 
+            class="card-img-top  rounded-3 img-fluid m-0 p-0"  alt="..." 
             style=" max-width: 12rem; max-height:10rem;"> </a>
       </div>
-      
     </div> 
     <p class=" bg-light border-light text-center"> 
-        <strong class=" fw-bolder text-success">5% cash back</strong> 
-      </p> 
+        @if(($store->rate == null || $store->rate == 0)  && ($store->fix_amount == null || $store->fix_amount == 0))
+        <strong class=" fw-bolder text-custom-color">Coming Soon</strong> 
+        @elseif ($store->rate == null || $store->rate == 0)
+        <strong class=" fw-bolder text-custom-color">${{$store->fix_amount}} Cashback</strong> 
+        @else
+        <strong class=" fw-bolder text-custom-color">{{$store->rate}}% Cashback</strong> 
+        @endif
+    </p> 
   </div> 
-      
-   @endforeach</div>
-
+   @endforeach
+  </div>
+   <!-- <div class="container">
+ <back-to-the-top-component id="app5"></back-to-the-top-component>
+ </div> -->
 
 
     <div class="d-flex align-items-center">
@@ -109,19 +124,21 @@
     <img loading="auto" src="{{ asset('images/company/1.jpg') }}" class="card-img-top  rounded-4 "  alt="..." 
     style=" max-width: 8rem; max-height:8rem;"></a>
     <div class="col-8 d-flex align-items-center">
-    <div>
+        <div>
         <p class="h4 fw-bold  ms-1 mb-3">{{$coupon->c_title}}</p>
-        @if($coupon->company->rate == null)
-        <p class="h5 text-custom-color   mb-0 pb-0">+ cashback Coming soon </p >
+        @if($coupon->company->rate == null && ($coupon->company->fix_amount == null || $coupon->company->fix_amount == 0))
+            <p class="h5 text-custom-color mb-0 pb-0"> Cashback Coming Soon </p >
+        @elseif ($coupon->company->rate == null)
+            <p class="h5 text-custom-color mb-0 pb-0">+ ${{$coupon->company->fix_amount}} Cashback</p>
         @else
-        <p class="h5  text-custom-color  mb-0 pb-0">+ {{$coupon->company->rate}}% cashback</p>
+            <p class="h5 text-custom-color mb-0 pb-0">+ {{$coupon->company->rate}}% Cashback</p>
         @endif
-        </div>
+       </div>
     </div>
       
       <div class="col-2 m-0 p-0 d-flex align-items-center justify-content-center">
-        <button class="fw-bold btn btn-outline-custom-color btn-md m-0  py-2 px-3 rounded-pill"
-        onclick="window.location='{{ url('coupons', ['id' => $coupon->id]) }}'"> Shop</button>
+      <a class="fw-bold btn btn-outline-custom-color btn-md m-0 py-2 px-3 rounded-pill" 
+        href="{{ url('coupons', ['id' => $coupon->id]) }}"  target="_blank">Shop</a>
     </div>
       
     </div>

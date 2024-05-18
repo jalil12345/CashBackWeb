@@ -50,8 +50,8 @@
 
                         <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                <div class="form-check" id="check11">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" value="1">
 
                                     <label class="form-check-label" for="remember">
                                         {{ __('Remember Me') }}
@@ -84,5 +84,11 @@
   
       <br>  <br> <br><br>  <br> <br><br><br><br>  <br> <br>
 </div>
+<script>
+    // Hide the checkbox by default
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('check11').style.display = 'none';
+    });
+</script>
 @include('layouts.footer')
 @endsection

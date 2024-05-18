@@ -11,8 +11,8 @@ class SetCookies
     {
         // Check if the cookie 'username' exists
         if (!Cookie::has('username')) {
-            // Set the cookie only if it doesn't exist
-            Cookie::queue('username', 'john_doe', 60);
+            // Set the cookie only if it doesn't exist 
+            // Cookie::queue('username', 'john_doe', 60);
         }
         return $next($request);
     }

@@ -7,7 +7,7 @@ use App\Models\Paypal;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\Auth;
 
 class PaypalController extends Controller
 {
@@ -44,20 +44,17 @@ class PaypalController extends Controller
             if ($response->successful()) {
                 $accessToken = $response->json('access_token');
                 Log::info('PayPal API response. Access Token: ' . $accessToken);
-
+                
                 // Continue with your logic to redirect the user or perform other actions
-                $url = "https://www.sandbox.paypal.com/signin/authorize?" .
-       "client_id={$clientId}&redirect_uri={$redirectUrl}&response_type=code&scope=openid%20profile%20email";
-
+             $url = "https://www.sandbox.paypal.com/signin/authorize?" .
+             "client_id={$clientId}&redirect_uri={$redirectUrl}&response_type=code&scope=openid%20profile%20email";
                 Log::info('Initiating PayPal account linking. Redirecting to: ' . $url);
-
 
                 return redirect($url);
             } else {
                 // Log the error details if the request was not successful
-                // Log::error('Error communicating with PayPal API. HTTP status: ' . $response->status());
-                // Log::error('Error details: ' . $response->body());
-
+                Log::error('Error communicating with PayPal API. HTTP status: ' . $response->status());
+                
                 return response()->json(['error' => 'An error occurred while communicating with PayPal API.'], 500);
             }
             } catch (\Exception $e) {
@@ -87,15 +84,6 @@ class PaypalController extends Controller
         $clientSecret = config('services.paypal.client_secret');
         $apiUrl = 'https://api-m.sandbox.paypal.com/v1/oauth2/token';
 
-        // Log::info('PayPal API request: ' . print_r([
-        //     'url' => $apiUrl,
-        //     'data' => [
-        //         'grant_type' => 'authorization_code',
-        //         'code' => $code,
-        //     ],
-        // ], true));
-    
-
         try {
             $response = Http::asForm()
                 ->withHeaders([
@@ -110,54 +98,56 @@ class PaypalController extends Controller
             // Check if the request was successful
             if ($response->successful()) {
                 $accessToken = $response->json('access_token');
-                Log::info('PayPal API response. Access Token: ' . $accessToken);
-
+                
                 // Fetch user data from PayPal API
                 $userData = $this->getUserData($accessToken);
-
+                Log::info('userData '  . json_encode($userData));
                 // Get the original URL from the session
                 $originalUrl = Session::pull('original_url', '/');
 
                 
-                // Store user data in the database
                 if (!empty($userData)) {
-                    $existingPaypalAccount = Paypal::where('paypal_email', $userData['email'])->first();
-                    if(!$existingPaypalAccount){
-                        $paypalAccount = new Paypal();
-                        $paypalAccount->user_id = auth()->user()->id;
-                        $paypalAccount->paypal_id=$userData['user_id'];
-                        $paypalAccount->paypal_email = $userData['email'];
-                        $paypalAccount->paypal_name = $userData['name'];
-                        $paypalAccount->paypal_access_token = $accessToken;
-                        $paypalAccount->paypal_expires_at = now()->addSeconds($response->json('expires_in'));
-                        $paypalAccount->save();
-
-                        // In your controller method handling PayPal callback
-                    return redirect($originalUrl)->with('paypalSuccessMessage', 'PayPal authentication successful!');
-                    } else{
-                            // Handle the case where the PayPal account is already linked to another user
-                         return response()->json(['error' => 'PayPal account is already linked to another user.'], 409);
-                    }
-                    
-                }
-
+                    if (Auth::check()) {
+                    // Check if the required fields are present in the user data
+                    if (isset($userData['email']) && isset($userData['user_id']) && isset($userData['name'])) {
+                        // Proceed with storing user data in the database
+                        $existingPaypalAccount = Paypal::where('paypal_email', $userData['email'])->first();
+                        if (!$existingPaypalAccount) {
+                            $paypalAccount = new Paypal();
+                            $paypalAccount->user_id = Auth::id();
+                            $paypalAccount->paypal_id = $userData['user_id'];
+                            $paypalAccount->paypal_email = $userData['email'];
+                            $paypalAccount->paypal_name = $userData['name'];
+                            $paypalAccount->paypal_access_token = $accessToken;
+                            $paypalAccount->paypal_expires_at = now()->addSeconds($response->json('expires_in'));
+                            $paypalAccount->save();
                 
-
-            } else {
-                // Log the error details if the request was not successful
-                Log::error('Error exchanging authorization code for access token. HTTP status: ' . $response->status());
-                Log::error('Error details: ' . $response->body());
-
-                return response()->json(['error' => 'An error occurred while exchanging authorization code for access token.'], 500);
-            }
+                            // Redirect to the original URL with success message
+                            return redirect($originalUrl)->with('paypalSuccessMessage', 'PayPal authentication successful!');
+                        } else {
+                            // Handle the case where the PayPal account is already linked to another user
+                            Log::error('PayPal account is already linked to another user');
+                            return response()->json(['error' => 'PayPal account is already linked to another user.'], 409);
+                        }
+                    } else {
+                        // Log an error if required fields are missing in the user data
+                        Log::error('Required fields are missing in the user data returned from PayPal API.');
+                        return response()->json(['error' => 'Required fields are missing in the user data returned from PayPal API.'], 500);
+                    }
+                } else {
+                    return redirect()->route('login');
+                }
+                } else {
+                    // Log an error if user data is empty or not received
+                    Log::error('User data is empty or not received from PayPal API.');
+                    return response()->json(['error' => 'User data is empty or not received from PayPal API.'], 500);
+              }    }
         } catch (\Exception $e) {
             // Log any exception that occurs during the request
             Log::error('Exception occurred while exchanging authorization code for access token: ' . $e->getMessage());
-            return response()->json(['error' => 'An exception occurred while exchanging authorization code for access token.'], 500);
+            return response('this is the response body');
         }
-            
-            
-            return response()->json(['success' => true]);
+            // return response('this is the response body');
     }
 
     /**
@@ -168,15 +158,14 @@ class PaypalController extends Controller
      */
     protected function getUserData($accessToken)
     {
-        // ?schema=openid
+        
         $apiUrl = 'https://api-m.sandbox.paypal.com/v1/identity/openidconnect/userinfo?schema=openid';
 
         try {
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $accessToken,
             ])->get($apiUrl);
-                // Log the entire response
-        Log::info('PayPal API response: ' . $response->body());
+                
             // Check if the request was successful
             if ($response->successful()) {
                 return $response->json();
@@ -192,8 +181,6 @@ class PaypalController extends Controller
             // Log any exception that occurs during the request
             Log::error('Exception occurred while getting user data from PayPal API: ' . $e->getMessage());
 
-            // Handle the exception as needed
-            return [];
         }
     }
 }

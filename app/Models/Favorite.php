@@ -10,16 +10,19 @@ use Laravel\Scout\Searchable;
 class Favorite extends Model
 {
     use HasFactory,Searchable;
-    protected $fillable = ['company_id','user_id','affiliate_networks_id','companies_click_id',
-                            'name','url','category','image','rate','duration'];
+    protected $fillable = ['company_id','user_id',];
     protected $table = 'favorites'; // Specify the table name
     protected $connection = 'mysql'; // Specify the database connection
 
     public function users()
-{
-    return $this->belongsToMany(User::class, 'user_id');
-}
- /**
+        {
+            return $this->belongsToMany(User::class, 'user_id');
+        }
+    public function company()
+        {
+            return $this->belongsTo(Company::class);
+        }
+    /**
      * Get the indexable data array for the model.
      *
      * @return array

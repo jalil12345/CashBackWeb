@@ -25,6 +25,7 @@ return new class extends Migration
             $table->boolean('pending')->default(false);
             $table->boolean('verified')->default(false);
             $table->boolean('payable')->default(false);
+            $table->decimal('paid_amount', 12, 2)->nullable()->default(0);
             $table->timestamps();
         });
     }

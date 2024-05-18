@@ -80,7 +80,6 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-
                         
                         <div class="text-center">
                             <label for="" class="col-form-label ">By signing up, you agree to 

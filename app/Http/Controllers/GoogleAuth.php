@@ -9,6 +9,7 @@ use Hash;
 use Socialite;
 use Str;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class GoogleAuth extends Controller
 {
@@ -37,19 +38,28 @@ class GoogleAuth extends Controller
     }
 
     public function handleFacebookCallback()
-    {
-        
+{
+    try {
         $user = Socialite::driver('facebook')->user();
-        
-        // handle the authenticated user
-        $user = User::firstOrCreate([
-            'email' => $user->email
-        ], [
-            'name' => $user->name,
-            'password' => Hash::make(Str::random(24)),
-        ]);
-        Auth::login($user, true);
-        return redirect('/');
+    } catch (\Exception $e) {
+        Log::error('Facebook OAuth Error: ' . $e->getMessage());
+        return redirect()->route('login')->with('error', 'Error occurred during Facebook authentication.');
     }
+
+    // Log the user data for debugging
+    Log::info('Facebook User Data: ' . print_r($user, true));
+
+    // Handle the authenticated user
+    $user = User::firstOrCreate([
+        'email' => $user->email
+    ], [
+        'name' => $user->name,
+        'password' => Hash::make(Str::random(24)),
+    ]);
+
+    Auth::login($user, true);
+    return redirect('/');
+}
+
 
 }

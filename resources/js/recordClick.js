@@ -16,7 +16,7 @@ function recordClick(p_store, p_cashback) {
 document.addEventListener('click', function(e) {
     let target = e.target;
     while (target && target !== this) {
-        if (target.matches('.store-link')) {
+        if (target.matches('.store-linke')) {
             const p_store = target.getAttribute('data-store');
             const p_cashback = target.getAttribute('data-cashback');
             recordClick(p_store, p_cashback);

@@ -18,6 +18,18 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        'App\Events\SubCategoryCreated' => [
+            'App\Listeners\UpdateCompanyRateOnSubCategoryCreate',
+        ],
+        'App\Events\SubCategoryUpdated' => [
+            'App\Listeners\UpdateCompanyRateOnSubCategoryUpdate',
+        ],
+        'App\Events\SubCategoryDeleted' => [
+            'App\Listeners\UpdateCompanyRateOnSubCategoryDelete',
+        ],
+        'App\Events\PaymentCreated' => [
+            'App\Listeners\ProcessPaymentStatus',
+        ],
     ];
 
     /**

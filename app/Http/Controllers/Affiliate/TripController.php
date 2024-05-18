@@ -9,6 +9,8 @@ use App\Models\Company;
 use App\Models\Deal;
 use App\Models\Coupon;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class TripController extends Controller
 {  
@@ -123,5 +125,31 @@ class TripController extends Controller
         } else {
             abort(404);
         }
+    }
+    public function  tripsAdmin(){
+        $trips =Trip::where('verified',1)->get();
+
+        return view('admin.trips-admin', ['trips' => $trips]);
+    }
+    public function filterTripsAdmin(Request $request){
+        $date = $request->get('date');
+       
+        $trips = Trip::whereDate('created_at', '<=', $date)
+                  ->where('created_at', '<=', Carbon::parse($date)->endOfDay())
+                  ->where('verified',1)
+                  ->get();
+        return view('admin.trips-admin', ['trips' => $trips]);
+    }
+    public function verifiedToPayableAdmin(Request $request){
+        log::info($request);
+        $tripIds = $request->input('trips');
+        $tripIdsArray = explode(',', $tripIds);
+        
+        log::info('trips: ' . $tripIds);
+        Trip::whereIn('id', $tripIdsArray)->update([
+            'verified' => 0,
+            'payable' => 1,
+        ]);
+        return back()->with('success', 'Trip statuses updated successfully!');
     }
 }

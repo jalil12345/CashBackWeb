@@ -19,14 +19,15 @@ return new class extends Migration
             $table->id();
             $table->boolean('sub_category')->default(false);
             $table->foreignId('affiliate_networks_id')->nullable();
-            $table->integer('companies_click_id')->nullable();
-            $table->string('cj_p_id');
-            $table->string('name');
-            $table->string('url');
-            $table->string('category');
-            $table->string('image');
             $table->decimal('rate', 10, 2)->nullable();
-            $table->string('duration');
+            $table->decimal('fix_amount', 10, 2)->nullable();
+            $table->integer('companies_click_id')->nullable();
+            $table->string('cj_p_id')->nullable();
+            $table->string('name')->nullable();
+            $table->string('url')->nullable();
+            $table->string('category')->nullable();
+            $table->string('image')->nullable();
+            $table->text('terms_exclutions')->nullable();
             $table->timestamps();
              
             // $table->index(['value1', 'value2']);
