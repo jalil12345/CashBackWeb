@@ -83,11 +83,21 @@ export default {
         <div  class=" shadow card border-light mb-3 rounded-3" style="max-width: 20rem;">
           <a :href="`stores/name/${company.name}`">
                 <img :src="`images/company/${company.image}`" 
-                 loading="lazy" class="card-img-top rounded-3" alt="..."
+                 loading="lazy" class="card-img-top rounded-3 img-fluid" alt="..."
                  @error="handleImageError"> 
           </a>
-          <div class="card-footer bg-transparent border-light">
-            <strong class="h6 fw-bold text-success">{{ company.name }}</strong>
+          <div class=" bg-white border-light  text-center mb-1">
+            <span v-if="company.sub_category === 1" >
+              <strong class="h6 fw-bold text-custom-color ">Up to: {{company.rate  }}%</strong>
+            </span>
+            <span v-else-if="company.fix_amount !== null && company.fix_amount !== 0" >
+              <strong class="h6 fw-bold text-custom-color ">${{ company.fix_amount }}</strong>
+            </span>
+            <span v-else-if="company.rate == null" class="h6 fw-bold text-custom-color">
+                            0%</span>
+            <span v-else >
+              <strong class="h6 fw-bold text-custom-color ">{{ company.rate }}%</strong>
+            </span>
           </div>
         </div>
       </div>

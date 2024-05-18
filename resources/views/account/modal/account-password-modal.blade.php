@@ -23,8 +23,8 @@
         <input type="password" id="new_password_confirmation" name="new_password_confirmation" class="form-control">
        </div>
         <div class="modal-footer border-light">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-custom-color">Save changes</button>
+        <button type="submit" class="btn btn-custom-color">Save</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         </div>
       </form>
       </div>

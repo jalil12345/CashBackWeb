@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Company;
 use App\Models\Deal;
 use App\Models\Coupon;
+use App\Models\Favorite;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentEmailVerificationController;
@@ -23,6 +24,8 @@ use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\DetailsController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DealController;
+use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\WebhookController;
  
 
 /*
@@ -47,7 +50,7 @@ Route::post('/contact-us', [App\Http\Controllers\ContactController::class, 'stor
 
 Route::get('/payouts', [PaymentMethodController::class, 'index'])->name('payouts')->middleware('auth');
 Route::post('/account-details', [PaymentEmailVerificationController::class, 'index'])->name('email.save')->middleware('auth');
-Route::post('/account-details/send', [PaymentEmailVerificationController::class, 'send'])->name('email.send');
+Route::post('/account-details/send', [PaymentEmailVerificationController::class, 'send'])->name('email.send')->middleware('auth');
 Route::get('/payouts/verify', [PaymentEmailVerificationController::class, 'verifyEmail'])->name('payouts.verify')->middleware('auth');
 Route::post('/account-settings/change-user-name', [PaymentEmailVerificationController::class, 'changeUserName'])
 ->name('account-details.change-user-name');
@@ -55,6 +58,9 @@ Route::post('/account-settings/change-user-name', [PaymentEmailVerificationContr
          // Paypal  
 Route::get('/paypal/authenticate', [PaypalController::class, 'initiatePaypalAuthentication']);
 Route::get('/paypal/callback', [PaypalController::class, 'handlePaypalCallback']);
+Route::post('/paypal/webhooks', [WebhookController::class, 'handlePaypalWebhook'])
+    ->withoutMiddleware('VerifyCsrfToken')
+    ->middleware('VerifyWebhookSignature');
 
 
 Route::post('/account-settings/add-password', [PaymentEmailVerificationController::class, 'addPassword'])
@@ -63,6 +69,10 @@ Route::post('/account-details/update-password', [PaymentEmailVerificationControl
 ->name('password.update0');
 Route::post('/account-details/add-number', [PaymentEmailVerificationController::class, 'addNumber'])
 ->name('number.add');
+Route::post('/account-details/verify-number', [PaymentEmailVerificationController::class, 'sendSmsToNumber'])
+->name('number.verify');
+Route::post('/account/get-code', [PaymentEmailVerificationController::class, 'getSmsFromNumber'])
+->name('number.verified');
 Route::get('/favorites', [CompanyController::class, 'favorite'])
 ->middleware('auth');
 
@@ -106,8 +116,18 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 Route::get('/stores/name/{name}', function (Request $request, $name) {
+    
+    $user = $request->user(); 
+    if ($user){ 
+    $favorites = Favorite::with('company')->where('user_id', $user->id)->get();
     $store = Company::where('name',$name)->get();
-    return view('/store',compact('store'));
+    $coupons = Coupon::get();
+    return view('/store',['store' => $store, 'coupons' => $coupons ,'favorites' => $favorites]);
+    } else {
+        $store = Company::where('name',$name)->get();
+        $coupons = Coupon::get();
+        return view('/store',['store' => $store, 'coupons' => $coupons ]);
+    }
 });
 
 
@@ -118,16 +138,14 @@ Route::get('/stores/category/{category}', function (Request $request, $category)
 });
 
 
-
-
+Route::get('delete-account/{token}', [UserController::class, 'confirmDeleteAccount'])->middleware('auth');
+Route::get('send-delete-token', [UserController::class, 'sendDeleteToken'])->name('send-delete-token')->middleware('auth');
 
 // compact('result')
 
 
-    Route::get('/sign-in/google', [GoogleAuth::class, 'googleSignin']);
-    Route::get('/sign-in/google/redirect', [GoogleAuth::class, 'googleRedirect']);
-
-
+Route::get('/sign-in/google', [GoogleAuth::class, 'googleSignin']);
+Route::get('/sign-in/google/redirect', [GoogleAuth::class, 'googleRedirect']);
 
 Route::get('/auth/facebook', [GoogleAuth::class, 'redirectToFacebook']);
 Route::get('/auth/facebook/callback', [GoogleAuth::class, 'handleFacebookCallback']);
@@ -136,13 +154,27 @@ Route::get('/auth/facebook/callback', [GoogleAuth::class, 'handleFacebookCallbac
 // Route::get('/Affiliate', [AffiliateController::class, 'index']);
 
 
-Route::get('/billing', [PaymentController::class, 'index']);
-
+Route::get('/get-payment', [PaymentController::class, 'index'])->middleware('auth');
+Route::post('/verify-email-code', [PaymentController::class, 'emailCodeVerification'])->name('emailCodeVerification.code');
 
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
-    Route::get('/1/cou', [UserController::class, 'cou'] );
+    Route::get('/1/cou', [UserController::class, 'cou']);
     Route::get('users', [UserController::class, 'index']);
+    Route::get('/1/cou', [CompanyController::class, 'searchAdmin'])->name('searchAdmin.index');
+    Route::delete('/1/cou/{id}', [CompanyController::class, 'searchAdminDestroy'])->name('searchAdmin.destroy');
+    Route::put('/1/cou/{id}', [CompanyController::class, 'searchAdminUpdate'])->name('searchAdmin.update');
+    Route::post('/1/cou', [CompanyController::class, 'searchAdminStore'])->name('searchAdmin.store');
+
+    Route::get('/2/cou', [SubCategoryController::class, 'subCategory'])->name('subCategory.index');
+    Route::delete('/2/cou/{id}', [SubCategoryController::class, 'subCategoryDestroy'])->name('subCategory.destroy');
+    Route::put('/2/cou/{id}', [SubCategoryController::class, 'subCategoryUpdate'])->name('subCategory.update');
+    Route::post('/2/cou', [SubCategoryController::class, 'subCategoryStore'])->name('subCategory.store');
+    
+    Route::get('/3/cou', [TripController::class, 'tripsAdmin']);
+    Route::get('/admin/filter-trips', [TripController::class, 'filterTripsAdmin'])->name('trips.filter');
+    Route::post('/admin/update-trips', [TripController::class, 'verifiedToPayableAdmin'])->name('trips.verifiedToPayableAdmin');
+
 });
 
 // Route::get('/blog', function () {

@@ -18,7 +18,7 @@
             <strong>How it works !</strong> 
             We refer you to the retailer or brand website, using our Website or Extension, 
             the retailer or brand will give us a commission, 
-            and we will give you 95% of this commission in cashback.  
+            and we will give you 90% of this commission in cashback.  
         </div>
         </div>
     </div>
@@ -83,6 +83,9 @@
         </div>
     </div>
     </div>
+</div>
+<div class="container" style="min-height:30rem;">
+
 </div>
 @include('layouts.footer')
 @endsection

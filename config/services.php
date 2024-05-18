@@ -48,7 +48,8 @@ return [
     'paypal' => [
         'client_id' => env('PAYPAL_CLIENT_ID'),
         'client_secret' => env('PAYPAL_SECRET'),
-        'redirect_url' => env('APP_URL') . '/paypal/callback',
+        'redirect_url' =>  'https://ladybug-eager-martin.ngrok-free.app/paypal/callback',
+        // https://ladybug-eager-martin.ngrok-free.app http://127.0.0.1:8000
     ],
 
 

@@ -2445,7 +2445,7 @@ document.addEventListener('click', function (e) {
   var target = e.target;
 
   while (target && target !== this) {
-    if (target.matches('.store-link')) {
+    if (target.matches('.store-linke')) {
       var p_store = target.getAttribute('data-store');
       var p_cashback = target.getAttribute('data-cashback');
       recordClick(p_store, p_cashback);

@@ -28,22 +28,17 @@ Vue.component('store-search', require('./components/StoreSearch.vue').default);
 Vue.component('search', require('./components/Search.vue').default);
 Vue.component('favorite', require('./components/favorite.vue').default);
 // Vue.component('trip-component', require('./components/TripComponent.vue').default);
+Vue.component('back-to-the-top-component', require('./components/BackToTheTopComponent.vue').default);
+Vue.component('heart-favorite-component', require('./components/HeartFavoriteComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app0',
-});
-const app1 = new Vue({
-    el: '#app1',
-});
-const app3 = new Vue({
-    el: '#app3',
-});
-// const app4 = new Vue({
-//     el: '#app4',
-// });
-
+const app = new Vue({ el: '#app0', });
+const app1 = new Vue({el: '#app1', });
+const app3 = new Vue({ el: '#app3', });
+// const app4 = new Vue({ el: '#app4', });
+const app5 = new Vue({ el: '#app5', });
+const app6 = new Vue({ el: '#app6', });

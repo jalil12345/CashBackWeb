@@ -16,6 +16,8 @@ class Trip extends Model
         'p_store',
         'p_cashback',
         'trip_id',
+        'verified',
+        'payable',
     ];
 
 }

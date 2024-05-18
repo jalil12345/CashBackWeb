@@ -68,7 +68,7 @@
     .post(`/favorites/toggleFavorite/${companyId}`)
     .then(response => {
       const updatedCompany = response.data;
-      
+      console.log(updatedCompany);
       const index = this.companies.findIndex(
         company => company.id === updatedCompany.id
       );
@@ -116,10 +116,14 @@ isFavoriteCompany(companyId) {
                         </i>
                       </a>
                       <a class="h4 text-dark" 
-                      :href="`stores/name/${favorite.name}`"
+                      :href="`stores/name/${favorite.company.name}`"
                       style="text-decoration: none;"
-                      >{{ favorite.name }}</a>
-                      <span class="h5 fw-bold text-success">{{ favorite.rate }}</span>
+                      >{{ favorite.company.name }}</a>
+                      <span v-if="favorite.company.fix_amount !== null && favorite.company.fix_amount !== 0" 
+                            class="h5 fw-bold text-success">${{ favorite.company.fix_amount }}</span>
+                      <span v-else-if="favorite.company.rate == null" class="h5 fw-bold text-success">
+                            0%</span>
+                      <span v-else class="h5 fw-bold text-success">{{ favorite.company.rate }}%</span>
                     </div>
           </div>
         </div>
@@ -152,7 +156,11 @@ isFavoriteCompany(companyId) {
                         :href="`stores/name/${company.name}`"
                         style="text-decoration: none;"
                         >{{ company.name }}</a>
-                        <span class="h5 fw-bold text-success">{{ company.rate }}</span>
+                        <span v-if="company.fix_amount !== null && company.fix_amount !== 0" 
+                            class="h5 fw-bold text-success">${{ company.fix_amount }}</span>
+                        <span v-else-if="company.rate == null" class="h5 fw-bold text-success">
+                            0%</span>
+                        <span v-else class="h5 fw-bold text-success">{{ company.rate }}%</span>
                       
                     </div>
                     </div>

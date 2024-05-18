@@ -13,6 +13,9 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
+use Twilio\Rest\Client;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 
 class PaymentEmailVerificationController extends Controller
@@ -29,7 +32,7 @@ class PaymentEmailVerificationController extends Controller
     $email = $request->input('paymentEmailVerification0');
     // Retrieve the authenticated user
     $user = Auth::user();
-    // Update the name field of the user
+    // Update the email and email_verified_at field of the user
     $user->email = $email;
     $user->email_verified_at = null;
     $user->save();
@@ -117,29 +120,98 @@ class PaymentEmailVerificationController extends Controller
         public function addNumber(Request $request)
         {
             try {
-                
-                // Retrieve the phone number value from the request
+                // Retrieve the phone number and country code values from the request
                 $userNumber = $request->input('phoneNumberInput');
+                $countryCode = $request->input('countryCodeInput');
+
+                // Concatenate country code with phone number
+                $userPhoneNumber = $countryCode . $userNumber;
+
                 // Retrieve the authenticated user
                 $user = Auth::user();
+                
                 // Update the phone_number field of the user
-                $user->phone_number = $userNumber;
+                $user->phone_number = $userPhoneNumber;
                 $user->save();
-
                 // Redirect to the account details route with success message
                 return redirect('account-details')->with('successPhoneNumber', 'Phone Number updated successfully.');
             } catch (\Illuminate\Validation\ValidationException $e) {
+                $message = $e->getMessage();
                 // Handle validation errors
                 // Redirect back with validation errors
-                return redirect('account-details')->with('warning', 'Enter a valied phone number.');
+                return redirect('account-details')->with('warning', $message);
             } catch (\Exception $e) {
+                $message = $e->getMessage();
                 // Handle other exceptions
                 // Redirect back with error message
-                return redirect('account-details')->with('warning', 'Enter a valied phone number.');
+                return redirect('account-details')->with('warning', $message);
+            }
+        }
+
+        // Define Twilio constants for testing
+                const TWILIO_ACCOUNT_SID = 'AC2cd6cb929248aa037014e60acc6441e6';
+                const TWILIO_AUTH_TOKEN = '7a04e70c5fe8221352937b3ceb9f12a1';
+                const TWILIO_PHONE_NUMBER = '+213655585124';
+        public function sendSmsToNumber(Request $request){
+            try {
+                // Generate a random 6-digit verification code
+                $verificationCode = mt_rand(100000, 999999);
+    
+                // Retrieve the user's phone number
+                $userNumber = Auth::user()->phone_number;
+    
+                // Your Twilio credentials
+                // $sid = 'TWILIO_ACCOUNT_SID';
+                // $token = 'TWILIO_AUTH_TOKEN';
+                // $twilioNumber = 'TWILIO_PHONE_NUMBER';
+    
+                // Initialize Twilio client
+                $client = new Client(self::TWILIO_ACCOUNT_SID, self::TWILIO_AUTH_TOKEN);
+    
+                // Send SMS message
+                $client->messages->create(
+                    self::TWILIO_PHONE_NUMBER,
+                    [
+                        'from' => self::TWILIO_PHONE_NUMBER,
+                        'body' => "Your verification code is: $verificationCode"
+                    ]
+                );
+    
+                // Store verification code in session
+                Session::put('verification_code', $verificationCode);
+    
+                // Redirect to the SMS verification view with success message
+                return view('account.sms-code')->with('success', 'Verification code sent successfully.');
+            } catch (\Exception $e) {
+                // Handle exceptions
+                $errorMsg = $e->getMessage();
+                Log::info('Twilio API response: ' . $errorMsg);
+                return back()->with('error', 'Failed to send verification code.');
             }
         }
         
-    }
+        public function getSmsFromNumber(Request $request){
+            try {
+                // Retrieve the verification code entered by the user
+                $userEnteredCode = $request->input('sms_code');
+    
+                // Retrieve the verification code from the session
+                $verificationCode = Session::get('verification_code');
+    
+                // Compare the entered code with the stored code
+                if ($userEnteredCode == $verificationCode) {
+                    // Verification successful
+                    return redirect()->route('verification.success');
+                } else {
+                    // Verification failed
+                    return back()->with('error', 'Invalid verification code.');
+                }
+            } catch (\Exception $e) {
+                // Handle exceptions
+                return back()->with('error', 'Error processing verification.');
+            }
+             }
+        }
     
 
 

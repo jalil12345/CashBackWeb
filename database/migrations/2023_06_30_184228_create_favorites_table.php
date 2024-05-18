@@ -17,15 +17,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained();
             $table->foreignId('company_id')->nullable()->constrained();
-            $table->boolean('favorite')->default(false);
-            $table->decimal('rate', 10, 2)->default(0);
-            $table->foreignId('affiliate_networks_id')->nullable();
-            $table->integer('companies_click_id')->nullable();
-            $table->string('name');
-            $table->string('url');
-            $table->string('category');
-            $table->string('image');
-            $table->string('duration');
             $table->timestamps();
         });
     }

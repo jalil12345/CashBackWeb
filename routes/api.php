@@ -7,6 +7,8 @@ use App\Models\Company;
 use App\Models\Favorite;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\SubCategoryController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes

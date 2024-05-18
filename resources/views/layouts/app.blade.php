@@ -12,18 +12,18 @@
     <!-- <title>{{ config('app.name', 'Laravel') }}</title> -->
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
     <script src="{{ asset('js/recordClick.js') }}"></script>
-
-    <!-- <script src="{{ asset('js/jquery.js') }}"></script> -->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+     <!-- Include Font Awesome -->
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
  <body class="d-flex flex-column min-vh-100"> <!-- navbar -->
     <div id="app">
@@ -45,33 +45,17 @@
                     <ul class="navbar-nav mx-auto">
                     <li class="nav-item me-auto">
                                 <a class="nav-link text-light wf-bold  h4" aria-current="page" href="{{ url('stores') }}"
-                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Stores">Store</a>
+                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Stores">Stores</a>
                             </li>
                             <li class="nav-item me-auto">
                             <a class="nav-link text-light  wf-bold h4"  href="{{ url('coupons') }}"
-                            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Coupons">Coupon</a>
+                            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Coupons">Coupons</a>
                             </li>
                             <!-- <li class="nav-item me-auto">
                             <a class="nav-link text-light wf-bold h4" href="{{ url('deals') }}">Deals</a>
                             </li> -->
                             <li class="nav-item me-auto">
-                            <a class="nav-link  text-light wf-bold h4" href="{{ url('favorites') }}">{{ __('Favorite') }}</a>
-                            </li>
-
-                            <li class="nav-item dropdown me-auto">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" 
-                        role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ __('More') }}
-                                </a>
-
-                            <div class="dropdown-menu dropdown-menu-end rounded-end rounded-start" aria-labelledby="navbarDropdown">
-                            <!-- <a class="dropdown-item text-success" href="{{ url('membership-plans') }}">{{ __('Membership Plans') }}
-                            </a> -->
-                            <a class="dropdown-item" href="{{ url('about-us') }}">{{ __('About Us') }}</a> 
-                            <a class="dropdown-item" href="{{ url('contact-us') }}">{{ __('Contact Us') }}</a>        
-                            <a class="dropdown-item" href="{{ url('how-it-works') }}">{{ __('FAQs') }}</a>
-                            <a class="dropdown-item" href="{{ url('how-it-works') }}">{{ __('How it works !') }}</a>                            <a class="dropdown-item" href="{{ url('privacy-policy') }}">{{ __('Privacy Policy') }}</a>
-                            <a class="dropdown-item" href="{{ url('terms-conditions') }}">{{ __('Terms & Conditions') }}</a></div>
+                            <a class="nav-link  text-light wf-bold h4" href="{{ url('favorites') }}">{{ __('Favorites') }}</a>
                             </li>
                             
                         <!-- Authentication Links -->
@@ -91,18 +75,22 @@
                             <li class="nav-item dropdown me-auto"id="navbarDropdown">
                                 <a  class="nav-link dropdown-toggle text-light" href="#" role="button"
                                  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}{{ __(' $') }}
+                                 {{ substr(Auth::user()->name, 0, 5) }}
+                                    {{$pendingBalance + $verifiedBalance + $payableBalance}}$
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end rounded-3" aria-labelledby="navbarDropdown">
                                     
                                     <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profile') }}
                                        </a>
-                                        <a class="dropdown-item" href="{{ url('payouts') }}">{{ __('Payouts') }}{{ __('$') }}
+                                        <a class="dropdown-item" href="{{ url('payouts') }}">{{ __('Payouts') }}
+                                          <span class="float-end fw-bold text-success">{{$pendingBalance + $verifiedBalance + $payableBalance}} $</span> 
                                         </a>
                                         <a class="dropdown-item" href="{{ url('trips') }}">{{ __('Trips') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ url('account-details') }}">{{ __('Account Settings') }}
+                                        </a>
+                                        <a class="dropdown-item" href="#footer">{{ __('Help') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

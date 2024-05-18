@@ -29,6 +29,12 @@ class Company extends Model
         ];
 
     }
+    protected $fillable = ['sub_category', 'affiliate_networks_id', 'rate', 
+                            'cj_p_id', 'name', 'url', 'category', 'fix_amount' ,'image'];
+    public function highestSubRate()
+    {
+        return $this->subCategories()->max('sub_rate');
+    }
     public function deals()
     {
         return $this->hasMany(Deal::class);
@@ -37,5 +43,12 @@ class Company extends Model
     {
         return $this->hasMany(Coupon::class);
     }
-
+    public function subCategories()
+    {
+        return $this->hasMany(SubCategory::class);
+    }
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
 }

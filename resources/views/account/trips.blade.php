@@ -30,13 +30,15 @@
                             <td>{{ $trip->trip_id }}</td>
                             <td>{{ $trip->pending }}</td>
                         </tr>
-                    @endforeach
+                    @endforeach 
                 </tbody>
             </table>
         </div>
-    @endif
+        @endif
     </div>
 </div>
+<div class="container" style="min-height:30rem;">
 
+</div>
 @include('layouts.footer')
 @endsection 

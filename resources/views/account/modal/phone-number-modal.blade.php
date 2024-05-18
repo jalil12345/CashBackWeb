@@ -13,13 +13,22 @@
         </div>
         <div class="modal-body border-light">
         <form action="{{ route('number.add') }}" method="post">
-            @csrf
-          <input name="phoneNumberInput" type="tel" class="form-control" 
-          placeholder="Enter Phone Number">
-        </div>
+          @csrf
+          <div class="input-group align-items-center">
+              <div class="input-group-prepend">
+                  <select class="custom-select" name="countryCodeInput" style="height: 38px;">
+                      <option value="+1" >+1 (US)</option>
+                      <option value="+1" >+1 (US)</option>
+                      <option value="+1" >+1 (US)</option>
+                      <!-- Add more options for other countries as needed -->
+                  </select>
+              </div>
+              <input name="phoneNumberInput" type="tel" class="form-control" 
+                     style="height: 38px;" placeholder="Enter Phone Number">
+          </div>
         <div class="modal-footer border-light">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-custom-color">Save changes</button>
+          <button type="submit" class="btn btn-custom-color">Save</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
           
         </div></form>
       </div>

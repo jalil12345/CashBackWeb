@@ -17,7 +17,9 @@
                             </div>
                             <div class="col-md-4 ">
                                 <p class="h3 fw-bold">Cash Back</p>
-                                <p class="h5 fw-bold text-success">$10</p>
+                                <p class="h5 fw-bold text-success">
+                                {{$pendingBalance + $verifiedBalance + $payableBalance}} $
+                                </p>
                             </div>
                             <div class="col-md-4">
                                 <p class="h5 card-text ">Member Since: {{ Auth::user()->created_at->format('M Y') }}</p>
