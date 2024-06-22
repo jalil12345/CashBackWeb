@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Trip;
 use App\Models\Company;
 use App\Models\Deal;
 use App\Models\Coupon;
@@ -16,6 +17,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\Affiliate\AffiliateController;
 use App\Http\Controllers\Affiliate\TripController;
+use App\Http\Controllers\Affiliate\CjController;
 use App\Http\Controllers\UserMembershipController;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\GoogleAuth;
@@ -84,7 +86,14 @@ Route::get('/how-it-works', function () { return view('legal/how-it-works');});
 // Route::get('/membership-plans', function () { return view('memberships');});
 
 Route::get('/profile', function () {
-    return view('profile');
+    $user_id = Auth::id();
+
+    $trips = Trip::where('user_id', $user_id)
+                   ->orderBy('created_at', 'desc')
+                   ->limit(10)
+                   ->get();
+
+    return view('profile', ['trips' => $trips]);
 })->middleware('auth');
 
 Route::get('/account-details', [DetailsController::class, 'index'])->middleware('auth');
@@ -160,11 +169,16 @@ Route::post('/verify-email-code', [PaymentController::class, 'emailCodeVerificat
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/1/cou', [UserController::class, 'cou']);
-    Route::get('users', [UserController::class, 'index']);
+    Route::get('users', [UserController::class, 'index']); 
+
     Route::get('/1/cou', [CompanyController::class, 'searchAdmin'])->name('searchAdmin.index');
     Route::delete('/1/cou/{id}', [CompanyController::class, 'searchAdminDestroy'])->name('searchAdmin.destroy');
     Route::put('/1/cou/{id}', [CompanyController::class, 'searchAdminUpdate'])->name('searchAdmin.update');
     Route::post('/1/cou', [CompanyController::class, 'searchAdminStore'])->name('searchAdmin.store');
+
+    Route::get('/1/trips', [TripController::class, 'searchAdmin'])->name('tripsAdmin.index');
+    Route::delete('/1/trips/{id}', [TripController::class, 'searchAdminDestroy'])->name('tripsAdmin.destroy');
+    Route::put('/1/trips/{id}', [TripController::class, 'searchAdminUpdate'])->name('tripsAdmin.update');
 
     Route::get('/2/cou', [SubCategoryController::class, 'subCategory'])->name('subCategory.index');
     Route::delete('/2/cou/{id}', [SubCategoryController::class, 'subCategoryDestroy'])->name('subCategory.destroy');

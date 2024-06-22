@@ -28,15 +28,17 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $users = [];
         // search  usersview 
         if($request->filled('search')){
             $users = User::search($request->search)->get();
         }else{
-            $users = User::search('user0')->get();
+            $users = [];
         }
             return view('users',['users' => $users]);
             // return response()->json($users);
     }
+   
     public function cou(Request $request) 
     { 
         $trips = Trip::get();

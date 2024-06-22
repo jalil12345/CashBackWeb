@@ -29,8 +29,10 @@ class Company extends Model
         ];
 
     }
-    protected $fillable = ['sub_category', 'affiliate_networks_id', 'rate', 
-                            'cj_p_id', 'name', 'url', 'category', 'fix_amount' ,'image'];
+    protected $fillable = ['sub_category', 'affiliate_networks', 'rate', 
+                           'name', 'url', 'category', 'fix_amount' ,'image',
+                           'terms_exclutions', 'account_status','relationship_status',
+                           'affiliate_url','advertiser_id' ];
     public function highestSubRate()
     {
         return $this->subCategories()->max('sub_rate');

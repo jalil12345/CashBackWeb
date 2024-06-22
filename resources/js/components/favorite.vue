@@ -1,4 +1,5 @@
 <script>
+import { formatCashback } from '../helpers';
    export default {
   data() {
     return {
@@ -18,6 +19,7 @@
     this.loadMoreCompanies();
   },
   methods: {
+    formatCashback,
     fetchFavoriteCompanies() {
       axios
         .get('/api-favorites')
@@ -120,10 +122,10 @@ isFavoriteCompany(companyId) {
                       style="text-decoration: none;"
                       >{{ favorite.company.name }}</a>
                       <span v-if="favorite.company.fix_amount !== null && favorite.company.fix_amount !== 0" 
-                            class="h5 fw-bold text-success">${{ favorite.company.fix_amount }}</span>
+                            class="h5 fw-bold text-success">${{ formatCashback(favorite.company.fix_amount) }}</span>
                       <span v-else-if="favorite.company.rate == null" class="h5 fw-bold text-success">
                             0%</span>
-                      <span v-else class="h5 fw-bold text-success">{{ favorite.company.rate }}%</span>
+                      <span v-else class="h5 fw-bold text-success">{{ formatCashback(favorite.company.rate) }}%</span>
                     </div>
           </div>
         </div>
@@ -157,10 +159,10 @@ isFavoriteCompany(companyId) {
                         style="text-decoration: none;"
                         >{{ company.name }}</a>
                         <span v-if="company.fix_amount !== null && company.fix_amount !== 0" 
-                            class="h5 fw-bold text-success">${{ company.fix_amount }}</span>
+                            class="h5 fw-bold text-success">${{ formatCashback(company.fix_amount) }}</span>
                         <span v-else-if="company.rate == null" class="h5 fw-bold text-success">
                             0%</span>
-                        <span v-else class="h5 fw-bold text-success">{{ company.rate }}%</span>
+                        <span v-else class="h5 fw-bold text-success">{{ formatCashback(company.rate) }}%</span>
                       
                     </div>
                     </div>

@@ -21,11 +21,12 @@ return new class extends Migration
             $table->string('p_name')->nullable();
             $table->string('p_store')->nullable();
             $table->string('p_price')->nullable();
-            $table->decimal('trip_cashback',12, 2)->nullable();
+            $table->decimal('trip_cashback',15, 8)->nullable();
+            $table->string('trip_status')->nullable();
             $table->boolean('pending')->default(false);
             $table->boolean('verified')->default(false);
             $table->boolean('payable')->default(false);
-            $table->decimal('paid_amount', 12, 2)->nullable()->default(0);
+            $table->decimal('paid_amount', 15, 8)->nullable()->default(0);
             $table->timestamps();
         });
     }

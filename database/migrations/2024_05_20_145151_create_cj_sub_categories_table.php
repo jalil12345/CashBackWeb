@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('companies', function (Blueprint $table) {
-            $table->decimal('fix_amount', 10, 2)->nullable()->after('rate');
+        Schema::create('cj_sub_categories', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('company_id')->nullable()->constrained();
+            $table->string('sub_name')->nullable();
+            $table->decimal('sub_rate', 10, 2)->default(0)->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('companies', function (Blueprint $table) {
-            
-        });
+        Schema::dropIfExists('cj_sub_categories');
     }
 };

@@ -22,11 +22,18 @@ class PaymentMethodController extends Controller
 
         // Fetch the paypal_name from the associated paypal_account
         $paypalName = $user->paypalAccount->paypal_name ?? null;
+        $user_id = Auth::id();
+
+        $trips = Trip::where('user_id', $user_id)
+                   ->orderBy('created_at', 'desc')
+                   ->limit(10)
+                   ->get();
 
         return view('account.payouts', [
             'paymentMethods' => $paymentMethods,
             'paypal_name' => $paypalName,
-            'email_verified' => $email_verified
+            'email_verified' => $email_verified,
+            'trips' => $trips
             
         ]);
     }

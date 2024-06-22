@@ -60,11 +60,11 @@
                         @php
                             $maxSubRate = $st->subCategories->max('sub_rate');
                         @endphp
-                        <p class="h5 text-custom-color fw-bold">Up to:{{ $maxSubRate }}{{ __('%') }}</p>
+                        <p class="h5 text-custom-color fw-bold">Up to:{{ formatCashback($maxSubRate) }}{{ __('%') }}</p>
                         @elseif($st->fix_amount !== null && $st->fix_amount !== 0)
-                        <p class="h5 text-custom-colors fw-bold">${{ $st->fix_amount }}</p>
+                        <p class="h5 text-custom-colors fw-bold">${{ formatCashback($st->fix_amount) }}</p>
                         @else
-                            <p class="h5 text-custom-color fw-bold">{{ $st->rate }}{{ __('%') }}</p>
+                            <p class="h5 text-custom-color fw-bold">{{ formatCashback($st->rate) }}{{ __('%') }}</p>
                         @endif
                     <a href="{{ url('stores', ['id' => $st->id]) }}"
                        class="btn btn-custom-color rounded-1 store-link" 
@@ -92,7 +92,7 @@
                                    <a href=""
                                       class="btn btn-outline-custom-color rounded-pill mt-2">
                                       <span class="text-dark h5 me-2">{{ $subCategory->sub_name }} </span>
-                                      <span class="text-success fw-bold"> {{ $subCategory->sub_rate }}{{ __('%') }}</span>
+                                      <span class="text-success fw-bold"> {{ formatCashback($subCategory->sub_rate) }}{{ __('%') }}</span>
                                     </a>
                                    @endforeach  
                                 </p>
@@ -122,9 +122,9 @@
                 @if($coupon->company->rate == null && $coupon->company->fix_amount == null)
                 <p class="h5 text-custom-color   mb-0 pb-0">+ cashback Coming soon </p>
                 @elseif($coupon->company->fix_amount !== null)
-                <p class="h5  text-custom-color  mb-0 pb-0">+  ${{$coupon->company->fix_amount}} cashback</p>
+                <p class="h5  text-custom-color  mb-0 pb-0">+  ${{formatCashback($coupon->company->fix_amount)}} cashback</p>
                 @else
-                <p class="h5  text-custom-color  mb-0 pb-0">+ {{$coupon->company->rate}}% cashback</p>
+                <p class="h5  text-custom-color  mb-0 pb-0">+ {{formatCashback($coupon->company->rate)}}% cashback</p>
                 @endif
                 </div>
             </div>

@@ -59,5 +59,9 @@ return [
         'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
     ],
     
+    'cj' => [
+        'token' => env('CJ_API_TOKEN'),
+        'publisher_id' => env('CJ_PUBLISHER_ID'),
+    ],
 
 ];

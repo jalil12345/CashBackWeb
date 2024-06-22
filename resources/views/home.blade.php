@@ -96,9 +96,9 @@
         @if(($store->rate == null || $store->rate == 0)  && ($store->fix_amount == null || $store->fix_amount == 0))
         <strong class=" fw-bolder text-custom-color">Coming Soon</strong> 
         @elseif ($store->rate == null || $store->rate == 0)
-        <strong class=" fw-bolder text-custom-color">${{$store->fix_amount}} Cashback</strong> 
+        <strong class=" fw-bolder text-custom-color">${{formatCashback($store->fix_amount)}} Cashback</strong> 
         @else
-        <strong class=" fw-bolder text-custom-color">{{$store->rate}}% Cashback</strong> 
+        <strong class=" fw-bolder text-custom-color">{{formatCashback($store->rate)}}% Cashback</strong> 
         @endif
     </p> 
   </div> 
@@ -129,9 +129,9 @@
         @if($coupon->company->rate == null && ($coupon->company->fix_amount == null || $coupon->company->fix_amount == 0))
             <p class="h5 text-custom-color mb-0 pb-0"> Cashback Coming Soon </p >
         @elseif ($coupon->company->rate == null)
-            <p class="h5 text-custom-color mb-0 pb-0">+ ${{$coupon->company->fix_amount}} Cashback</p>
+            <p class="h5 text-custom-color mb-0 pb-0">+ ${{formatCashback($coupon->company->fix_amount)}} Cashback</p>
         @else
-            <p class="h5 text-custom-color mb-0 pb-0">+ {{$coupon->company->rate}}% Cashback</p>
+            <p class="h5 text-custom-color mb-0 pb-0">+ {{formatCashback($coupon->company->rate)}}% Cashback</p>
         @endif
        </div>
     </div>

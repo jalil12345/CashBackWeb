@@ -7,6 +7,7 @@
 
 <div class="container my-3 ">
     <a href="{{ url('/1/cou') }}" target="_blank" rel="noopener noreferrer" class="me-3">companies</a>
+    <a href="{{ url('/3/cou') }}" target="_blank" rel="noopener noreferrer" class="me-3">Filter Trips</a>
 </div>
 <div class="container">
     <form action="{{ route('subCategory.index') }}" method="GET">

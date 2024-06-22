@@ -14,10 +14,18 @@ class Trip extends Model
         'company_id',
         'p_name',
         'p_store',
-        'p_cashback',
+        'trip_cashback',
         'trip_id',
+        'trip_status',
         'verified',
+        'pending',
         'payable',
-    ];
+        'p_price',
+        'paid_amount',
 
+    ];
+    public function user()
+        {
+            return $this->belongsToMany(User::class);
+        }
 }
