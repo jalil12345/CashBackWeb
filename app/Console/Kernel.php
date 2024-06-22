@@ -15,9 +15,29 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-          $schedule->command('event:listen')
-             ;
-            //  ->everyTwoMinutes()
+          $schedule->command('event:listen');
+    }
+    /**
+     * Define the application's command schedule.
+     *
+     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @return void
+     */
+    protected function scheduleCjData(Schedule $schedule)
+    {
+        $schedule->command('fetch:cj-data'); 
+        //  ->daily()
+    }
+    /**
+     * Define the application's command schedule.
+     *
+     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @return void
+     */
+    protected function scheduleAwinData(Schedule $schedule)
+    {
+        $schedule->command('fetch:Awin-data'); 
+        //  ->daily()
     }
 
     /**

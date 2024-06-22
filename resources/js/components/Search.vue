@@ -1,4 +1,5 @@
 <script>
+import { formatCashback } from '../helpers';
   export default {
     data() {
       return {
@@ -11,11 +12,12 @@
       console.log('Component mounted.')
     },
     methods: {
+      formatCashback,
       async getSearch4(e) {
         this.searchText = e.target.value;
         let userData3 = this.searchText;
         try {
-          const response = await axios.get('http://127.0.0.1:8000/api/stores?search=' + userData3);
+          const response = await axios.get('/api/stores?search=' + userData3);
           this.emptyArray3 = response.data;
         } catch (err) {
           console.log(err);
@@ -29,13 +31,13 @@
       getHighlightedText(item) {
         let text = this.highlightMatchingText(item.name); // Apply highlighting to text
         if (item.sub_category === 1) {
-          text += `<strong class="h6 fw-bold text-custom-color text-center float-end">Up to: ${item.rate}%</strong>`;
+          text += `<strong class="h6 fw-bold text-custom-color text-center float-end">Up to: ${this.formatCashback(item.rate)}%</strong>`;
         } else if (item.fix_amount !== null && item.fix_amount !== 0) {
-          text += `<strong class="h6 fw-bold text-custom-color text-center float-end">$${item.fix_amount}</strong>`;
+          text += `<strong class="h6 fw-bold text-custom-color text-center float-end">$${this.formatCashback(item.fix_amount)}</strong>`;
         }else if (item.rate == null ) {
           text += `<strong class="h6 fw-bold text-custom-color text-center float-end">0%</strong>`;
         } else {
-          text += `<strong class="h6 fw-bold text-custom-color text-center float-end">${item.rate}%</strong>`;
+          text += `<strong class="h6 fw-bold text-custom-color text-center float-end">${this.formatCashback(item.rate)}%</strong>`;
         }
         return text;
       },

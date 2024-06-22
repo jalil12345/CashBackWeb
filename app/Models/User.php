@@ -53,6 +53,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(History::class);
     }
+    public function trips()
+    {
+        return $this->hasMany(Trip::class);
+    }
     public function favorites()
     {
         return $this->hasMany(Favorite::class, 'user_id');
@@ -90,7 +94,8 @@ class User extends Authenticatable
         return [
             
             'name' => $this->name,  // you can search by name
-            'email' => $this->email   // you can search by email
+            'email' => $this->email,   // you can search by email
+            'id' => $this->id
         ];
 
     }

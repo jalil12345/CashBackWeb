@@ -6,6 +6,13 @@
 @endsection 
 @section('content')
       
+<div class="container my-3 ">
+    <a href="{{ url('/2/cou') }}"  rel="noopener noreferrer" class="me-3">sub_Categories</a>
+    <a href="{{ url('/3/cou') }}"  rel="noopener noreferrer" class="me-3">Filter Trips</a>
+    <a href="{{ url('/1/trips') }}"  rel="noopener noreferrer" class="me-3">ManageTrips</a>
+    <a href="{{ url('/3/cou') }}"  rel="noopener noreferrer" class="me-3">trips</a>
+</div>
+
 <div class="container">
     <h1 class="text-center text-dark">H1</h1>
   
@@ -27,11 +34,10 @@
         
     </form>
     
-    </div>
+    
 
- <div  id="auto"></div>
 </div>
-    <table class="table table-bordered data-table">
+    <table class="table table-bordered data-table mt-4">
         <thead>
             <tr>
                 <th>Name</th>
@@ -54,46 +60,8 @@
         </tbody>
     </table>
     
-</div>
+    </div></div>
 
-<br><br><br><br><br><br><br><br><br><br>
-<br><br><br>
-    
-<script>
-    // const inputBox0 = document.getElementById("user_name");
-    // const suggBox0 = document.getElementById("iid");
-    
-    // const getSearch =(e)=>{
-    //     let userData0=e.target.value;
-    //     console.log(userData0);  
-    //  axios.get('http://127.0.0.1:8000/api/users?search='+userData0,{
-            
-    //     }).then(response=>{
-    //         console.log(response.data.length);
-    //         for (let index = 0; index < response.data.length; index++) {
-    //              let element = response.data[index].name;
-    //              let email = response.data[index].email;
-    //              console.log(element);
-    //              console.log(email);
-                 
-    //             //  suggBox0.innerHTML='<li><a class="dropdown-item" href="#">'+element+'</a></li>'+
-    //             //  '<li><a class="dropdown-item" href="#">'+email+'</a></li>';
-    //         }
-    //         let txt = "";
-    //         response.data.forEach(myFunction);
-    //         document.getElementById("iid").innerHTML = txt;
-    //         function myFunction(value) {
-    //                     txt +='<li><a class="dropdown-item" href="#">'+value.name + '</a></li>'+
-    //                     '<li><a class="dropdown-item" href="#">'+value.email+'</a></li>'; 
-    //                     }
-    //         // suggBox.innerHTML=;
-    //     }).catch(err=>{
-    //         console.log(err);
-    //     });  
-    // };
-   
-    // inputBox0.addEventListener('keyup',getSearch);
-</script>
 
 @include('layouts.footer')
 @endsection 

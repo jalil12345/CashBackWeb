@@ -16,7 +16,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Time</th>
+                        <th>Date</th>
                         <th>Store</th>
                         <th>Trip Number</th>
                         <th>Order Info</th>

@@ -6,11 +6,17 @@
 @endsection 
 
 @section('content')
+<div class="container my-3 ">
+    <a href="{{ url('/2/cou') }}"  rel="noopener noreferrer" class="me-3">sub_Categories</a>
+    <a href="{{ url('/1/cou') }}"  rel="noopener noreferrer" class="me-3">Companies</a>
+    <a href="{{ url('/1/trips') }}"  rel="noopener noreferrer" class="me-3">ManageTrips</a>
+    <a href="{{ url('/users') }}"  rel="noopener noreferrer" class="me-3">users</a>
+</div>
 <div class="container">
     <h1>Trips</h1>
         <form action="{{ route('trips.filter') }}" method="GET"> <div class="mb-3">
             <label for="filterDate" class="form-label">Filter by Date:</label>
-            <input type="date" class="form-control" id="filterDate" name="date">
+            <input type="date" class="form-control " id="filterDate" name="date"style="width : 350px;">
             </div>
             <button type="submit" class="btn btn-primary">Filter Trips</button>
        </form>

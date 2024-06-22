@@ -11,6 +11,7 @@ use App\Models\Coupon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
+use App\Models\User;
 
 class TripController extends Controller
 {  
@@ -152,4 +153,44 @@ class TripController extends Controller
         ]);
         return back()->with('success', 'Trip statuses updated successfully!');
     }
+
+
+
+
+ 
+
+
+    public function searchAdmin(Request $request)
+    {
+        $search = $request->input('search');
+        $users =[];
+        if ($search) {
+            $trips = Trip::where('user_id', 'like', "%$search%")
+                         ->orWhere('trip_id', 'like', "%$search%")
+                         ->get();
+        } else {
+            $trips = [];
+        }
+
+        return view('admin.trips-user', ['trips' => $trips,'users'=>$users]);
+    }
+
+    public function searchAdminDestroy($id)
+    {
+        $trip = Trip::findOrFail($id);
+        $trip->delete();
+        return redirect()->back()->with('success', 'Trip deleted successfully.');
+    }
+
+    public function searchAdminUpdate(Request $request, $id)
+    {
+        $trip = Trip::findOrFail($id);
+        $trip->update($request->all());
+        log::info($trip);
+        return redirect()->back()->with('success', 'Trip updated successfully.');
+    }
+
+   
 }
+
+

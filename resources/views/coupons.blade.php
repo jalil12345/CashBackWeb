@@ -24,9 +24,9 @@
         @if($coupon->company->rate == null && $coupon->company->fix_amount == null)
         <p class="h5 text-custom-color   mb-0 pb-0">+ cashback Coming soon </p>
         @elseif($coupon->company->fix_amount !== null)
-        <p class="h5  text-custom-color  mb-0 pb-0">+  ${{$coupon->company->fix_amount}} cashback</p>
+        <p class="h5  text-custom-color  mb-0 pb-0">+  ${{formatCashback($coupon->company->fix_amount)}} cashback</p>
         @else
-        <p class="h5  text-custom-color  mb-0 pb-0">+ {{$coupon->company->rate}}% cashback</p>
+        <p class="h5  text-custom-color  mb-0 pb-0">+ {{formatCashback($coupon->company->rate)}}% cashback</p>
         @endif
         </div>
       </div>

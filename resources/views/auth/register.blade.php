@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8 mt-5">
             <div class="card">
                 <div class="card-header">{{ __('Sign up') }}</div>
 
@@ -30,7 +30,7 @@
                         </div></div>
 
                        
-
+<!-- 
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
@@ -80,7 +80,7 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-                        
+                         -->
                         <div class="text-center">
                             <label for="" class="col-form-label ">By signing up, you agree to 
                                  the 
@@ -92,13 +92,13 @@
                             </label>
                         </div>
 
-                        <div class="row mb-0">
+                        <!-- <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-custom-color rounded-1 px-3">
                                     {{ __('Sign up') }}
                                 </button>
                             </div>
-                        </div>
+                        </div> -->
                         
                     </form>
                 </div>

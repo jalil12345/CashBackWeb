@@ -45,7 +45,7 @@
 
 
     
-      <div class="card shadow border-light rounded-3">
+      <div class="card shadow border-light rounded-3 ">
       <div class="card-body">
       <h2 class="card-title fw-bold">{{ __('Trips') }}</h2>
    <table class="table">
@@ -53,20 +53,24 @@
     <tr>
       <th class="h6 fw-bold">Date</th>
       <th class="h6 fw-bold">Store</th>
-      <th class="h6 fw-bold">Click Id</th>
-      <th class="h6 fw-bold">Order Reported</th>
+      <th class="h6 fw-bold">Trip Number</th>
+      <th class="h6 fw-bold">Order Info</th>
     </tr>
    </thead>
-  
+   @foreach ($trips->reverse() as $trip)
     <tr>
-      <td>date</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
+    <td>{{ \Carbon\Carbon::parse($trip->created_at)->format('m/d/Y g:i A') }}</td>
+    <td>{{ $trip->p_store }}</td>
+    <td>{{ $trip->trip_id }}</td>
+    <td>{{ $trip->pending }}</td>
     </tr>
-    
+    @endforeach 
   
 </table>
+<div class="d-flex justify-content-center">
+   <a href="{{ url('trips') }}" class="text-center btn btn-custom-color">More Trips</a>
+</div>
+
           </div>
        </div>
      </div>

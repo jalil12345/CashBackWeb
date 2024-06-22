@@ -73,22 +73,27 @@
 <table class="table">
 <thead>
     <tr>
-      <th class="h6 fw-bold">Date & Time</th>
-      <th class="h6 fw-bold">Amount</th>
-      <th class="h6 fw-bold">Method</th>
-      <th class="h6 fw-bold">Status</th>
+      <th class="h6 fw-bold">Date</th>
+      <th class="h6 fw-bold">Store</th>
+      <th class="h6 fw-bold">Trip Number</th>
+      <th class="h6 fw-bold">Order Info</th>
     </tr>
 </thead>
   
+@foreach ($trips->reverse() as $trip)
     <tr>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
+    <td>{{ \Carbon\Carbon::parse($trip->created_at)->format('m/d/Y g:i A') }}</td>
+    <td>{{ $trip->p_store }}</td>
+    <td>{{ $trip->trip_id }}</td>
+    <td>{{ $trip->pending }}</td>
     </tr>
+ @endforeach 
     
-  
 </table>
+<div class="d-flex justify-content-center">
+   <a href="{{ url('trips') }}" class="text-center btn btn-custom-color">More Trips</a>
+</div>
+
 </div></div>
 <br><br><br>
 @include('account.modal.get-payment-modal')

@@ -1,4 +1,5 @@
 <script>
+import { formatCashback } from '../helpers';
 export default {
   data() {
     return {
@@ -13,6 +14,7 @@ export default {
     this.setupIntersectionObserver();
   },
   methods: {
+    formatCashback,
       handleImageError(event) {
       event.target.src = 'images/company/g.png'; // Provide a placeholder image
        },
@@ -20,7 +22,7 @@ export default {
       if (!this.isFetching && this.hasMoreData) {
         this.isFetching = true;
         axios
-          .get('http://127.0.0.1:8000/api/companies', {
+          .get('/api/companies', {
             params: {
               perPage: this.perPage,
               page: this.page,
@@ -88,15 +90,15 @@ export default {
           </a>
           <div class=" bg-white border-light  text-center mb-1">
             <span v-if="company.sub_category === 1" >
-              <strong class="h6 fw-bold text-custom-color ">Up to: {{company.rate  }}%</strong>
+              <strong class="h6 fw-bold text-custom-color ">Up to: {{formatCashback(company.rate)  }}%</strong>
             </span>
             <span v-else-if="company.fix_amount !== null && company.fix_amount !== 0" >
-              <strong class="h6 fw-bold text-custom-color ">${{ company.fix_amount }}</strong>
+              <strong class="h6 fw-bold text-custom-color ">${{ formatCashback(company.fix_amount) }}</strong>
             </span>
             <span v-else-if="company.rate == null" class="h6 fw-bold text-custom-color">
                             0%</span>
             <span v-else >
-              <strong class="h6 fw-bold text-custom-color ">{{ company.rate }}%</strong>
+              <strong class="h6 fw-bold text-custom-color ">{{formatCashback(company.rate) }}%</strong>
             </span>
           </div>
         </div>

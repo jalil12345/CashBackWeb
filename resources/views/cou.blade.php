@@ -5,9 +5,11 @@
 @endsection 
 @section('content')
 
-
  <div class="container my-3 ">
-    <a href="{{ url('/2/cou') }}" target="_blank" rel="noopener noreferrer" class="me-3">sub_Categories</a>
+    <a href="{{ url('/2/cou') }}"  rel="noopener noreferrer" class="me-3">sub_Categories</a>
+    <a href="{{ url('/3/cou') }}"  rel="noopener noreferrer" class="me-3">Filter Trips</a>
+    <a href="{{ url('/1/trips') }}"  rel="noopener noreferrer" class="me-3">ManageTrips</a>
+    <a href="{{ url('/3/cou') }}"  rel="noopener noreferrer" class="me-3">trips</a>
 </div>
 
 <div class="container">

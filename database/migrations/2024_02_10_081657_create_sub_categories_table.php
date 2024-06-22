@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('company_id')->nullable()->constrained();
             $table->string('sub_name');
-            $table->decimal('sub_rate', 10, 2)->default(0);
+            $table->decimal('sub_rate', 15, 8)->default(0);
+            $table->softDeletes(); // Add deleted_at column
+            $table->timestamps(); 
         });
     }
 

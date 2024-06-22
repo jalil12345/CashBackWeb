@@ -20,16 +20,25 @@ class GoogleAuth extends Controller
 
     public function googleRedirect()
     {
-        $user = Socialite::driver('google')->user();
-
-        $user = User::firstOrCreate([
-            'email' => $user->email
-        ], [
-            'name' => $user->name,
-            'password' => Hash::make(Str::random(24)),
-        ]);
-        Auth::login($user, true);
-        return redirect('/');
+        try {
+            $user = Socialite::driver('google')->user();
+    
+            $user = User::firstOrCreate([
+                'email' => $user->email
+            ], [
+                'name' => $user->name,
+                'password' => Hash::make(Str::random(24)),
+            ]);
+    
+            Auth::login($user, true);
+    
+            return redirect('/');
+        } catch (\Exception $e) {
+            Log::error('Google OAuth Error: ' . $e->getMessage());
+            // Handle the error gracefully or redirect the user to an error page
+            // For example:
+            return redirect()->route('error.page');
+        }
     }
 
     public function redirectToFacebook()
@@ -58,7 +67,7 @@ class GoogleAuth extends Controller
     ]);
 
     Auth::login($user, true);
-    return redirect('/');
+    return redirect('/home');
 }
 
 
