@@ -17,7 +17,7 @@ import { formatCashback } from '../helpers';
         this.searchText = e.target.value;
         let userData3 = this.searchText;
         try {
-          const response = await axios.get('/api/stores?search=' + userData3);
+          const response = await axios.get('/api/stores?search='+userData3);
           this.emptyArray3 = response.data;
         } catch (err) {
           console.log(err);
@@ -29,20 +29,21 @@ import { formatCashback } from '../helpers';
         return `<span class="">${highlightedText}</span>`;
       },
       getHighlightedText(item) {
-        let text = this.highlightMatchingText(item.name); // Apply highlighting to text
+        let text = item.name ? this.highlightMatchingText(item.name) : '';
         if (item.sub_category === 1) {
           text += `<strong class="h6 fw-bold text-custom-color text-center float-end">Up to: ${this.formatCashback(item.rate)}%</strong>`;
-        } else if (item.fix_amount !== null && item.fix_amount !== 0) {
+        } else if (item.fix_amount !== null && (parseFloat(item.fix_amount) !== 0.0)) {
           text += `<strong class="h6 fw-bold text-custom-color text-center float-end">$${this.formatCashback(item.fix_amount)}</strong>`;
         }else if (item.rate == null ) {
           text += `<strong class="h6 fw-bold text-custom-color text-center float-end">0%</strong>`;
         } else {
           text += `<strong class="h6 fw-bold text-custom-color text-center float-end">${this.formatCashback(item.rate)}%</strong>`;
         }
-        return text;
+        return text; 
       },
-      // Method for highlighting category text
+      // Method for highlighting category text 
       highlightCategoryText(text) {
+        if (!text) return '';
         const regex = new RegExp(this.searchText, 'gi');
         return text.replace(regex, '<span class="highlight">$&</span>');
       },
@@ -65,7 +66,7 @@ import { formatCashback } from '../helpers';
               id="user_name2" 
               type="text" 
               @keyup="getSearch4" 
-              @click="getSearch4" 
+              @click="getSearch4"
               name="search" 
               placeholder="Search..." 
               aria-label="Search" 

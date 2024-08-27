@@ -27,6 +27,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('store-search', require('./components/StoreSearch.vue').default);
 Vue.component('search', require('./components/Search.vue').default);
 Vue.component('favorite', require('./components/favorite.vue').default);
+Vue.component('coupon-component', require('./components/CouponComponent.vue').default);
 // Vue.component('trip-component', require('./components/TripComponent.vue').default);
 Vue.component('back-to-the-top-component', require('./components/BackToTheTopComponent.vue').default);
 Vue.component('heart-favorite-component', require('./components/HeartFavoriteComponent.vue').default);
@@ -42,3 +43,5 @@ const app3 = new Vue({ el: '#app3', });
 // const app4 = new Vue({ el: '#app4', });
 const app5 = new Vue({ el: '#app5', });
 const app6 = new Vue({ el: '#app6', });
+const app7 = new Vue({ el: '#app7', });
+

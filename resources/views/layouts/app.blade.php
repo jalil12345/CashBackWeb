@@ -90,6 +90,8 @@
                                         </a>
                                         <a class="dropdown-item" href="{{ url('account-details') }}">{{ __('Account Settings') }}
                                         </a>
+                                        <a class="dropdown-item" href="{{ url('add-coupon') }}">{{ __('Add Coupon') }}
+                                        </a>
                                         <a class="dropdown-item" href="#footer">{{ __('Help') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"

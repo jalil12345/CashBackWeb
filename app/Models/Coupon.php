@@ -11,9 +11,16 @@ class Coupon extends Model
     use HasFactory, Searchable;
 
     protected $fillable = [
+        'company_id',
+        'added_by',
+        'c_title',
+        'c_url',
         'store',
         'type',
-        'c_desc',
+        'code',
+        'c_status',
+        'expire',
+        'used',
     ];
     public function company()
     {

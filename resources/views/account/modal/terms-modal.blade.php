@@ -9,12 +9,10 @@
       <div class="modal-body">
         <!-- Your terms and exclusions content goes here -->
         <p>This is where you can place your terms and exclusions.</p>
-        <p class="h2">{{$st->name }}</p>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <p class="h3">{{$st->name }}</p>
+        <br><br><br><br><br><br><br>
       </div>
-      <div class="modal-footer border-light">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
+      
     </div>
   </div>
 </div>

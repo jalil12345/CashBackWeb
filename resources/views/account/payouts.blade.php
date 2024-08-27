@@ -41,7 +41,7 @@
   <div class="card mb-3 shadow border-light rounded-3">
     <div class="card-body">
         <div class="float-start">
-          <img src="Paypal_logo.png" alt="Paypal Logo" width="100" height="100">
+          <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" alt="PayPal Logo">
         </div>
             @if($paypal_name != NULL)
             <div class="float-end">

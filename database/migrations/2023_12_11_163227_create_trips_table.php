@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained();
             $table->foreignId('company_id')->nullable()->constrained();
             $table->string('trip_id')->nullable();
+            $table->unsignedBigInteger('referrer_id')->nullable();
             $table->string('p_name')->nullable();
             $table->string('p_store')->nullable();
             $table->string('p_price')->nullable();

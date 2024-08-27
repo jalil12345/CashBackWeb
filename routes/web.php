@@ -10,6 +10,7 @@ use App\Models\Deal;
 use App\Models\Coupon;
 use App\Models\Favorite;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CodeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentEmailVerificationController;
 use App\Http\Controllers\CompanyController;
@@ -26,6 +27,7 @@ use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\DetailsController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DealController;
+use App\Http\Controllers\ReferralController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\WebhookController;
  
@@ -46,6 +48,8 @@ Route::middleware(['auth'])->group(function () {
 
 Route::post('/favorites/toggleFavorite/{companyId}', [favoriteController::class, 'toggleFavorite'])
 ->name('favorites.toggleFavorite');
+
+Route::get('/r/{code}', [ReferralController::class, 'handleReferral']);
 
 Route::get('/contact-us', [App\Http\Controllers\ContactController::class, 'show'])->middleware('auth')->name('contact.show');
 Route::post('/contact-us', [App\Http\Controllers\ContactController::class, 'store'])->middleware('auth')->name('contact.store');
@@ -85,16 +89,9 @@ Route::get('/contact-us', function () { return view('legal/Contact Us');});
 Route::get('/how-it-works', function () { return view('legal/how-it-works');});
 // Route::get('/membership-plans', function () { return view('memberships');});
 
-Route::get('/profile', function () {
-    $user_id = Auth::id();
+Route::get('/profile', [CodeController::class, 'profile'])
+->middleware('auth');
 
-    $trips = Trip::where('user_id', $user_id)
-                   ->orderBy('created_at', 'desc')
-                   ->limit(10)
-                   ->get();
-
-    return view('profile', ['trips' => $trips]);
-})->middleware('auth');
 
 Route::get('/account-details', [DetailsController::class, 'index'])->middleware('auth');
 
@@ -107,7 +104,8 @@ Route::get('trips/data', [TripController::class, 'tripsData'])->middleware('auth
 
 Route::get('/coupons', [CouponController::class, 'index']);
 Route::get('coupons/{id}', [TripController::class, 'storeCoupons'])->middleware('auth');
-
+Route::get('/add-coupon',[CouponController::class, 'couponCreatePage'])->name('add.coupon.form')->middleware('auth');
+Route::post('/add-coupon', [CouponController::class, 'addCoupon'])->name('add.coupon');
 // Route::get('/deals', [DealController::class, 'index']);
 // Route::get('deals/{id}', [TripController::class, 'storeDeals'])->middleware('auth');
 // Route::get('/deals/name/{id}', function (Request $request, $id) {
@@ -188,6 +186,10 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/3/cou', [TripController::class, 'tripsAdmin']);
     Route::get('/admin/filter-trips', [TripController::class, 'filterTripsAdmin'])->name('trips.filter');
     Route::post('/admin/update-trips', [TripController::class, 'verifiedToPayableAdmin'])->name('trips.verifiedToPayableAdmin');
+
+
+    Route::get('/admin-add-coupon',[CouponController::class, 'adminCouponPage']);
+    Route::post('/admin-add-coupon', [CouponController::class, 'adminAddCoupon'])->name('admin.addcoupon');
 
 });
 

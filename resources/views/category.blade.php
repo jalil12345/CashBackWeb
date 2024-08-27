@@ -9,7 +9,7 @@
 <search id="app1" class="py-3"></search>  
 </div>
 <div class="container mb-3">
-    <span class="h1 mb-3">All the stores from {{$store->first()->category }} category</span>
+    <h1 class="h1 mb-3">{{$store->first()->category }}</h1>
 </div>
 
 <div class="container">
@@ -30,11 +30,11 @@
                         @php
                             $maxSubRate = $st->subCategories->max('sub_rate');
                         @endphp
-                        <p class="h5 text-custom-color fw-bold">Up to:{{ $maxSubRate }}{{ __('%') }}</p>
+                        <p class="h5 text-custom-color fw-bold">Up to:{{ formatCashback($maxSubRate) }}{{ __('%') }}</p>
                         @elseif($st->fix_amount !== null && $st->fix_amount !== 0)
-                        <p class="h5 text-custom-color fw-bold">${{ $st->fix_amount }}</p>
+                        <p class="h5 text-custom-color fw-bold">${{ formatCashback($st->fix_amount) }}</p>
                         @else
-                            <p class="h5 text-custom-color fw-bold">{{ $st->rate }}{{ __('%') }}</p>
+                            <p class="h5 text-custom-color fw-bold">{{ formatCashback($st->rate) }}{{ __('%') }}</p>
                         @endif
                     </div>
                 </div>
