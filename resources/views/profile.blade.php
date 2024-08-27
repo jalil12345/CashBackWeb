@@ -30,6 +30,40 @@
             </div>
         </div>
     
+
+        @if(Auth::user()->referral_code)
+        <div class="row">
+            <div class="col-md-12 mb-4">
+                <div class="card shadow border-light rounded-3">
+                    <div class="card-body">
+                    <p class="h3 fw-bold pb-2">Referral <span class="h5 ms-4">referral URL: <span id="referral-url" class="">www.example.com</span></span>
+                        <button class="btn btn-outline-secondary btn-sm ms-2" onclick="copyToClipboard()">Copy URL</button></p>
+
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th><span class="h6 ms-1 mb-5">Referrals:</span></th>
+                                    <th><span class="h6 ms-1 mb-5">Active Referrals:</span></th>
+                                    <th><span class="h6 ms-1 mb-5">Payable Amount:</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>{{$referralsCount}}</th>
+                                    <th>{{ $activeReferralsCount }}</th>
+                                    <th> 0</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <span class="h6 ms-1 mb-5">Total paid amount: </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       @endif
+
         <div class="card shadow border-light rounded-3 mb-4">
         <div class="card-body">
             <p class="h3 fw-bold">Payouts <span class="h5 card-text "><a href="{{ url('payouts') }}">click here</a></span></p>
@@ -41,13 +75,13 @@
         </div>
         </div>
 
-
-
-
     
       <div class="card shadow border-light rounded-3 ">
       <div class="card-body">
       <h2 class="card-title fw-bold">{{ __('Trips') }}</h2>
+      @if($trips->isEmpty())
+      <p>You have no trips for now.</p>
+      @else 
    <table class="table">
    <thead>
     <tr>
@@ -70,12 +104,23 @@
 <div class="d-flex justify-content-center">
    <a href="{{ url('trips') }}" class="text-center btn btn-custom-color">More Trips</a>
 </div>
-
+@endif 
           </div>
        </div>
      </div>
     </div></div>
 
-
+    <script>
+        function copyToClipboard() {
+        var url = document.getElementById("referral-url").innerText;
+        var tempInput = document.createElement("input");
+        tempInput.value = url;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+    }
+    
+    </script>
 @include('layouts.footer')
 @endsection 

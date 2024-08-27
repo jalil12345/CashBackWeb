@@ -28,7 +28,26 @@ class CompanyController extends Controller
      */
     public function searchStores(Request $request)
     {
-        $perPage = $request->input('perPage',30); 
+        $perPage = $request->input('perPage',4000); 
+        $page = $request->input('page', 1);
+    
+        if ($request->filled('search')) {
+            $companies = Company::search($request->search)->get();
+        }else {
+            $companies = Company::paginate($perPage, ['*'], 'page', $page);
+        }
+    
+        return response()->json($companies);
+    }
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function searchStoresSecond(Request $request)
+    {
+        $perPage = $request->input('perPage',4000); 
         $page = $request->input('page', 1);
     
         if ($request->filled('search')) {

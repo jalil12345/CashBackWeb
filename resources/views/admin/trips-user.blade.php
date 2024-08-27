@@ -11,7 +11,7 @@
     <a href="{{ url('/1/cou') }}"  rel="noopener noreferrer" class="me-3">Companies</a>
     <a href="{{ url('/users') }}"  rel="noopener noreferrer" class="me-3">users</a>
     <a href="{{ url('/3/cou') }}"  rel="noopener noreferrer" class="me-3">trips</a>
-
+    <a href="{{ url('/admin-add-coupon') }}"  rel="noopener noreferrer" class="me-3">admin-add-coupon</a>
 </div>
 
 <div class="container">

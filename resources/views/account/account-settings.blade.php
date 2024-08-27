@@ -199,7 +199,7 @@
 <div class="card mb-3 shadow border-light rounded-3">
   <div class="card-body">
       <div class="float-start">
-        <img src="paypal_logo.png" alt="PayPal Logo" width="100" height="100">
+        <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" alt="PayPal Logo">
       </div>
       <div class="float-end">
               @if($paypal_name != NULL)

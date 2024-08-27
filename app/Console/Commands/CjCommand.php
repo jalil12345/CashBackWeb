@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use App\Models\Company;
 use App\Models\SubCategory;
+use App\Models\Coupon; // Assuming you have a Coupon model
 use Illuminate\Support\Facades\Log;
 
 class FetchCjData extends Command
@@ -21,6 +21,7 @@ class FetchCjData extends Command
     public function handle()
     {
         $apiUrl = 'https://api.cj.com/v3/advertiser-lookup';
+        $couponApiUrl = 'https://api.cj.com/v3/coupons'; // API endpoint for coupons
         $apiKey = env('CJ_API_KEY');
 
         try {
@@ -51,7 +52,7 @@ class FetchCjData extends Command
                     $company = Company::updateOrCreate(
                         [
                             'affiliate_networks' => 'cj',
-                            'advertiser_id' => $cjCId
+                            'name' => $cjCName
                         ],
                         [
                             'account_status' => $cjAccountStatus,
@@ -76,9 +77,52 @@ class FetchCjData extends Command
                             ['sub_rate' => $cjRate]
                         );
                     }
+
+                    // Fetch and store coupons for active advertisers
+                    if ($cjRelationshipStatus === 'active') {
+                        $couponResponse = Http::withHeaders([
+                            'Authorization' => "Bearer $apiKey",
+                            'Accept' => 'application/xml'
+                        ])->get($couponApiUrl, [
+                            'advertiser-ids' => $cjCId, // Filter by advertiser ID
+                        ]);
+
+                        if ($couponResponse->successful()) {
+                            $couponXml = simplexml_load_string($couponResponse->body());
+
+                            foreach ($couponXml->coupons->coupon as $coupon) {
+                                
+                                $couponName = (string) $coupon->{'coupon-name'};
+                                $couponDescription = (string) $coupon->{'coupon-description'};
+                                $couponCode = (string) $coupon->{'coupon-code'};
+                                $couponExpiration = (string) $coupon->{'expiration-date'};
+
+                                // Check if the coupon already exists in the database
+                                $existingCoupon = Coupon::where('company_id', $company->id)
+                                                        ->where('code', $couponCode)
+                                                        ->where('added_by', null) 
+                                                        ->first();
+
+                                if (!$existingCoupon) {
+                                    
+                                    Coupon::create([
+                                        'company_id' => $company->id,
+                                        'c_title' => $couponName,
+                                        // 'description' => $couponDescription,  // Optional: Uncomment if needed
+                                        'code' => $couponCode,
+                                        'expire' => $couponExpiration,
+                                        'c_status' => true,
+                                    ]);
+                                }
+                            }
+                        } else {
+                            Log::error("CJCommand Failed to fetch coupons for advertiser ID: $cjCId");
+                        }
+                    }
+
                 }
 
-                $this->info('CJCommand data fetched and saved successfully.');
+                $this->info('CJCommand data and coupons fetched and saved successfully.');
             } else {
                 $this->error('CJCommand Failed to fetch data from the API.');
             }

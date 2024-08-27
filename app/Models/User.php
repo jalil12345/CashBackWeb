@@ -26,6 +26,8 @@ class User extends Authenticatable
         'password',
         'deleted_at',
         'token_delete',
+        'referral_code',
+        'referrer_id',
     ];
 
     /**

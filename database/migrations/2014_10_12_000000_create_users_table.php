@@ -22,6 +22,8 @@ return new class extends Migration
             $table->set('flavors', ['strawberry', 'vanilla'])->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->unsignedInteger('email_code')->nullable();
+            $table->string('referral_code')->unique()->nullable();
+            $table->unsignedBigInteger('referrer_id')->nullable();
             $table->string('password');
             $table->string('token')->nullable();
             $table->string('token_delete')->nullable(); 

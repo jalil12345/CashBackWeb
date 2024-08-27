@@ -39,6 +39,15 @@ class Kernel extends ConsoleKernel
         $schedule->command('fetch:Awin-data'); 
         //  ->daily()
     }
+    protected function scheduleImpactData(Schedule $schedule)
+    {
+        $schedule->command('fetch:impact-data')->daily();
+    }
+    protected function deleteOldCoupons(Schedule $schedule)
+    {
+        // Schedule the command to run daily
+        $schedule->command('coupons:delete-old')->daily();
+    }
 
     /**
      * Register the commands for the application.
@@ -51,4 +60,6 @@ class Kernel extends ConsoleKernel
 
         require base_path('routes/console.php');
     }
+    
+
 }

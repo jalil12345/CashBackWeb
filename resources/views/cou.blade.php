@@ -10,6 +10,7 @@
     <a href="{{ url('/3/cou') }}"  rel="noopener noreferrer" class="me-3">Filter Trips</a>
     <a href="{{ url('/1/trips') }}"  rel="noopener noreferrer" class="me-3">ManageTrips</a>
     <a href="{{ url('/3/cou') }}"  rel="noopener noreferrer" class="me-3">trips</a>
+    <a href="{{ url('/admin-add-coupon') }}"  rel="noopener noreferrer" class="me-3">admin-add-coupon</a>
 </div>
 
 <div class="container">

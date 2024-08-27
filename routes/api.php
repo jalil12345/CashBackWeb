@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\Favorite;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\SubCategoryController;
 
 /*
@@ -35,6 +36,8 @@ Route::get('/users', function (Request $request) {
 });
 
 Route::get('/companies',  [CompanyController::class, 'searchStores']);
+Route::get('/1/companies',  [CompanyController::class, 'searchStoresSecond']);
+Route::get('/2/companies',  [CouponController::class, 'searchStores']);
 Route::get('/stores',  [CompanyController::class, 'search']);
 
 // middleware('last.modified')->
